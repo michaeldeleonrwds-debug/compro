@@ -1013,43 +1013,36 @@ html[data-theme="light"] .component-card:hover {
   color: var(--bg);
 }
 
-/* Code Toggle Handle */
-.code-toggle {
-  display: flex;
-  justify-content: center;
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 0;
-  flex-shrink: 0;
-}
-
-.code-toggle__btn {
+/* Code Toggle Button */
+.code-tabs__toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 28px;
   height: 28px;
+  margin-left: auto;
+  padding: 0;
   background: var(--surface);
-  border: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
   cursor: pointer;
   color: var(--muted);
-  font-size: 12px;
   transition: background 0.2s, color 0.2s;
 }
 
-.code-toggle__btn:hover {
+.code-tabs__toggle:hover {
   background: var(--surface-2);
   color: var(--text);
 }
 
-.code-toggle__icon {
+.code-tabs__toggle-icon {
   display: inline-block;
+  font-size: 10px;
   transition: transform 0.3s ease;
 }
 
 /* Code Hidden State */
-.modal__body.is-code-hidden .code-toggle__icon {
+.modal__body.is-code-hidden .code-tabs__toggle-icon {
   transform: rotate(180deg);
 }
 
@@ -1066,6 +1059,12 @@ html[data-theme="light"] .component-card:hover {
 
 .modal__body.is-code-hidden .preview-stage {
   flex: 1;
+}
+
+.modal__body.is-code-hidden .preview-workspace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .preview-workspace {
