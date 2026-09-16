@@ -78,17 +78,12 @@
           <div class="ghl-carousel-preview__dots"><span class="active"></span><span></span><span></span><span></span></div>
         </div>
       `,
-      html: `<!--
-  GHL Infinite Draggable Carousel
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your .c-column cards inside .slider-section .carousel > .inner
--->
-
-<div class="slider-section">
+      html: `<div class="slider-section">
     <div class="carousel">
         <div class="inner">
-            <!-- Add your .c-column cards here -->
+            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 1" /></div></div>
+            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 2" /></div></div>
+            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 3" /></div></div>
         </div>
     </div>
 </div>
@@ -115,17 +110,12 @@
           </div>
         </div>
       `,
-      html: `<!--
-  GHL Infinite Scroll Carousel
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your .c-column cards inside .slider-section .carousel > .inner
--->
-
-<div class="slider-section">
+      html: `<div class="slider-section">
     <div class="carousel">
         <div class="inner">
-            <!-- Add your .c-column cards here -->
+            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 1" /></div></div>
+            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 2" /></div></div>
+            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 3" /></div></div>
         </div>
     </div>
 </div>`,
@@ -196,16 +186,8 @@
               </div>
             </div>
         </div>`,
-      html: `<!--
-  Review Testimonial Slider
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your review cards inside .review-slider
-  4. Each card needs: .review-stars, blockquote, .review-author with img and text
--->
-
-<div class="review-slider">
-  <!-- Add your review cards here -->
+      html: `<div class="review-slider">
+  
   <div class="review-card">
     <div class="review-stars">★★★★★</div>
     <blockquote>"Your testimonial text here."</blockquote>
@@ -1126,17 +1108,10 @@
           <button class="bs-next" aria-label="Next">→</button>
         </div>
       `,
-      html: `<!--
-  Basic Slider
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your slides inside .bs-track
--->
-
-<div class="basic-slider">
+      html: `<div class="basic-slider">
   <button class="bs-prev" aria-label="Previous">←</button>
   <div class="bs-window"><div class="bs-track">
-    <!-- Add your slides here -->
+    
     <div class="bs-slide">Slide 1</div>
     <div class="bs-slide">Slide 2</div>
     <div class="bs-slide">Slide 3</div>
@@ -1164,15 +1139,9 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Product Slider
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your product cards inside .ps-track
--->
-
-<div class="product-slider">
+      html: `<div class="product-slider">
   <div class="ps-track">
-    <!-- Add your product cards here -->
+    
     <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
     <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
     <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
@@ -1196,15 +1165,8 @@
           <div class="mg-item"></div>
         </div>
       `,
-      html: `<!--
-  Masonry Gallery
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your gallery items inside .masonry-gallery
-  3. Use .mg-item--tall for tall items, .mg-item--wide for wide items
--->
-
-<div class="masonry-gallery">
-  <!-- Add your gallery items here -->
+      html: `<div class="masonry-gallery">
+  
   <div class="mg-item mg-item--tall"></div>
   <div class="mg-item"></div>
   <div class="mg-item"></div>
@@ -1252,16 +1214,9 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Testimonial Slider
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your testimonial slides inside .ts-track
-  3. Each slide needs: .ts-stars, <p> for quote, <cite> for author
--->
-
-<div class="testimonial-slider">
+      html: `<div class="testimonial-slider">
   <div class="ts-track">
-    <!-- Add your testimonial slides here -->
+    
     <div class="ts-slide">
       <div class="ts-stars">★★★★★</div>
       <p>"Your testimonial text here."</p>
@@ -1288,15 +1243,8 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Review Cards
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your stacked review cards
-  3. Use .rc-card--back, .rc-card--mid, .rc-card--front for stacking
--->
-
-<div class="review-cards">
-  <!-- Add your stacked cards here -->
+      html: `<div class="review-cards">
+  
   <div class="rc-card rc-card--back"></div>
   <div class="rc-card rc-card--mid"></div>
   <div class="rc-card rc-card--front">
@@ -1322,15 +1270,8 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Hover Card
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your card content inside .hover-card
-  3. Use .hc-glow for the glow effect, .hc-body for content
--->
-
-<div class="hover-card">
-  <!-- Add your card content here -->
+      html: `<div class="hover-card">
+  
   <div class="hc-glow"></div>
   <div class="hc-body">
     <h4>Card Title</h4>
@@ -1353,14 +1294,8 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Tilt Card
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your card content inside .tilt-card
--->
-
-<div class="tilt-card">
-  <!-- Add your card content here -->
+      html: `<div class="tilt-card">
+  
   <div class="tc-inner"><span>Card Content</span></div>
 </div>`,
       css: `.tilt-card {\n  width: 160px; height: 110px; perspective: 800px; cursor: pointer;\n}\n.tc-inner {\n  width: 100%; height: 100%; border-radius: 16px;\n  background: linear-gradient(135deg,#6366f1,#8b5cf6);\n  display: grid; place-items: center; color: #fff; font-weight: 800;\n  box-shadow: 0 16px 40px rgba(99,102,241,0.35);\n  transition: transform 150ms ease;\n}`,
@@ -1380,16 +1315,9 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Infinite Text
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your scrolling text inside .infinite-text
-  3. Duplicate the <span> elements for continuous scrolling
--->
-
-<div class="infinite-text">
+      html: `<div class="infinite-text">
   <div class="it-track">
-    <!-- Add your scrolling text here -->
+    
     <span>Your text here • </span>
     <span>Your text here • </span>
   </div>
@@ -1411,16 +1339,9 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Logo Marquee
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your logos inside .lm-track
-  3. Each logo goes in a .lm-logo container
--->
-
-<div class="logo-marquee">
+      html: `<div class="logo-marquee">
   <div class="lm-track">
-    <!-- Add your logos here -->
+    
     <div class="lm-logo">Logo 1</div>
     <div class="lm-logo">Logo 2</div>
     <div class="lm-logo">Logo 3</div>
@@ -1441,15 +1362,8 @@
           <p>Move your cursor</p>
         </div>
       `,
-      html: `<!--
-  Cursor Follow
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your target element inside .cursor-follow
--->
-
-<div class="cursor-follow">
-  <!-- Add your target element here -->
+      html: `<div class="cursor-follow">
+  
   <div class="cf-target"></div>
   <p>Move your cursor over this area</p>
 </div>`,
@@ -1468,15 +1382,8 @@
           <span>Spotlight</span>
         </div>
       `,
-      html: `<!--
-  Cursor Spotlight
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your content inside .cursor-spotlight
--->
-
-<div class="cursor-spotlight">
-  <!-- Add your content here -->
+      html: `<div class="cursor-spotlight">
+  
   <div class="cs-glow"></div>
   <span>Your content here</span>
 </div>`,
@@ -1495,15 +1402,8 @@
           <span class="rt-active">Reveal</span>
         </div>
       `,
-      html: `<!--
-  Reveal Text
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your text inside .reveal-text
-  3. The text appears in both .rt-base and .rt-active
--->
-
-<div class="reveal-text">
-  <!-- Add your text here -->
+      html: `<div class="reveal-text">
+  
   <span class="rt-base">Your Text</span>
   <span class="rt-active">Your Text</span>
 </div>`,
@@ -1519,13 +1419,7 @@
       preview: `
         <div class="comp gradient-text">Gradient</div>
       `,
-      html: `<!--
-  Gradient Text
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your text inside .gradient-text
--->
-
-<div class="gradient-text">Your Text Here</div>`,
+      html: `<div class="gradient-text">Your Text Here</div>`,
       css: `.gradient-text {\n  font-size: 2rem; font-weight: 900;\n  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #6366f1);\n  background-size: 300% 100%;\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  animation: gtFlow 3s linear infinite;\n}\n@keyframes gtFlow { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }`,
       js: `// Pure CSS animated gradient text.`
     },
@@ -1540,15 +1434,8 @@
           <button>Hover Me</button>
         </div>
       `,
-      html: `<!--
-  Magnetic Button
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your button inside .magnetic-button
--->
-
-<div class="magnetic-button">
-  <!-- Add your button here -->
+      html: `<div class="magnetic-button">
+  
   <button>Hover Me</button>
 </div>`,
       css: `.magnetic-button { padding: 20px; }\n.magnetic-button button {\n  padding: 12px 28px; border: 0; border-radius: 999px;\n  background: linear-gradient(135deg,#6366f1,#8b5cf6); color: #fff;\n  font-weight: 700; cursor: pointer; transition: transform 150ms ease;\n}`,
@@ -1565,14 +1452,8 @@
           <button><span>Liquid</span></button>
         </div>
       `,
-      html: `<!--
-  Liquid Button
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your button inside .liquid-button
--->
-
-<div class="liquid-button">
-  <!-- Add your button here -->
+      html: `<div class="liquid-button">
+  
   <button><span>Button Text</span></button>
 </div>`,
       css: `.liquid-button button {\n  position: relative; padding: 12px 28px; border: 1px solid rgba(255,255,255,0.12);\n  border-radius: 999px; background: transparent; color: #f5f7ff; font-weight: 700; overflow: hidden;\n}\n.liquid-button button::before {\n  content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,#6366f1,#8b5cf6);\n  transform: translateY(100%); transition: transform 400ms cubic-bezier(0.22,1,0.36,1);\n}\n.liquid-button button:hover::before { transform: translateY(0); }\n.liquid-button button span { position: relative; z-index: 1; }`,
@@ -1590,16 +1471,10 @@
           <div class="cn-links"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></div>
         </nav>
       `,
-      html: `<!--
-  Navigation Bar
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your logo and navigation links
--->
-
-<nav class="comp-navbar">
-  <!-- Add your logo here -->
+      html: `<nav class="comp-navbar">
+  
   <span class="cn-logo">Your Logo</span>
-  <!-- Add your navigation links here -->
+  
   <div class="cn-links">
     <a href="#">Home</a>
     <a href="#">About</a>
@@ -1620,15 +1495,8 @@
           <button class="mm-btn" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
       `,
-      html: `<!--
-  Mobile Menu Button
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. The button toggles open/close state
--->
-
-<div class="mobile-menu">
-  <!-- Add your menu button here -->
+      html: `<div class="mobile-menu">
+  
   <button class="mm-btn" aria-label="Menu"><span></span><span></span><span></span></button>
 </div>`,
       css: `.mobile-menu { padding: 10px; }\n.mm-btn { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; background: #15171d; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }\n.mm-btn span { width: 20px; height: 2px; background: #f5f7ff; border-radius: 2px; transition: transform 300ms ease, opacity 300ms ease; }\n.mm-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }\n.mm-btn.is-open span:nth-child(2) { opacity: 0; }\n.mm-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }`,
@@ -1646,14 +1514,8 @@
           <p>Premium components for modern sites.</p>
         </div>
       `,
-      html: `<!--
-  Gradient Hero Section
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your hero content inside .gradient-hero
--->
-
-<section class="gradient-hero">
-  <!-- Add your hero content here -->
+      html: `<section class="gradient-hero">
+  
   <h3>Your Headline</h3>
   <p>Your description text.</p>
 </section>`,
@@ -1672,16 +1534,10 @@
           <div class="sh-visual"></div>
         </div>
       `,
-      html: `<!--
-  Split Hero Section
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your text and visual content
--->
-
-<div class="split-hero">
-  <!-- Add your text content here -->
+      html: `<div class="split-hero">
+  
   <div class="sh-text"><strong>Your Headline</strong></div>
-  <!-- Add your visual content here -->
+  
   <div class="sh-visual"></div>
 </div>`,
       css: `.split-hero {\n  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 320px;\n  padding: 16px; border-radius: 16px; background: #15171d; border: 1px solid rgba(255,255,255,0.08);\n}\n.sh-text { display: grid; place-items: center; color: #f5f7ff; font-size: 1rem; }\n.sh-visual { min-height: 80px; border-radius: 12px; background: linear-gradient(135deg,#6366f1,#8b5cf6); }`,
@@ -1698,14 +1554,8 @@
           <div class="spinner"></div>
         </div>
       `,
-      html: `<!--
-  Spinner Loader
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add the spinner inside .spinner-loader
--->
-
-<div class="spinner-loader">
-  <!-- Add your spinner here -->
+      html: `<div class="spinner-loader">
+  
   <div class="spinner"></div>
 </div>`,
       css: `.spinner-loader { padding: 10px; }\n.spinner { width: 44px; height: 44px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1); border-top-color: #6366f1; animation: spin 800ms linear infinite; }\n@keyframes spin { to { transform: rotate(360deg); } }`,
@@ -1723,15 +1573,8 @@
           <div class="sk-lines"><div></div><div></div></div>
         </div>
       `,
-      html: `<!--
-  Skeleton Loader
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your skeleton elements
-  3. Use .sk-circle for circular placeholders, .sk-lines for text placeholders
--->
-
-<div class="skeleton-loader">
-  <!-- Add your skeleton elements here -->
+      html: `<div class="skeleton-loader">
+  
   <div class="sk-circle"></div>
   <div class="sk-lines"><div></div><div></div></div>
 </div>`,
@@ -1747,13 +1590,7 @@
       preview: `
         <div class="comp gradient-mesh"></div>
       `,
-      html: `<!--
-  Gradient Mesh Background
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add the mesh element
--->
-
-<div class="gradient-mesh"></div>`,
+      html: `<div class="gradient-mesh"></div>`,
       css: `.gradient-mesh {\n  width: 100%; max-width: 300px; height: 160px; border-radius: 18px;\n  background:\n    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.6), transparent 40%),\n    radial-gradient(circle at 80% 70%, rgba(236,72,153,0.5), transparent 40%),\n    radial-gradient(circle at 50% 50%, rgba(139,92,246,0.4), transparent 50%);\n  background-size: 200% 200%; animation: meshMove 8s ease infinite;\n}\n@keyframes meshMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }`,
       js: `// Pure CSS animated mesh gradient.`
     },
@@ -1768,15 +1605,8 @@
           <span></span><span></span><span></span><span></span><span></span>
         </div>
       `,
-      html: `<!--
-  Particle Background
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your particles inside .particle-background
-  3. Each particle is a <span> element
--->
-
-<div class="particle-background">
-  <!-- Add your particles here -->
+      html: `<div class="particle-background">
+  
   <span></span><span></span><span></span><span></span><span></span>
 </div>`,
       css: `.particle-background { position: relative; width: 100%; max-width: 300px; height: 160px; border-radius: 18px; background: #15171d; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; }\n.particle-background span { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); animation: float 4s ease-in-out infinite; }\n.particle-background span:nth-child(1){left:10%;top:20%;animation-delay:0s}\n.particle-background span:nth-child(2){left:30%;top:60%;animation-delay:1s}\n.particle-background span:nth-child(3){left:50%;top:30%;animation-delay:2s}\n.particle-background span:nth-child(4){left:70%;top:70%;animation-delay:1.5s}\n.particle-background span:nth-child(5){left:90%;top:40%;animation-delay:0.5s}\n@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }`,
@@ -1795,14 +1625,8 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Floating 3D Object
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add the 3D cube inside .floating-object
--->
-
-<div class="floating-object">
-  <!-- Add your 3D object here -->
+      html: `<div class="floating-object">
+  
   <div class="fo-cube"><div></div><div></div><div></div><div></div><div></div><div></div></div>
 </div>`,
       css: `.floating-object { width: 120px; height: 120px; perspective: 400px; display: grid; place-items: center; }\n.fo-cube { position: relative; width: 48px; height: 48px; transform-style: preserve-3d; animation: foFloat 4s ease-in-out infinite, foRotate 8s linear infinite; }\n.fo-cube div { position: absolute; width: 48px; height: 48px; background: rgba(99,102,241,0.5); border: 1px solid rgba(255,255,255,0.2); }\n.fo-cube div:nth-child(1){transform:rotateY(0deg) translateZ(24px)}\n.fo-cube div:nth-child(2){transform:rotateY(90deg) translateZ(24px)}\n.fo-cube div:nth-child(3){transform:rotateY(180deg) translateZ(24px)}\n.fo-cube div:nth-child(4){transform:rotateY(-90deg) translateZ(24px)}\n.fo-cube div:nth-child(5){transform:rotateX(90deg) translateZ(24px)}\n.fo-cube div:nth-child(6){transform:rotateX(-90deg) translateZ(24px)}\n@keyframes foFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }\n@keyframes foRotate { to { transform: rotateX(360deg) rotateY(360deg); } }`,
@@ -1834,14 +1658,8 @@
           <input type="text" placeholder="Enter your email" />
         </div>
       `,
-      html: `<!--
-  Input Field
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your input inside .input-field
--->
-
-<div class="input-field">
-  <!-- Add your input here -->
+      html: `<div class="input-field">
+  
   <input type="text" placeholder="Enter your text" />
 </div>`,
       css: `.input-field { width: 100%; max-width: 260px; }\n.input-field input {\n  width: 100%; height: 44px; padding: 0 16px; border: 1px solid rgba(255,255,255,0.12);\n  border-radius: 12px; background: #15171d; color: #f5f7ff; outline: none;\n  transition: border-color 200ms ease, box-shadow 200ms ease;\n}\n.input-field input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }\n.input-field input::placeholder { color: #a7adbe; }`,
@@ -1858,15 +1676,8 @@
           <button class="ts-btn" aria-pressed="false"><span></span></button>
         </div>
       `,
-      html: `<!--
-  Toggle Switch
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Paste the JS from the JavaScript tab inside a <script> block.
-  3. Add your toggle button inside .toggle-switch
--->
-
-<div class="toggle-switch">
-  <!-- Add your toggle button here -->
+      html: `<div class="toggle-switch">
+  
   <button class="ts-btn" aria-pressed="false"><span></span></button>
 </div>`,
       css: `.toggle-switch { padding: 10px; }\n.ts-btn { width: 56px; height: 30px; border-radius: 999px; border: 0; background: #2a2e3b; cursor: pointer; position: relative; transition: background 300ms ease; }\n.ts-btn span { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: transform 300ms cubic-bezier(0.22,1,0.36,1); }\n.ts-btn.is-on { background: linear-gradient(135deg,#6366f1,#8b5cf6); }\n.ts-btn.is-on span { transform: translateX(26px); }`,
@@ -1890,15 +1701,8 @@
           </div>
         </div>
       `,
-      html: `<!--
-  Accordion
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your accordion items inside .accordion
-  3. Each item needs: .acc-header (button) and .acc-body (content)
--->
-
-<div class="accordion">
-  <!-- Add your accordion items here -->
+      html: `<div class="accordion">
+  
   <div class="acc-item">
     <button class="acc-header">Question <span>+</span></button>
     <div class="acc-body"><p>Answer text here.</p></div>
@@ -1919,20 +1723,13 @@
           <div class="tab-panels"><div class="tab-panel is-active">Content 1</div><div class="tab-panel">Content 2</div></div>
         </div>
       `,
-      html: `<!--
-  Tabs
-  1. Paste the CSS from the CSS tab inside a <style> block.
-  2. Add your tab buttons inside .tab-nav
-  3. Add your tab panels inside .tab-panels
--->
-
-<div class="tabs">
-  <!-- Add your tab buttons here -->
+      html: `<div class="tabs">
+  
   <div class="tab-nav">
     <button class="is-active">Tab 1</button>
     <button>Tab 2</button>
   </div>
-  <!-- Add your tab panels here -->
+  
   <div class="tab-panels">
     <div class="tab-panel is-active">Content 1</div>
     <div class="tab-panel">Content 2</div>
