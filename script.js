@@ -56,6 +56,1549 @@
   // ============================================================
   const components = [
 {
+  id: "cinematic-slider",
+  name: "Cinematic Slider",
+  description: "Full-width cinematic image slider with Ken Burns effect and overlay gradients.",
+  category: "sliders",
+  tags: ["free", "interactive", "javascript"],
+  injectScript: true,
+  preview: `<div class="comp cinematic-slider">
+    <div class="cinematic-slides">
+      <div class="cinematic-slide is-active">
+        <img src="${images[0]}" alt="" />
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+      <div class="cinematic-slide">
+        <img src="${images[1]}" alt="" />
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+    </div>
+    <div class="cinematic-content">
+      <div class="content-inner">
+        <p class="slide-subtitle">Mountain Studies — Vol. III</p>
+        <h2 class="slide-title">Eternal Silence</h2>
+        <p class="slide-description">Where the air thins and the noise fades, only scale remains.</p>
+        <p class="slide-meta">2024 · Dolomites, Italy</p>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-control" aria-label="Previous"><span>←</span></button>
+      <button class="slider-control" aria-label="Pause"><span>Ⅱ</span></button>
+      <button class="slider-control" aria-label="Next"><span>→</span></button>
+    </div>
+    <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+    <div class="slider-counter"><span>01</span><span class="counter-separator">/</span><span>04</span></div>
+  </div>`,
+  html: `<section class="cinematic-slider">
+    <div class="cinematic-slides">
+        <div class="cinematic-slide is-active">
+            <img src="https://images.pexels.com/photos/675257/pexels-photo-675257.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Eternal Silence">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+        <div class="cinematic-slide">
+            <img src="https://images.pexels.com/photos/1280840/pexels-photo-1280840.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Veil of Clouds">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+        <div class="cinematic-slide">
+            <img src="https://images.pexels.com/photos/15469407/pexels-photo-15469407.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Last Light">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+        <div class="cinematic-slide">
+            <img src="https://images.pexels.com/photos/34068536/pexels-photo-34068536.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Twilight Bodies">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+    </div>
+    <div class="cinematic-content">
+        <div class="content-inner">
+            <p class="slide-subtitle">Mountain Studies — Vol. III</p>
+            <h2 class="slide-title">Eternal Silence</h2>
+            <p class="slide-description">Where the air thins and the noise fades, only scale remains.</p>
+            <p class="slide-meta">2024 · Dolomites, Italy</p>
+        </div>
+    </div>
+    <div class="slider-controls">
+        <button class="slider-control" aria-label="Previous slide"><span>←</span></button>
+        <button class="slider-control" aria-label="Pause slideshow"><span>Ⅱ</span></button>
+        <button class="slider-control" aria-label="Next slide"><span>→</span></button>
+    </div>
+    <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+    <div class="slider-counter"><span>01</span><span class="counter-separator">/</span><span>04</span></div>
+</section>`,
+  css: `.cinematic-slider {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.cinematic-slider *,
+.cinematic-slider *::before,
+.cinematic-slider *::after {
+    box-sizing: border-box;
+}
+
+/* SLIDES */
+
+.cinematic-slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cinematic-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    pointer-events: none;
+}
+
+.cinematic-slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.cinematic-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* KEN BURNS */
+
+.cinematic-slide.is-active img {
+    animation: cinematicKenBurns 7s ease-out forwards;
+}
+
+@keyframes cinematicKenBurns {
+    0% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* OVERLAYS */
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.overlay-bottom {
+    background: linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.30) 50%, rgba(0,0,0,.20));
+}
+
+.overlay-left {
+    background: linear-gradient(to right, rgba(0,0,0,.60), transparent);
+}
+
+/* CONTENT */
+
+.cinematic-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+.content-inner {
+    width: 100%;
+    padding: 0 8vw 80px;
+}
+
+.slide-subtitle {
+    margin: 0 0 12px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+    color: rgba(255,255,255,.5);
+}
+
+.slide-title {
+    margin: 0;
+    max-width: 800px;
+    font-size: clamp(52px, 7vw, 112px);
+    line-height: .95;
+    font-weight: 300;
+    letter-spacing: -.05em;
+    animation: fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.slide-description {
+    max-width: 430px;
+    margin: 22px 0 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,.6);
+    animation: fadeUp .8s .08s cubic-bezier(.22,1,.36,1) both;
+}
+
+.slide-meta {
+    margin: 15px 0 0;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,.3);
+    animation: fadeUp .8s .15s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CONTROLS */
+
+.slider-controls {
+    position: absolute;
+    right: 8vw;
+    bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 20;
+}
+
+.slider-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: rgba(255,255,255,.4);
+    cursor: pointer;
+    font-size: 20px;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.slider-control:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.slider-control:focus-visible {
+    outline: 1px solid #fff;
+    outline-offset: 4px;
+}
+
+/* PROGRESS */
+
+.slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,.1);
+    z-index: 20;
+}
+
+.slider-progress-bar {
+    width: 0;
+    height: 100%;
+    background: rgba(255,255,255,.7);
+}
+
+.slider-progress-bar.animate {
+    animation: cinematicProgress 5.5s linear forwards;
+}
+
+@keyframes cinematicProgress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* COUNTER */
+
+.slider-counter {
+    position: absolute;
+    top: 48px;
+    left: 8vw;
+    z-index: 20;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,.4);
+}
+
+.slider-counter #currentSlide {
+    color: rgba(255,255,255,.9);
+}
+
+.counter-separator {
+    margin: 0 5px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .cinematic-slider {
+        height: 600px;
+    }
+    .content-inner {
+        padding: 0 25px 70px;
+    }
+    .slide-title {
+        font-size: clamp(48px, 15vw, 80px);
+    }
+    .slide-description {
+        font-size: 14px;
+    }
+    .slider-counter {
+        top: 25px;
+        left: 25px;
+    }
+    .slider-controls {
+        right: 20px;
+        bottom: 25px;
+    }
+}
+
+/* PREVIEW VIEWPORT OVERRIDES */
+.preview-viewport.is-tablet .cinematic-slider {
+    height: 500px;
+}
+.preview-viewport.is-tablet .content-inner {
+    padding: 0 30px 50px;
+}
+.preview-viewport.is-tablet .slide-title {
+    font-size: clamp(36px, 6vw, 56px);
+}
+.preview-viewport.is-tablet .slide-description {
+    font-size: 13px;
+}
+
+.preview-viewport.is-mobile .cinematic-slider {
+    height: 380px;
+}
+.preview-viewport.is-mobile .content-inner {
+    padding: 0 16px 40px;
+}
+.preview-viewport.is-mobile .slide-subtitle {
+    font-size: 10px;
+    margin-bottom: 6px;
+}
+.preview-viewport.is-mobile .slide-title {
+    font-size: clamp(24px, 8vw, 36px);
+}
+.preview-viewport.is-mobile .slide-description {
+    font-size: 12px;
+    margin-top: 8px;
+}
+.preview-viewport.is-mobile .slide-meta {
+    font-size: 10px;
+    margin-top: 6px;
+}
+.preview-viewport.is-mobile .slider-counter {
+    top: 14px;
+    left: 16px;
+    font-size: 11px;
+}
+.preview-viewport.is-mobile .slider-controls {
+    right: 12px;
+    bottom: 12px;
+    gap: 4px;
+}
+.preview-viewport.is-mobile .slider-control {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+}
+
+/* Preview overrides */
+.component-card__preview .cinematic-slider {
+    height: 220px !important;
+}
+
+.component-card__preview .content-inner {
+    padding: 0 15px 20px !important;
+}
+
+.component-card__preview .slide-subtitle {
+    font-size: 8px !important;
+    margin-bottom: 4px !important;
+}
+
+.component-card__preview .slide-title {
+    font-size: 20px !important;
+}
+
+.component-card__preview .slide-description {
+    font-size: 9px !important;
+    margin-top: 6px !important;
+    display: none;
+}
+
+.component-card__preview .slide-meta {
+    font-size: 7px !important;
+    margin-top: 4px !important;
+}
+
+.component-card__preview .slider-controls {
+    right: 10px !important;
+    bottom: 10px !important;
+    gap: 4px !important;
+}
+
+.component-card__preview .slider-control {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+}
+
+.component-card__preview .slider-counter {
+    top: 10px !important;
+    left: 15px !important;
+    font-size: 9px !important;
+}
+
+.component-card__preview .slider-progress {
+    display: none !important;
+}
+
+.modal__preview .cinematic-slider {
+    height: 420px !important;
+}
+
+.modal__preview .content-inner {
+    padding: 0 40px 50px !important;
+}
+
+.modal__preview .slide-title {
+    font-size: 48px !important;
+}
+
+.modal__preview .slide-description {
+    display: block;
+    font-size: 14px !important;
+}
+`,
+  js: `(function() {
+  function initCinematicSlider(root) {
+    const slider = root.classList && root.classList.contains('cinematic-slider')
+      ? root
+      : root.querySelector('.cinematic-slider');
+
+    if (!slider) return;
+
+    const slidesData = [
+      { title: "Eternal Silence", sub: "Mountain Studies — Vol. III", desc: "Where the air thins and the noise fades, only scale remains.", meta: "2024 · Dolomites, Italy" },
+      { title: "Veil of Clouds", sub: "Mountain Studies — Vol. V", desc: "A monochrome study of weather rolling over stone.", meta: "2024 · Mount Kazbek, Georgia" },
+      { title: "Last Light", sub: "Mountain Studies — Vol. I", desc: "The golden breath before night swallows the ridge.", meta: "2023 · Kashmir, India" },
+      { title: "Twilight Bodies", sub: "Mountain Studies — Vol. VII", desc: "Shadows lengthen into memory across the Minas Gerais range.", meta: "2024 · Minas Gerais, Brazil" }
+    ];
+
+    const slideElements = slider.querySelectorAll(".cinematic-slide");
+    const title = slider.querySelector(".slide-title");
+    const subtitle = slider.querySelector(".slide-subtitle");
+    const description = slider.querySelector(".slide-description");
+    const meta = slider.querySelector(".slide-meta");
+    const currentSlideEl = slider.querySelector("#currentSlide") || slider.querySelector("[data-counter]");
+    const progressBar = slider.querySelector(".slider-progress-bar");
+    const previousButton = slider.querySelector("[data-prev]") || slider.querySelector(".slider-control:first-child");
+    const nextButton = slider.querySelector("[data-next]") || slider.querySelector(".slider-control:last-child");
+    const playButton = slider.querySelector("[data-play]") || slider.querySelector(".slider-control:nth-child(2)");
+    const playIcon = slider.querySelector("#playIcon") || slider.querySelector("[data-play-icon]");
+
+    let current = 0;
+    let playing = true;
+    let interval;
+    const intervalTime = 5500;
+
+    function updateSlide() {
+      slideElements.forEach(function(slide, index) {
+        slide.classList.toggle("is-active", index === current);
+      });
+
+      if (title) {
+        title.classList.remove("slide-title");
+        void title.offsetWidth;
+        title.classList.add("slide-title");
+      }
+
+      if (subtitle) subtitle.textContent = slidesData[current].sub;
+      if (title) title.textContent = slidesData[current].title;
+      if (description) description.textContent = slidesData[current].desc;
+      if (meta) meta.textContent = slidesData[current].meta;
+      if (currentSlideEl) currentSlideEl.textContent = String(current + 1).padStart(2, "0");
+
+      restartProgress();
+    }
+
+    function next() {
+      current = (current + 1) % slidesData.length;
+      updateSlide();
+    }
+
+    function previous() {
+      current = (current - 1 + slidesData.length) % slidesData.length;
+      updateSlide();
+    }
+
+    function startAutoplay() {
+      clearInterval(interval);
+      if (!playing) return;
+      interval = setInterval(next, intervalTime);
+      restartProgress();
+    }
+
+    function stopAutoplay() {
+      clearInterval(interval);
+    }
+
+    function restartProgress() {
+      if (progressBar) {
+        progressBar.classList.remove("animate");
+        void progressBar.offsetWidth;
+        if (playing) progressBar.classList.add("animate");
+      }
+    }
+
+    function togglePlay() {
+      playing = !playing;
+      if (playing) {
+        if (playIcon) playIcon.textContent = "Ⅱ";
+        if (playButton) playButton.setAttribute("aria-label", "Pause slideshow");
+        startAutoplay();
+      } else {
+        if (playIcon) playIcon.textContent = "▶";
+        if (playButton) playButton.setAttribute("aria-label", "Play slideshow");
+        stopAutoplay();
+        restartProgress();
+      }
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", function() { next(); startAutoplay(); });
+    }
+
+    if (previousButton) {
+      previousButton.addEventListener("click", function() { previous(); startAutoplay(); });
+    }
+
+    if (playButton) {
+      playButton.addEventListener("click", togglePlay);
+    }
+
+    slider.addEventListener("touchstart", function(e) {
+      slider._touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener("touchend", function(e) {
+      const distance = slider._touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(distance) < 50) return;
+      if (distance > 0) { next(); } else { previous(); }
+      startAutoplay();
+    }, { passive: true });
+
+    updateSlide();
+    startAutoplay();
+  }
+
+  window.initCinematicSlider = initCinematicSlider;
+
+  function autoInit() {
+    document.querySelectorAll('.cinematic-slider').forEach(initCinematicSlider);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+})();
+`
+},
+{
+  id: "coverflow-slider",
+  name: "Coverflow Slider",
+  description: "3D coverflow card slider with perspective transforms and touch support.",
+  category: "sliders",
+  tags: ["free", "interactive", "javascript"],
+  injectScript: true,
+  preview: `<div class="comp coverflow-component">
+    <div class="coverflow-stage">
+      <div class="coverflow-card is-active" data-index="0">
+        <img src="${images[0]}" alt="" />
+        <span class="coverflow-number">01</span>
+        <div class="coverflow-info"><span>Geometric Studies</span><strong>Dark Facade</strong></div>
+      </div>
+      <div class="coverflow-card" data-index="1">
+        <img src="${images[1]}" alt="" />
+        <span class="coverflow-number">02</span>
+        <div class="coverflow-info"><span>Urban Series</span><strong>Blue Sky</strong></div>
+      </div>
+      <div class="coverflow-card" data-index="2">
+        <img src="${images[2]}" alt="" />
+        <span class="coverflow-number">03</span>
+        <div class="coverflow-info"><span>Color Theory</span><strong>Orange Lines</strong></div>
+      </div>
+      <div class="coverflow-card" data-index="3">
+        <img src="${images[3]}" alt="" />
+        <span class="coverflow-number">04</span>
+        <div class="coverflow-info"><span>Minimalism</span><strong>White Panels</strong></div>
+      </div>
+    </div>
+    <button class="coverflow-arrow coverflow-prev" aria-label="Previous">←</button>
+    <button class="coverflow-arrow coverflow-next" aria-label="Next">→</button>
+    <div class="coverflow-dots"></div>
+  </div>`,
+  html: `<div class="coverflow-component">
+    <div class="coverflow-stage">
+        <div class="coverflow-card" data-index="0">
+            <img src="https://images.pexels.com/photos/17187918/pexels-photo-17187918.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Dark Facade">
+            <span class="coverflow-number">01</span>
+            <div class="coverflow-info"><span>Geometric Studies</span><strong>Dark Facade</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="1">
+            <img src="https://images.pexels.com/photos/12903905/pexels-photo-12903905.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Blue Sky">
+            <span class="coverflow-number">02</span>
+            <div class="coverflow-info"><span>Urban Series</span><strong>Blue Sky</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="2">
+            <img src="https://images.pexels.com/photos/29114530/pexels-photo-29114530.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Orange Lines">
+            <span class="coverflow-number">03</span>
+            <div class="coverflow-info"><span>Color Theory</span><strong>Orange Lines</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="3">
+            <img src="https://images.pexels.com/photos/9458996/pexels-photo-9458996.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="White Panels">
+            <span class="coverflow-number">04</span>
+            <div class="coverflow-info"><span>Minimalism</span><strong>White Panels</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="4">
+            <img src="https://images.pexels.com/photos/26547201/pexels-photo-26547201.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Window Grid">
+            <span class="coverflow-number">05</span>
+            <div class="coverflow-info"><span>Patterns</span><strong>Window Grid</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="5">
+            <img src="https://images.pexels.com/photos/26241922/pexels-photo-26241922.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Glass Tower">
+            <span class="coverflow-number">06</span>
+            <div class="coverflow-info"><span>Perspective</span><strong>Glass Tower</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="6">
+            <img src="https://images.pexels.com/photos/9612453/pexels-photo-9612453.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Sleek Lines">
+            <span class="coverflow-number">07</span>
+            <div class="coverflow-info"><span>Contemporary</span><strong>Sleek Lines</strong></div>
+        </div>
+    </div>
+    <button class="coverflow-arrow coverflow-prev" aria-label="Previous">←</button>
+    <button class="coverflow-arrow coverflow-next" aria-label="Next">→</button>
+    <div class="coverflow-dots"></div>
+</div>`,
+  css: `.coverflow-component {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+    font-family: Inter, Arial, sans-serif;
+    perspective: 1400px;
+}
+
+.coverflow-stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.coverflow-card {
+    position: absolute;
+    width: 280px;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(.22,1,.36,1), opacity 0.6s ease, filter 0.6s ease;
+    user-select: none;
+}
+
+.coverflow-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.coverflow-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.8), transparent 55%);
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.coverflow-card.is-active::after {
+    opacity: 1;
+}
+
+.coverflow-number {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,.6);
+    mix-blend-mode: difference;
+}
+
+.coverflow-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    padding: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+.coverflow-card.is-active .coverflow-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.coverflow-info span {
+    display: block;
+    margin-bottom: 6px;
+    font-family: monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: rgba(255,255,255,.5);
+}
+
+.coverflow-info strong {
+    display: block;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.coverflow-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 50;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    background: rgba(10,10,10,.5);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+.coverflow-arrow:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.4);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.coverflow-prev {
+    left: 24px;
+}
+
+.coverflow-next {
+    right: 24px;
+}
+
+.coverflow-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transform: translateX(-50%);
+}
+
+.coverflow-dot {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(255,255,255,.25);
+    cursor: pointer;
+    transition: width .35s ease, background .35s ease;
+}
+
+.coverflow-dot.is-active {
+    width: 30px;
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .coverflow-component {
+        height: 440px;
+    }
+    .coverflow-card {
+        width: 230px;
+        height: 350px;
+    }
+    .coverflow-prev {
+        left: 10px;
+    }
+    .coverflow-next {
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .coverflow-component {
+        height: 400px;
+    }
+    .coverflow-card {
+        width: 210px;
+        height: 320px;
+    }
+}
+
+/* Preview overrides */
+.component-card__preview .coverflow-component {
+    height: 220px !important;
+}
+
+.component-card__preview .coverflow-card {
+    width: 120px !important;
+    height: 160px !important;
+}
+
+.component-card__preview .coverflow-arrow {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+}
+
+.component-card__preview .coverflow-prev {
+    left: 8px !important;
+}
+
+.component-card__preview .coverflow-next {
+    right: 8px !important;
+}
+
+.component-card__preview .coverflow-info {
+    display: none !important;
+}
+
+.component-card__preview .coverflow-number {
+    font-size: 8px !important;
+    top: 6px !important;
+    right: 6px !important;
+}
+
+.component-card__preview .coverflow-dots {
+    bottom: 8px !important;
+}
+
+.component-card__preview .coverflow-dot {
+    width: 4px !important;
+    height: 4px !important;
+}
+
+.component-card__preview .coverflow-dot.is-active {
+    width: 16px !important;
+}
+
+.modal__preview .coverflow-component {
+    height: 420px !important;
+}
+
+.modal__preview .coverflow-card {
+    width: 240px !important;
+    height: 360px !important;
+}
+`,
+  js: `(function() {
+  function initCoverflow(root) {
+    const component = root.classList && root.classList.contains('coverflow-component')
+      ? root
+      : root.querySelector('.coverflow-component');
+
+    if (!component) return;
+
+    const cards = Array.from(component.querySelectorAll('.coverflow-card'));
+    const prev = component.querySelector('.coverflow-prev');
+    const next = component.querySelector('.coverflow-next');
+    const dotsContainer = component.querySelector('.coverflow-dots');
+
+    if (!cards.length) return;
+
+    let current = 2;
+
+    // Create dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      cards.forEach(function(_, index) {
+        const dot = document.createElement('button');
+        dot.className = 'coverflow-dot';
+        dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
+        dot.addEventListener('click', function() {
+          current = index;
+          update();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.coverflow-dot')) : [];
+
+    function update() {
+      cards.forEach(function(card, index) {
+        const offset = index - current;
+        const distance = Math.abs(offset);
+
+        if (distance > 2) {
+          card.style.display = 'none';
+          return;
+        }
+
+        card.style.display = 'block';
+
+        const x = offset * 220;
+        const z = -distance * 200;
+        const rotation = offset * -25;
+        const scale = offset === 0 ? 1 : .78;
+
+        card.style.transform = \`translateX(\${x}px) translateZ(\${z}px) rotateY(\${rotation}deg) scale(\${scale})\`;
+        card.style.zIndex = 30 - distance;
+        card.style.opacity = 1 - distance * .15;
+
+        if (offset === 0) {
+          card.classList.add('is-active');
+          card.style.filter = 'none';
+        } else {
+          card.classList.remove('is-active');
+          card.style.filter = \`brightness(\${.5 - distance * .1})\`;
+        }
+      });
+
+      dots.forEach(function(dot, index) {
+        dot.classList.toggle('is-active', index === current);
+      });
+    }
+
+    if (prev) {
+      prev.addEventListener('click', function() {
+        if (current > 0) {
+          current--;
+          update();
+        }
+      });
+    }
+
+    if (next) {
+      next.addEventListener('click', function() {
+        if (current < cards.length - 1) {
+          current++;
+          update();
+        }
+      });
+    }
+
+    component.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowLeft' && current > 0) {
+        current--;
+        update();
+      }
+      if (event.key === 'ArrowRight' && current < cards.length - 1) {
+        current++;
+        update();
+      }
+    });
+
+    let startX = 0;
+    component.addEventListener('touchstart', function(e) {
+      startX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    component.addEventListener('touchend', function(e) {
+      const endX = e.changedTouches[0].screenX;
+      const distance = startX - endX;
+      if (Math.abs(distance) < 50) return;
+      if (distance > 0 && current < cards.length - 1) {
+        current++;
+      } else if (distance < 0 && current > 0) {
+        current--;
+      }
+      update();
+    }, { passive: true });
+
+    component.setAttribute('tabindex', '0');
+    update();
+  }
+
+  window.initCoverflow = initCoverflow;
+
+  function autoInit() {
+    document.querySelectorAll('.coverflow-component').forEach(initCoverflow);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+})();
+`
+},
+
+{
+  id: "unwoven",
+  name: "Unwoven",
+  description: "Endless horizontal strip of image cards with WebGL ribbon thread effects and drag interaction.",
+  category: "gallery",
+  tags: ["free", "interactive", "javascript", "webgl"],
+  deps: [
+    "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+  ],
+  injectScript: true,
+  preview: `<div class="comp unwoven-component">
+    <main class="unwoven-stage" aria-hidden="true"></main>
+  </div>`,
+  html: `<div class="unwoven-component">
+  <main class="unwoven-stage" aria-hidden="true"></main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>`,
+  css: `.unwoven-component {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.unwoven-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.unwoven-stage.is-dragging {
+  cursor: grabbing;
+}
+
+.unwoven-stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Marquee fallback used when WebGL is unavailable. */
+.unwoven-stage .unwoven-marquee {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.unwoven-stage .unwoven-marquee__track {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  animation: unwoven-marquee 40s linear infinite;
+  will-change: transform;
+}
+
+.unwoven-stage .unwoven-marquee__track img {
+  width: 300px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 18px;
+  flex: none;
+}
+
+@keyframes unwoven-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .unwoven-stage .unwoven-marquee__track {
+    animation: none;
+  }
+}
+
+/* Preview overrides */
+.component-card__preview .unwoven-component {
+  height: 220px !important;
+}
+
+.component-card__preview .unwoven-stage .unwoven-marquee__track img {
+  width: 100px !important;
+  height: 140px !important;
+  border-radius: 8px !important;
+}
+
+.modal__preview .unwoven-component {
+  height: 420px !important;
+}
+
+.modal__preview .unwoven-stage .unwoven-marquee__track img {
+  width: 200px !important;
+  height: 280px !important;
+}
+`,
+  js: `(function() {
+  "use strict";
+
+  function initUnwovenComponent(root) {
+    const component = root.classList && root.classList.contains('unwoven-component')
+      ? root
+      : root.querySelector('.unwoven-component');
+
+    if (!component) return;
+
+    const stage = component.querySelector('.unwoven-stage');
+    if (!stage) return;
+
+    initUnwoven(stage);
+  }
+
+  function initUnwoven(stage) {
+    const CONFIG = {
+      threads: 26,
+      segments: 20,
+      cardMaxHeight: 452,
+      cardAspect: 0.75,
+      cardGapRatio: 0.11,
+      cardRadius: 20,
+      scrollSpeed: 95,
+      flingMax: 4200,
+      tearZoneRatio: 0.26,
+      tearZoneMax: 380,
+    };
+
+    const defaultImageUrls = [
+      "https://images.pexels.com/photos/36754317/pexels-photo-36754317.jpeg",
+      "https://images.pexels.com/photos/39180930/pexels-photo-39180930.jpeg",
+      "https://images.pexels.com/photos/39300342/pexels-photo-39300342.jpeg",
+      "https://images.pexels.com/photos/14200080/pexels-photo-14200080.jpeg",
+      "https://images.pexels.com/photos/9001212/pexels-photo-9001212.jpeg",
+      "https://images.pexels.com/photos/39216851/pexels-photo-39216851.jpeg",
+    ];
+    let IMAGE_URLS = defaultImageUrls;
+    if (stage.dataset.imageUrls) {
+      try {
+        const parsed = JSON.parse(stage.dataset.imageUrls);
+        if (Array.isArray(parsed) && parsed.length) IMAGE_URLS = parsed;
+      } catch (error) {
+        IMAGE_URLS = defaultImageUrls;
+      }
+    }
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const PALETTES = [
+      { base: ["#f6d5c3", "#e7a48b"], blobs: ["#f2b8a0", "#b86b4b", "#ffe9d9"], accent: "#5a2e1c" },
+      { base: ["#dfeeea", "#a9cfc3"], blobs: ["#7fb3a2", "#3f7263", "#eefaf4"], accent: "#1e4034" },
+      { base: ["#dfe7f5", "#9fb4d8"], blobs: ["#7d97c6", "#3a5387", "#f0f4ff"], accent: "#1c2a4d" },
+      { base: ["#f7e6ee", "#e3a9c6"], blobs: ["#d886b0", "#8f3a68", "#ffeef6"], accent: "#54173c" },
+      { base: ["#f5eedd", "#e3ce9d"], blobs: ["#d9b96f", "#8f7331", "#fff8e6"], accent: "#4d3a12" },
+      { base: ["#e4e4ec", "#b3b3c6"], blobs: ["#9494ad", "#4c4c66", "#f4f4fa"], accent: "#22222f" },
+    ];
+
+    function drawPlaceholder(palette, seed) {
+      const w = 640, h = 832;
+      const canvas = document.createElement("canvas");
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext("2d");
+
+      let s = seed * 9301 + 49297;
+      const rnd = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+
+      const gradient = ctx.createLinearGradient(0, 0, 0, h);
+      gradient.addColorStop(0, palette.base[0]);
+      gradient.addColorStop(1, palette.base[1]);
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, w, h);
+
+      ctx.globalCompositeOperation = "lighter";
+      for (let i = 0; i < 5; i++) {
+        const color = palette.blobs[i % palette.blobs.length];
+        const cx = rnd() * w, cy = rnd() * h, r = (0.35 + rnd() * 0.55) * w;
+        const blob = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+        blob.addColorStop(0, color + "cc");
+        blob.addColorStop(1, color + "00");
+        ctx.fillStyle = blob;
+        ctx.fillRect(0, 0, w, h);
+      }
+      ctx.globalCompositeOperation = "source-over";
+
+      ctx.fillStyle = palette.accent + "22";
+      ctx.beginPath();
+      ctx.arc(w * (0.3 + rnd() * 0.4), h * (0.25 + rnd() * 0.5), w * (0.10 + rnd() * 0.12), 0, Math.PI * 2);
+      ctx.fill();
+
+      const frame = ctx.getImageData(0, 0, w, h);
+      const px = frame.data;
+      for (let i = 0; i < px.length; i += 4) {
+        const n = (rnd() - 0.5) * 14;
+        px[i] += n; px[i + 1] += n; px[i + 2] += n;
+      }
+      ctx.putImageData(frame, 0, 0);
+
+      return canvas;
+    }
+
+    const SLOT_COUNT = IMAGE_URLS.length || PALETTES.length;
+    const placeholders = Array.from({ length: SLOT_COUNT }, (_, i) => drawPlaceholder(PALETTES[i % PALETTES.length], i + 7));
+
+    let renderer = null;
+    if (window.THREE && window.gsap) {
+      try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); } catch (err) { renderer = null; }
+    }
+
+    if (!renderer) {
+      startMarquee();
+      return;
+    }
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    stage.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, -100, 100);
+
+    const VERTEX_SHADER = \`
+      attribute float aThread;
+      attribute float aRim;
+      uniform float uTime;
+      uniform float uHalfWidth;
+      uniform float uZone;
+      uniform float uStrength;
+      uniform float uWobble;
+      uniform float uSeed;
+      varying vec2 vUv;
+      varying float vTear;
+      varying float vRim;
+      varying float vRandom;
+
+      float hash(float n) { return fract(sin(n * 127.1 + 311.7) * 43758.5453); }
+
+      void main() {
+        vUv = uv;
+        vRim = aRim;
+        vec4 world = modelMatrix * vec4(position, 1.0);
+        float x = world.x;
+        float left = 1.0 - smoothstep(-uHalfWidth, -uHalfWidth + uZone, x);
+        float right = smoothstep(uHalfWidth - uZone, uHalfWidth, x);
+        float tear = max(left, right) * uStrength;
+        float direction = x < 0.0 ? -1.0 : 1.0;
+        float randomA = hash(aThread + uSeed * 57.0);
+        float randomB = hash(aThread * 3.7 + uSeed * 91.0);
+        vRandom = randomA;
+        float t = pow(tear, 1.4);
+        float run = t * (60.0 + randomA * 420.0);
+        run *= 0.85 + 0.15 * sin(uTime * (1.0 + randomB * 2.0) + randomA * 6.2831);
+        world.x += direction * run;
+        world.y += (randomA - 0.5) * 170.0 * t * t;
+        world.y += sin(world.x * 0.02 + uTime * (1.6 + randomA * 2.2) + randomA * 6.2831) * (5.0 + 13.0 * randomA) * t * uWobble;
+        vTear = tear;
+        gl_Position = projectionMatrix * viewMatrix * world;
+      }
+    \`;
+
+    const FRAGMENT_SHADER = \`
+      precision highp float;
+      uniform sampler2D uMap;
+      uniform vec2 uCardSize;
+      uniform float uRadius;
+      uniform float uImageAspect;
+      varying vec2 vUv;
+      varying float vTear;
+      varying float vRim;
+      varying float vRandom;
+
+      float sdRoundBox(vec2 p, vec2 b, float r) {
+        vec2 q = abs(p) - b + r;
+        return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r;
+      }
+
+      void main() {
+        float tear = vTear;
+        float rim = abs(vRim);
+        float coreWidth = mix(0.8, 0.16 + vRandom * 0.12, smoothstep(0.0, 0.85, tear));
+        float threadAlpha = 1.0 - smoothstep(coreWidth - 0.10, coreWidth + 0.06, rim);
+        threadAlpha = mix(1.0, threadAlpha, smoothstep(0.03, 0.30, tear));
+        vec2 p = (vUv - 0.5) * uCardSize;
+        float cardAlpha = 1.0 - smoothstep(-1.5, 0.5, sdRoundBox(p, uCardSize * 0.5, uRadius));
+        float fade = 1.0 - smoothstep(0.75, 1.0, tear) * 0.65;
+        float alpha = cardAlpha * threadAlpha * fade;
+        if (alpha < 0.003) discard;
+        float cardAspect = uCardSize.x / uCardSize.y;
+        vec2 scale = cardAspect > uImageAspect ? vec2(1.0, uImageAspect / cardAspect) : vec2(cardAspect / uImageAspect, 1.0);
+        vec3 color = texture2D(uMap, (vUv - 0.5) * scale + 0.5).rgb;
+        color *= 1.0 - tear * 0.4 * rim * rim;
+        color += tear * 0.18 * (1.0 - smoothstep(0.0, 0.45, rim));
+        color = mix(color, vec3(1.0), smoothstep(0.55, 1.0, tear) * 0.8);
+        gl_FragColor = vec4(color, alpha);
+      }
+    \`;
+
+    function buildRibbonGeometry(width, height, threads, segments) {
+      const columns = segments + 1;
+      const perThread = columns * 2;
+      const total = threads * perThread;
+      const positions = new Float32Array(total * 3);
+      const uvs = new Float32Array(total * 2);
+      const rims = new Float32Array(total);
+      const threadIds = new Float32Array(total);
+      const indices = [];
+      let v = 0;
+
+      for (let t = 0; t < threads; t++) {
+        for (let row = 0; row < 2; row++) {
+          const vy = (t + row) / threads;
+          for (let c = 0; c < columns; c++) {
+            const ux = c / segments;
+            positions[v * 3] = (ux - 0.5) * width;
+            positions[v * 3 + 1] = (vy - 0.5) * height;
+            positions[v * 3 + 2] = 0;
+            uvs[v * 2] = ux;
+            uvs[v * 2 + 1] = vy;
+            rims[v] = row === 0 ? -1 : 1;
+            threadIds[v] = t;
+            v++;
+          }
+        }
+        const base = t * perThread;
+        for (let c = 0; c < segments; c++) {
+          indices.push(base + c, base + c + 1, base + columns + c, base + c + 1, base + columns + c + 1, base + columns + c);
+        }
+      }
+
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+      geometry.setAttribute("aRim", new THREE.BufferAttribute(rims, 1));
+      geometry.setAttribute("aThread", new THREE.BufferAttribute(threadIds, 1));
+      geometry.setIndex(indices);
+      return geometry;
+    }
+
+    const shared = {
+      uTime: { value: 0 },
+      uHalfWidth: { value: 1 },
+      uZone: { value: 1 },
+      uStrength: { value: 0 },
+      uWobble: { value: reduceMotion ? 0 : 1 },
+      uCardSize: { value: new THREE.Vector2(1, 1) },
+      uRadius: { value: CONFIG.cardRadius },
+    };
+
+    function createTexture(source) {
+      const texture = new THREE.Texture(source);
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.wrapS = THREE.ClampToEdgeWrapping;
+      texture.wrapT = THREE.ClampToEdgeWrapping;
+      texture.generateMipmaps = false;
+      texture.needsUpdate = true;
+      return texture;
+    }
+
+    const slots = placeholders.map((canvas, i) => {
+      const texture = createTexture(canvas);
+      const material = new THREE.ShaderMaterial({
+        vertexShader: VERTEX_SHADER,
+        fragmentShader: FRAGMENT_SHADER,
+        transparent: true,
+        depthTest: false,
+        depthWrite: false,
+        uniforms: {
+          uMap: { value: texture },
+          uSeed: { value: (i + 1) * 0.731 },
+          uImageAspect: { value: canvas.width / canvas.height },
+          uTime: shared.uTime,
+          uHalfWidth: shared.uHalfWidth,
+          uZone: shared.uZone,
+          uStrength: shared.uStrength,
+          uWobble: shared.uWobble,
+          uCardSize: shared.uCardSize,
+          uRadius: shared.uRadius,
+        },
+      });
+      return { texture, material };
+    });
+
+    IMAGE_URLS.forEach((url, i) => {
+      if (i >= slots.length) return;
+      const image = new Image();
+      image.crossOrigin = "anonymous";
+      image.onload = () => {
+        slots[i].texture.image = image;
+        slots[i].texture.needsUpdate = true;
+        slots[i].material.uniforms.uImageAspect.value = image.naturalWidth / image.naturalHeight;
+      };
+      image.onerror = () => console.warn(\`Unwoven image failed to load: \${url}\`);
+      image.src = url;
+    });
+
+    const cards = [];
+    let geometry = null;
+    let cardWidth = 0, cardHeight = 0, pitch = 0, stripSpan = 0;
+    let viewportWidth = 0, viewportHeight = 0;
+
+    function rebuildStrip() {
+      cards.forEach(card => scene.remove(card.mesh));
+      cards.length = 0;
+      if (geometry) geometry.dispose();
+      geometry = buildRibbonGeometry(cardWidth, cardHeight, CONFIG.threads, CONFIG.segments);
+      const count = Math.max(8, Math.ceil((viewportWidth + pitch * 3) / pitch));
+      stripSpan = count * pitch;
+      for (let i = 0; i < count; i++) {
+        const mesh = new THREE.Mesh(geometry, slots[i % slots.length].material);
+        mesh.frustumCulled = false;
+        scene.add(mesh);
+        cards.push({ mesh, baseX: i * pitch });
+      }
+    }
+
+    function resize() {
+      viewportWidth = stage.clientWidth;
+      viewportHeight = stage.clientHeight;
+      renderer.setSize(viewportWidth, viewportHeight);
+      camera.left = -viewportWidth / 2;
+      camera.right = viewportWidth / 2;
+      camera.top = viewportHeight / 2;
+      camera.bottom = -viewportHeight / 2;
+      camera.updateProjectionMatrix();
+      cardHeight = Math.min(CONFIG.cardMaxHeight, viewportHeight * 0.62);
+      cardWidth = cardHeight * CONFIG.cardAspect;
+      pitch = cardWidth + Math.max(24, cardWidth * CONFIG.cardGapRatio);
+      shared.uHalfWidth.value = viewportWidth / 2;
+      shared.uZone.value = Math.min(viewportWidth * CONFIG.tearZoneRatio, CONFIG.tearZoneMax);
+      shared.uCardSize.value.set(cardWidth, cardHeight);
+      rebuildStrip();
+    }
+
+    const baseSpeed = reduceMotion ? 0 : CONFIG.scrollSpeed;
+    const motion = { velocity: 0 };
+    let offset = 0;
+
+    gsap.to(motion, { velocity: baseSpeed, duration: 2.4, ease: "power2.out", delay: 0.35 });
+    gsap.to(shared.uStrength, { value: 1, duration: 1.8, ease: "power3.inOut", delay: 0.2 });
+
+    let dragging = false, lastX = 0, lastTime = 0, dragVelocity = 0;
+
+    stage.addEventListener("pointerdown", (event) => {
+      dragging = true;
+      lastX = event.clientX;
+      lastTime = performance.now();
+      dragVelocity = 0;
+      stage.classList.add("is-dragging");
+      stage.setPointerCapture(event.pointerId);
+      gsap.killTweensOf(motion);
+    });
+
+    stage.addEventListener("pointermove", (event) => {
+      if (!dragging) return;
+      const now = performance.now();
+      const dx = event.clientX - lastX;
+      const dt = Math.max(1, now - lastTime) / 1000;
+      offset -= dx;
+      dragVelocity += (-dx / dt - dragVelocity) * 0.35;
+      lastX = event.clientX;
+      lastTime = now;
+    });
+
+    function endDrag() {
+      if (!dragging) return;
+      dragging = false;
+      stage.classList.remove("is-dragging");
+      motion.velocity = gsap.utils.clamp(-CONFIG.flingMax, CONFIG.flingMax, dragVelocity);
+      gsap.to(motion, { velocity: baseSpeed, duration: 2.2, ease: "power3.out" });
+    }
+
+    stage.addEventListener("pointerup", endDrag);
+    stage.addEventListener("pointercancel", endDrag);
+    stage.addEventListener("lostpointercapture", endDrag);
+
+    gsap.ticker.add((time, deltaMS) => {
+      if (!dragging) offset += motion.velocity * (deltaMS / 1000);
+      shared.uTime.value = time;
+      const half = stripSpan / 2;
+      for (const card of cards) {
+        const x = ((card.baseX - offset) % stripSpan + stripSpan) % stripSpan;
+        card.mesh.position.x = x - half;
+      }
+      renderer.render(scene, camera);
+    });
+
+    window.addEventListener("resize", resize);
+    resize();
+
+    function startMarquee() {
+      const wrap = document.createElement("div");
+      wrap.className = "unwoven-marquee";
+      const track = document.createElement("div");
+      track.className = "unwoven-marquee__track";
+      [...placeholders, ...placeholders].forEach((canvas) => {
+        const img = document.createElement("img");
+        img.src = canvas.toDataURL("image/jpeg", 0.85);
+        img.alt = "";
+        track.appendChild(img);
+      });
+      wrap.appendChild(track);
+      stage.appendChild(wrap);
+      stage.style.cursor = "default";
+    }
+  }
+
+  window.initUnwovenComponent = initUnwovenComponent;
+
+  function autoInit() {
+    document.querySelectorAll('.unwoven-component').forEach(initUnwovenComponent);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+})();
+`
+},
+{
       id: "ghl-infinite-carousel",
       name: "GHL Infinite Carousel",
       description: "Draggable infinite carousel built for GoHighLevel with clone-based looping, floating arrows, and dots.",
@@ -1133,1035 +2676,12 @@
 
 })();`
     },
-    {
-      id: "basic-slider",
-      name: "Basic Slider",
-      description: "A clean responsive slider with previous/next navigation.",
-      category: "sliders",
-      tags: ["free", "interactive", "javascript"],
-      preview: `
-        <div class="comp basic-slider">
-          <button class="bs-prev" aria-label="Previous">←</button>
-          <div class="bs-window"><div class="bs-track">
-            <div class="bs-slide" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">1</div>
-            <div class="bs-slide" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">2</div>
-            <div class="bs-slide" style="background:linear-gradient(135deg,#10b981,#3b82f6)">3</div>
-            <div class="bs-slide" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">4</div>
-          </div></div>
-          <button class="bs-next" aria-label="Next">→</button>
-        </div>
-      `,
-      html: `<div class="basic-slider">
-  <button class="bs-prev" aria-label="Previous">←</button>
-  <div class="bs-window"><div class="bs-track">
-    
-    <div class="bs-slide">Slide 1</div>
-    <div class="bs-slide">Slide 2</div>
-    <div class="bs-slide">Slide 3</div>
-  </div></div>
-  <button class="bs-next" aria-label="Next">→</button>
-</div>`,
-      css: `.basic-slider {\n  display: flex; align-items: center; gap: 12px; width: 100%; max-width: 400px;\n}\n.bs-window { overflow: hidden; border-radius: 12px; flex: 1; }\n.bs-track { display: flex; transition: transform 500ms cubic-bezier(0.22,1,0.36,1); }\n.bs-slide {\n  flex: 0 0 100%; aspect-ratio: 16/10; display: grid; place-items: center;\n  color: #fff; font-size: 2rem; font-weight: 800; border-radius: 12px;\n  background: linear-gradient(135deg,#6366f1,#8b5cf6);\n}\n.bs-prev, .bs-next {\n  width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.12);\n  border-radius: 50%; background: #1f222c; color: #fff; cursor: pointer;\n}`,
-      js: `const slider = document.querySelector('.basic-slider');\nconst track = slider.querySelector('.bs-track');\nconst slides = slider.querySelectorAll('.bs-slide');\nlet i = 0;\nfunction update(){ track.style.transform = \`translateX(\${-i*100}%)\`; }\\nslider.querySelector('.bs-next').onclick = () => { i = (i+1)%slides.length; update(); };\\nslider.querySelector('.bs-prev').onclick = () => { i = (i-1+slides.length)%slides.length; update(); };\\nupdate();`
-    },
-{
-      id: "product-slider",
-      name: "Product Slider",
-      description: "Carousel card slider for products with smooth hover lift.",
-      category: "sliders",
-      tags: ["free", "interactive", "javascript"],
-      preview: `
-        <div class="comp product-slider">
-          <div class="ps-track">
-            <div class="ps-card"><div class="ps-img"><img src="${images[0]}" alt="" /></div></div>
-            <div class="ps-card"><div class="ps-img"><img src="${images[1]}" alt="" /></div></div>
-            <div class="ps-card"><div class="ps-img"><img src="${images[2]}" alt="" /></div></div>
-            <div class="ps-card"><div class="ps-img"><img src="${images[0]}" alt="" /></div></div>
-            <div class="ps-card"><div class="ps-img"><img src="${images[1]}" alt="" /></div></div>
-            <div class="ps-card"><div class="ps-img"><img src="${images[2]}" alt="" /></div></div>
-          </div>
-        </div>
-      `,
-      html: `<div class="product-slider">
-  <div class="ps-track">
-    <div class="ps-card"><div class="ps-img"><img src="${images[0]}" alt="" /></div></div>
-    <div class="ps-card"><div class="ps-img"><img src="${images[1]}" alt="" /></div></div>
-    <div class="ps-card"><div class="ps-img"><img src="${images[2]}" alt="" /></div></div>
-  </div>
-</div>`,
-      css: `.product-slider { overflow: hidden; border-radius: 14px; width: 100%; max-width: 320px; }\n.ps-track { display: flex; gap: 12px; animation: psScroll 6s linear infinite; }\n@keyframes psScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }\n.ps-card {\n  flex: 0 0 140px; background: #15171d; border: 1px solid rgba(255,255,255,0.08);\n  border-radius: 14px; padding: 12px; text-align: center; color: #f5f7ff;\n}\n.ps-img { aspect-ratio: 1; border-radius: 10px; background: linear-gradient(135deg,#6366f1,#8b5cf6); margin-bottom: 10px; overflow: hidden; }\n.ps-img img { width: 100%; height: 100%; object-fit: cover; display: block; }`,
-      js: `// CSS animation handles continuous scroll.`
-    },
+    ,
+,
 
-{
-  id: "cinematic-slider",
-  name: "Cinematic Slider",
-  description: "Full-width cinematic image slider with Ken Burns effect and overlay gradients.",
-  category: "sliders",
-  tags: ["free", "interactive", "javascript"],
-  injectScript: true,
-  preview: `<div class="comp cinematic-slider">
-    <div class="cinematic-slides">
-      <div class="cinematic-slide is-active">
-        <img src="${images[0]}" alt="" />
-        <div class="slide-overlay overlay-bottom"></div>
-        <div class="slide-overlay overlay-left"></div>
-      </div>
-      <div class="cinematic-slide">
-        <img src="${images[1]}" alt="" />
-        <div class="slide-overlay overlay-bottom"></div>
-        <div class="slide-overlay overlay-left"></div>
-      </div>
-    </div>
-    <div class="cinematic-content">
-      <div class="content-inner">
-        <p class="slide-subtitle">Mountain Studies — Vol. III</p>
-        <h2 class="slide-title">Eternal Silence</h2>
-        <p class="slide-description">Where the air thins and the noise fades, only scale remains.</p>
-        <p class="slide-meta">2024 · Dolomites, Italy</p>
-      </div>
-    </div>
-    <div class="slider-controls">
-      <button class="slider-control" aria-label="Previous"><span>←</span></button>
-      <button class="slider-control" aria-label="Pause"><span>Ⅱ</span></button>
-      <button class="slider-control" aria-label="Next"><span>→</span></button>
-    </div>
-    <div class="slider-progress"><div class="slider-progress-bar"></div></div>
-    <div class="slider-counter"><span>01</span><span class="counter-separator">/</span><span>04</span></div>
-  </div>`,
-  html: `<section class="cinematic-slider">
-    <div class="cinematic-slides">
-        <div class="cinematic-slide is-active">
-            <img src="https://images.pexels.com/photos/675257/pexels-photo-675257.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Eternal Silence">
-            <div class="slide-overlay overlay-bottom"></div>
-            <div class="slide-overlay overlay-left"></div>
-        </div>
-        <div class="cinematic-slide">
-            <img src="https://images.pexels.com/photos/1280840/pexels-photo-1280840.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Veil of Clouds">
-            <div class="slide-overlay overlay-bottom"></div>
-            <div class="slide-overlay overlay-left"></div>
-        </div>
-        <div class="cinematic-slide">
-            <img src="https://images.pexels.com/photos/15469407/pexels-photo-15469407.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Last Light">
-            <div class="slide-overlay overlay-bottom"></div>
-            <div class="slide-overlay overlay-left"></div>
-        </div>
-        <div class="cinematic-slide">
-            <img src="https://images.pexels.com/photos/34068536/pexels-photo-34068536.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Twilight Bodies">
-            <div class="slide-overlay overlay-bottom"></div>
-            <div class="slide-overlay overlay-left"></div>
-        </div>
-    </div>
-    <div class="cinematic-content">
-        <div class="content-inner">
-            <p class="slide-subtitle">Mountain Studies — Vol. III</p>
-            <h2 class="slide-title">Eternal Silence</h2>
-            <p class="slide-description">Where the air thins and the noise fades, only scale remains.</p>
-            <p class="slide-meta">2024 · Dolomites, Italy</p>
-        </div>
-    </div>
-    <div class="slider-controls">
-        <button class="slider-control" aria-label="Previous slide"><span>←</span></button>
-        <button class="slider-control" aria-label="Pause slideshow"><span>Ⅱ</span></button>
-        <button class="slider-control" aria-label="Next slide"><span>→</span></button>
-    </div>
-    <div class="slider-progress"><div class="slider-progress-bar"></div></div>
-    <div class="slider-counter"><span>01</span><span class="counter-separator">/</span><span>04</span></div>
-</section>`,
-  css: `.cinematic-slider {
-    position: relative;
-    width: 100%;
-    height: 600px;
-    overflow: hidden;
-    background: #000;
-    color: #fff;
-    box-sizing: border-box;
-}
+,
 
-.cinematic-slider *,
-.cinematic-slider *::before,
-.cinematic-slider *::after {
-    box-sizing: border-box;
-}
-
-/* SLIDES */
-
-.cinematic-slides {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.cinematic-slide {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transform: scale(1.05);
-    transition: opacity 1.2s ease, transform 1.2s ease;
-    pointer-events: none;
-}
-
-.cinematic-slide.is-active {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
-}
-
-.cinematic-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* KEN BURNS */
-
-.cinematic-slide.is-active img {
-    animation: cinematicKenBurns 7s ease-out forwards;
-}
-
-@keyframes cinematicKenBurns {
-    0% { transform: scale(1.08); }
-    100% { transform: scale(1); }
-}
-
-/* OVERLAYS */
-
-.slide-overlay {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-
-.overlay-bottom {
-    background: linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.30) 50%, rgba(0,0,0,.20));
-}
-
-.overlay-left {
-    background: linear-gradient(to right, rgba(0,0,0,.60), transparent);
-}
-
-/* CONTENT */
-
-.cinematic-content {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: flex-end;
-    pointer-events: none;
-}
-
-.content-inner {
-    width: 100%;
-    padding: 0 8vw 80px;
-}
-
-.slide-subtitle {
-    margin: 0 0 12px;
-    font-family: "Courier New", monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: .3em;
-    color: rgba(255,255,255,.5);
-}
-
-.slide-title {
-    margin: 0;
-    max-width: 800px;
-    font-size: clamp(52px, 7vw, 112px);
-    line-height: .95;
-    font-weight: 300;
-    letter-spacing: -.05em;
-    animation: fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;
-}
-
-.slide-description {
-    max-width: 430px;
-    margin: 22px 0 0;
-    font-size: 16px;
-    line-height: 1.6;
-    color: rgba(255,255,255,.6);
-    animation: fadeUp .8s .08s cubic-bezier(.22,1,.36,1) both;
-}
-
-.slide-meta {
-    margin: 15px 0 0;
-    font-family: "Courier New", monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,.3);
-    animation: fadeUp .8s .15s cubic-bezier(.22,1,.36,1) both;
-}
-
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* CONTROLS */
-
-.slider-controls {
-    position: absolute;
-    right: 8vw;
-    bottom: 48px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 20;
-}
-
-.slider-control {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: rgba(255,255,255,.4);
-    cursor: pointer;
-    font-size: 20px;
-    transition: color .3s ease, transform .3s ease;
-}
-
-.slider-control:hover {
-    color: #fff;
-    transform: scale(1.1);
-}
-
-.slider-control:focus-visible {
-    outline: 1px solid #fff;
-    outline-offset: 4px;
-}
-
-/* PROGRESS */
-
-.slider-progress {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: rgba(255,255,255,.1);
-    z-index: 20;
-}
-
-.slider-progress-bar {
-    width: 0;
-    height: 100%;
-    background: rgba(255,255,255,.7);
-}
-
-.slider-progress-bar.animate {
-    animation: cinematicProgress 5.5s linear forwards;
-}
-
-@keyframes cinematicProgress {
-    from { width: 0; }
-    to { width: 100%; }
-}
-
-/* COUNTER */
-
-.slider-counter {
-    position: absolute;
-    top: 48px;
-    left: 8vw;
-    z-index: 20;
-    font-family: "Courier New", monospace;
-    font-size: 13px;
-    color: rgba(255,255,255,.4);
-}
-
-.slider-counter #currentSlide {
-    color: rgba(255,255,255,.9);
-}
-
-.counter-separator {
-    margin: 0 5px;
-}
-
-/* RESPONSIVE */
-
-@media (max-width: 768px) {
-    .cinematic-slider {
-        height: 600px;
-    }
-    .content-inner {
-        padding: 0 25px 70px;
-    }
-    .slide-title {
-        font-size: clamp(48px, 15vw, 80px);
-    }
-    .slide-description {
-        font-size: 14px;
-    }
-    .slider-counter {
-        top: 25px;
-        left: 25px;
-    }
-    .slider-controls {
-        right: 20px;
-        bottom: 25px;
-    }
-}
-
-/* Preview overrides */
-.component-card__preview .cinematic-slider {
-    height: 220px !important;
-}
-
-.component-card__preview .content-inner {
-    padding: 0 15px 20px !important;
-}
-
-.component-card__preview .slide-subtitle {
-    font-size: 8px !important;
-    margin-bottom: 4px !important;
-}
-
-.component-card__preview .slide-title {
-    font-size: 20px !important;
-}
-
-.component-card__preview .slide-description {
-    font-size: 9px !important;
-    margin-top: 6px !important;
-    display: none;
-}
-
-.component-card__preview .slide-meta {
-    font-size: 7px !important;
-    margin-top: 4px !important;
-}
-
-.component-card__preview .slider-controls {
-    right: 10px !important;
-    bottom: 10px !important;
-    gap: 4px !important;
-}
-
-.component-card__preview .slider-control {
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 12px !important;
-}
-
-.component-card__preview .slider-counter {
-    top: 10px !important;
-    left: 15px !important;
-    font-size: 9px !important;
-}
-
-.component-card__preview .slider-progress {
-    display: none !important;
-}
-
-.modal__preview .cinematic-slider {
-    height: 420px !important;
-}
-
-.modal__preview .content-inner {
-    padding: 0 40px 50px !important;
-}
-
-.modal__preview .slide-title {
-    font-size: 48px !important;
-}
-
-.modal__preview .slide-description {
-    display: block;
-    font-size: 14px !important;
-}
-`,
-  js: `(function() {
-  function initCinematicSlider(root) {
-    const slider = root.classList && root.classList.contains('cinematic-slider')
-      ? root
-      : root.querySelector('.cinematic-slider');
-
-    if (!slider) return;
-
-    const slidesData = [
-      { title: "Eternal Silence", sub: "Mountain Studies — Vol. III", desc: "Where the air thins and the noise fades, only scale remains.", meta: "2024 · Dolomites, Italy" },
-      { title: "Veil of Clouds", sub: "Mountain Studies — Vol. V", desc: "A monochrome study of weather rolling over stone.", meta: "2024 · Mount Kazbek, Georgia" },
-      { title: "Last Light", sub: "Mountain Studies — Vol. I", desc: "The golden breath before night swallows the ridge.", meta: "2023 · Kashmir, India" },
-      { title: "Twilight Bodies", sub: "Mountain Studies — Vol. VII", desc: "Shadows lengthen into memory across the Minas Gerais range.", meta: "2024 · Minas Gerais, Brazil" }
-    ];
-
-    const slideElements = slider.querySelectorAll(".cinematic-slide");
-    const title = slider.querySelector(".slide-title");
-    const subtitle = slider.querySelector(".slide-subtitle");
-    const description = slider.querySelector(".slide-description");
-    const meta = slider.querySelector(".slide-meta");
-    const currentSlideEl = slider.querySelector("#currentSlide") || slider.querySelector("[data-counter]");
-    const progressBar = slider.querySelector(".slider-progress-bar");
-    const previousButton = slider.querySelector("[data-prev]") || slider.querySelector(".slider-control:first-child");
-    const nextButton = slider.querySelector("[data-next]") || slider.querySelector(".slider-control:last-child");
-    const playButton = slider.querySelector("[data-play]") || slider.querySelector(".slider-control:nth-child(2)");
-    const playIcon = slider.querySelector("#playIcon") || slider.querySelector("[data-play-icon]");
-
-    let current = 0;
-    let playing = true;
-    let interval;
-    const intervalTime = 5500;
-
-    function updateSlide() {
-      slideElements.forEach(function(slide, index) {
-        slide.classList.toggle("is-active", index === current);
-      });
-
-      if (title) {
-        title.classList.remove("slide-title");
-        void title.offsetWidth;
-        title.classList.add("slide-title");
-      }
-
-      if (subtitle) subtitle.textContent = slidesData[current].sub;
-      if (title) title.textContent = slidesData[current].title;
-      if (description) description.textContent = slidesData[current].desc;
-      if (meta) meta.textContent = slidesData[current].meta;
-      if (currentSlideEl) currentSlideEl.textContent = String(current + 1).padStart(2, "0");
-
-      restartProgress();
-    }
-
-    function next() {
-      current = (current + 1) % slidesData.length;
-      updateSlide();
-    }
-
-    function previous() {
-      current = (current - 1 + slidesData.length) % slidesData.length;
-      updateSlide();
-    }
-
-    function startAutoplay() {
-      clearInterval(interval);
-      if (!playing) return;
-      interval = setInterval(next, intervalTime);
-      restartProgress();
-    }
-
-    function stopAutoplay() {
-      clearInterval(interval);
-    }
-
-    function restartProgress() {
-      if (progressBar) {
-        progressBar.classList.remove("animate");
-        void progressBar.offsetWidth;
-        if (playing) progressBar.classList.add("animate");
-      }
-    }
-
-    function togglePlay() {
-      playing = !playing;
-      if (playing) {
-        if (playIcon) playIcon.textContent = "Ⅱ";
-        if (playButton) playButton.setAttribute("aria-label", "Pause slideshow");
-        startAutoplay();
-      } else {
-        if (playIcon) playIcon.textContent = "▶";
-        if (playButton) playButton.setAttribute("aria-label", "Play slideshow");
-        stopAutoplay();
-        restartProgress();
-      }
-    }
-
-    if (nextButton) {
-      nextButton.addEventListener("click", function() { next(); startAutoplay(); });
-    }
-
-    if (previousButton) {
-      previousButton.addEventListener("click", function() { previous(); startAutoplay(); });
-    }
-
-    if (playButton) {
-      playButton.addEventListener("click", togglePlay);
-    }
-
-    slider.addEventListener("touchstart", function(e) {
-      slider._touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    slider.addEventListener("touchend", function(e) {
-      const distance = slider._touchStartX - e.changedTouches[0].screenX;
-      if (Math.abs(distance) < 50) return;
-      if (distance > 0) { next(); } else { previous(); }
-      startAutoplay();
-    }, { passive: true });
-
-    updateSlide();
-    startAutoplay();
-  }
-
-  window.initCinematicSlider = initCinematicSlider;
-
-  function autoInit() {
-    document.querySelectorAll('.cinematic-slider').forEach(initCinematicSlider);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', autoInit);
-  } else {
-    autoInit();
-  }
-})();
-`
-},
-
-{
-  id: "coverflow-slider",
-  name: "Coverflow Slider",
-  description: "3D coverflow card slider with perspective transforms and touch support.",
-  category: "sliders",
-  tags: ["free", "interactive", "javascript"],
-  injectScript: true,
-  preview: `<div class="comp coverflow-component">
-    <div class="coverflow-stage">
-      <div class="coverflow-card is-active" data-index="0">
-        <img src="${images[0]}" alt="" />
-        <span class="coverflow-number">01</span>
-        <div class="coverflow-info"><span>Geometric Studies</span><strong>Dark Facade</strong></div>
-      </div>
-      <div class="coverflow-card" data-index="1">
-        <img src="${images[1]}" alt="" />
-        <span class="coverflow-number">02</span>
-        <div class="coverflow-info"><span>Urban Series</span><strong>Blue Sky</strong></div>
-      </div>
-      <div class="coverflow-card" data-index="2">
-        <img src="${images[2]}" alt="" />
-        <span class="coverflow-number">03</span>
-        <div class="coverflow-info"><span>Color Theory</span><strong>Orange Lines</strong></div>
-      </div>
-      <div class="coverflow-card" data-index="3">
-        <img src="${images[3]}" alt="" />
-        <span class="coverflow-number">04</span>
-        <div class="coverflow-info"><span>Minimalism</span><strong>White Panels</strong></div>
-      </div>
-    </div>
-    <button class="coverflow-arrow coverflow-prev" aria-label="Previous">←</button>
-    <button class="coverflow-arrow coverflow-next" aria-label="Next">→</button>
-    <div class="coverflow-dots"></div>
-  </div>`,
-  html: `<div class="coverflow-component">
-    <div class="coverflow-stage">
-        <div class="coverflow-card" data-index="0">
-            <img src="https://images.pexels.com/photos/17187918/pexels-photo-17187918.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Dark Facade">
-            <span class="coverflow-number">01</span>
-            <div class="coverflow-info"><span>Geometric Studies</span><strong>Dark Facade</strong></div>
-        </div>
-        <div class="coverflow-card" data-index="1">
-            <img src="https://images.pexels.com/photos/12903905/pexels-photo-12903905.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Blue Sky">
-            <span class="coverflow-number">02</span>
-            <div class="coverflow-info"><span>Urban Series</span><strong>Blue Sky</strong></div>
-        </div>
-        <div class="coverflow-card" data-index="2">
-            <img src="https://images.pexels.com/photos/29114530/pexels-photo-29114530.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Orange Lines">
-            <span class="coverflow-number">03</span>
-            <div class="coverflow-info"><span>Color Theory</span><strong>Orange Lines</strong></div>
-        </div>
-        <div class="coverflow-card" data-index="3">
-            <img src="https://images.pexels.com/photos/9458996/pexels-photo-9458996.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="White Panels">
-            <span class="coverflow-number">04</span>
-            <div class="coverflow-info"><span>Minimalism</span><strong>White Panels</strong></div>
-        </div>
-        <div class="coverflow-card" data-index="4">
-            <img src="https://images.pexels.com/photos/26547201/pexels-photo-26547201.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Window Grid">
-            <span class="coverflow-number">05</span>
-            <div class="coverflow-info"><span>Patterns</span><strong>Window Grid</strong></div>
-        </div>
-        <div class="coverflow-card" data-index="5">
-            <img src="https://images.pexels.com/photos/26241922/pexels-photo-26241922.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Glass Tower">
-            <span class="coverflow-number">06</span>
-            <div class="coverflow-info"><span>Perspective</span><strong>Glass Tower</strong></div>
-        </div>
-        <div class="coverflow-card" data-index="6">
-            <img src="https://images.pexels.com/photos/9612453/pexels-photo-9612453.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Sleek Lines">
-            <span class="coverflow-number">07</span>
-            <div class="coverflow-info"><span>Contemporary</span><strong>Sleek Lines</strong></div>
-        </div>
-    </div>
-    <button class="coverflow-arrow coverflow-prev" aria-label="Previous">←</button>
-    <button class="coverflow-arrow coverflow-next" aria-label="Next">→</button>
-    <div class="coverflow-dots"></div>
-</div>`,
-  css: `.coverflow-component {
-    position: relative;
-    width: 100%;
-    height: 520px;
-    overflow: hidden;
-    font-family: Inter, Arial, sans-serif;
-    perspective: 1400px;
-}
-
-.coverflow-stage {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform-style: preserve-3d;
-}
-
-.coverflow-card {
-    position: absolute;
-    width: 280px;
-    height: 420px;
-    overflow: hidden;
-    border-radius: 4px;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transition: transform 0.6s cubic-bezier(.22,1,.36,1), opacity 0.6s ease, filter 0.6s ease;
-    user-select: none;
-}
-
-.coverflow-card img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    pointer-events: none;
-}
-
-.coverflow-card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,.8), transparent 55%);
-    opacity: 0;
-    transition: opacity .5s ease;
-}
-
-.coverflow-card.is-active::after {
-    opacity: 1;
-}
-
-.coverflow-number {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    z-index: 5;
-    font-family: monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,.6);
-    mix-blend-mode: difference;
-}
-
-.coverflow-info {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 5;
-    padding: 24px;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity .5s ease, transform .5s ease;
-}
-
-.coverflow-card.is-active .coverflow-info {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.coverflow-info span {
-    display: block;
-    margin-bottom: 6px;
-    font-family: monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    color: rgba(255,255,255,.5);
-}
-
-.coverflow-info strong {
-    display: block;
-    color: #fff;
-    font-size: 24px;
-    font-weight: 300;
-}
-
-.coverflow-arrow {
-    position: absolute;
-    top: 50%;
-    z-index: 50;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255,255,255,.15);
-    border-radius: 50%;
-    background: rgba(10,10,10,.5);
-    color: #fff;
-    font-size: 18px;
-    cursor: pointer;
-    transform: translateY(-50%);
-    transition: background .25s ease, border-color .25s ease, transform .25s ease;
-}
-
-.coverflow-arrow:hover {
-    background: rgba(255,255,255,.1);
-    border-color: rgba(255,255,255,.4);
-    transform: translateY(-50%) scale(1.08);
-}
-
-.coverflow-prev {
-    left: 24px;
-}
-
-.coverflow-next {
-    right: 24px;
-}
-
-.coverflow-dots {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    z-index: 50;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    transform: translateX(-50%);
-}
-
-.coverflow-dot {
-    width: 6px;
-    height: 6px;
-    padding: 0;
-    border: 0;
-    border-radius: 10px;
-    background: rgba(255,255,255,.25);
-    cursor: pointer;
-    transition: width .35s ease, background .35s ease;
-}
-
-.coverflow-dot.is-active {
-    width: 30px;
-    background: #fff;
-}
-
-@media (max-width: 768px) {
-    .coverflow-component {
-        height: 440px;
-    }
-    .coverflow-card {
-        width: 230px;
-        height: 350px;
-    }
-    .coverflow-prev {
-        left: 10px;
-    }
-    .coverflow-next {
-        right: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .coverflow-component {
-        height: 400px;
-    }
-    .coverflow-card {
-        width: 210px;
-        height: 320px;
-    }
-}
-
-/* Preview overrides */
-.component-card__preview .coverflow-component {
-    height: 220px !important;
-}
-
-.component-card__preview .coverflow-card {
-    width: 120px !important;
-    height: 160px !important;
-}
-
-.component-card__preview .coverflow-arrow {
-    width: 24px !important;
-    height: 24px !important;
-    font-size: 12px !important;
-}
-
-.component-card__preview .coverflow-prev {
-    left: 8px !important;
-}
-
-.component-card__preview .coverflow-next {
-    right: 8px !important;
-}
-
-.component-card__preview .coverflow-info {
-    display: none !important;
-}
-
-.component-card__preview .coverflow-number {
-    font-size: 8px !important;
-    top: 6px !important;
-    right: 6px !important;
-}
-
-.component-card__preview .coverflow-dots {
-    bottom: 8px !important;
-}
-
-.component-card__preview .coverflow-dot {
-    width: 4px !important;
-    height: 4px !important;
-}
-
-.component-card__preview .coverflow-dot.is-active {
-    width: 16px !important;
-}
-
-.modal__preview .coverflow-component {
-    height: 420px !important;
-}
-
-.modal__preview .coverflow-card {
-    width: 240px !important;
-    height: 360px !important;
-}
-`,
-  js: `(function() {
-  function initCoverflow(root) {
-    const component = root.classList && root.classList.contains('coverflow-component')
-      ? root
-      : root.querySelector('.coverflow-component');
-
-    if (!component) return;
-
-    const cards = Array.from(component.querySelectorAll('.coverflow-card'));
-    const prev = component.querySelector('.coverflow-prev');
-    const next = component.querySelector('.coverflow-next');
-    const dotsContainer = component.querySelector('.coverflow-dots');
-
-    if (!cards.length) return;
-
-    let current = 2;
-
-    // Create dots
-    if (dotsContainer) {
-      dotsContainer.innerHTML = '';
-      cards.forEach(function(_, index) {
-        const dot = document.createElement('button');
-        dot.className = 'coverflow-dot';
-        dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
-        dot.addEventListener('click', function() {
-          current = index;
-          update();
-        });
-        dotsContainer.appendChild(dot);
-      });
-    }
-
-    const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.coverflow-dot')) : [];
-
-    function update() {
-      cards.forEach(function(card, index) {
-        const offset = index - current;
-        const distance = Math.abs(offset);
-
-        if (distance > 2) {
-          card.style.display = 'none';
-          return;
-        }
-
-        card.style.display = 'block';
-
-        const x = offset * 220;
-        const z = -distance * 200;
-        const rotation = offset * -25;
-        const scale = offset === 0 ? 1 : .78;
-
-        card.style.transform = \`translateX(\${x}px) translateZ(\${z}px) rotateY(\${rotation}deg) scale(\${scale})\`;
-        card.style.zIndex = 30 - distance;
-        card.style.opacity = 1 - distance * .15;
-
-        if (offset === 0) {
-          card.classList.add('is-active');
-          card.style.filter = 'none';
-        } else {
-          card.classList.remove('is-active');
-          card.style.filter = \`brightness(\${.5 - distance * .1})\`;
-        }
-      });
-
-      dots.forEach(function(dot, index) {
-        dot.classList.toggle('is-active', index === current);
-      });
-    }
-
-    if (prev) {
-      prev.addEventListener('click', function() {
-        if (current > 0) {
-          current--;
-          update();
-        }
-      });
-    }
-
-    if (next) {
-      next.addEventListener('click', function() {
-        if (current < cards.length - 1) {
-          current++;
-          update();
-        }
-      });
-    }
-
-    component.addEventListener('keydown', function(event) {
-      if (event.key === 'ArrowLeft' && current > 0) {
-        current--;
-        update();
-      }
-      if (event.key === 'ArrowRight' && current < cards.length - 1) {
-        current++;
-        update();
-      }
-    });
-
-    let startX = 0;
-    component.addEventListener('touchstart', function(e) {
-      startX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    component.addEventListener('touchend', function(e) {
-      const endX = e.changedTouches[0].screenX;
-      const distance = startX - endX;
-      if (Math.abs(distance) < 50) return;
-      if (distance > 0 && current < cards.length - 1) {
-        current++;
-      } else if (distance < 0 && current > 0) {
-        current--;
-      }
-      update();
-    }, { passive: true });
-
-    component.setAttribute('tabindex', '0');
-    update();
-  }
-
-  window.initCoverflow = initCoverflow;
-
-  function autoInit() {
-    document.querySelectorAll('.coverflow-component').forEach(initCoverflow);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', autoInit);
-  } else {
-    autoInit();
-  }
-})();
-`
-},
+,
 {
       id: "masonry-gallery",
       name: "Masonry Gallery",
@@ -2170,21 +2690,20 @@
       tags: ["free", "css"],
       preview: `
         <div class="comp masonry-gallery">
-          <div class="mg-item mg-item--tall"></div>
-          <div class="mg-item"></div>
-          <div class="mg-item"></div>
-          <div class="mg-item mg-item--wide"></div>
-          <div class="mg-item"></div>
+          <div class="mg-item mg-item--tall"><img src="${images[3]}" alt="" /></div>
+          <div class="mg-item"><img src="${images[4]}" alt="" /></div>
+          <div class="mg-item"><img src="${images[5]}" alt="" /></div>
+          <div class="mg-item mg-item--wide"><img src="${images[0]}" alt="" /></div>
         </div>
       `,
       html: `<div class="masonry-gallery">
-  
-  <div class="mg-item mg-item--tall"></div>
-  <div class="mg-item"></div>
-  <div class="mg-item"></div>
-  <div class="mg-item mg-item--wide"></div>
+
+  <div class="mg-item mg-item--tall"><img src="${images[3]}" alt="" /></div>
+  <div class="mg-item"><img src="${images[4]}" alt="" /></div>
+  <div class="mg-item"><img src="${images[5]}" alt="" /></div>
+  <div class="mg-item mg-item--wide"><img src="${images[0]}" alt="" /></div>
 </div>`,
-      css: `.masonry-gallery {\n  display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 40px;\n  gap: 8px; width: 100%; max-width: 320px;\n}\n.mg-item { background: linear-gradient(135deg,#6366f1,#8b5cf6); border-radius: 10px; grid-row: span 2; }\n.mg-item--tall { grid-row: span 4; }\n.mg-item--wide { grid-column: span 2; }`,
+      css: `.masonry-gallery { display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 80px; gap: 6px; width: 100%; max-width: 320px; }\n.mg-item { overflow: hidden; border-radius: 10px; grid-row: span 2; }\n.mg-item img { width: 100%; height: 100%; object-fit: cover; display: block; }\n.mg-item--tall { grid-row: span 4; }\n.mg-item--wide { grid-column: span 2; }\n@media (max-width: 800px) { .masonry-gallery { grid-template-columns: repeat(2, 1fr); } }\n@media (max-width: 480px) { .masonry-gallery { grid-template-columns: 1fr; max-width: 220px; } }`,
       js: `// Pure CSS masonry grid. No JavaScript required.`
     },
 {
@@ -2756,18 +3275,14 @@
   // Preview initializers
   // ============================================================
   const previewInits = {
-    "basic-slider": (el) => {
-      const track = el.querySelector(".bs-track");
-      const slides = el.querySelectorAll(".bs-slide");
-      let i = 0;
-      el.querySelector(".bs-next").onclick = () => { i = (i + 1) % slides.length; track.style.transform = `translateX(${-i * 100}%)`; };
-      el.querySelector(".bs-prev").onclick = () => { i = (i - 1 + slides.length) % slides.length; track.style.transform = `translateX(${-i * 100}%)`; };
-    },
     "cinematic-slider": (el) => {
       window.initCinematicSlider(el);
     },
     "coverflow-slider": (el) => {
       window.initCoverflow(el);
+    },
+    "unwoven": (el) => {
+      window.initUnwovenComponent(el);
     },
     "tilt-card": (el) => {
       const inner = el.querySelector(".tc-inner");
@@ -2980,8 +3495,8 @@
 
       function getCardWidth() {
         const viewport = track.parentElement.offsetWidth;
-        if (window.innerWidth <= 767) return viewport - 32;
-        if (window.innerWidth <= 1024) return (viewport - 32) / 3;
+        if (viewport <= 450) return viewport * 0.75;
+        if (viewport <= 850) return (viewport - 32) / 3;
         return (viewport - 48) / 4;
       }
 
@@ -3038,6 +3553,21 @@
           });
         }, 250);
       });
+
+      const viewportEl = el.closest(".preview-viewport");
+      if (viewportEl) {
+        const viewportObserver = new MutationObserver(() => {
+          cancelAnimationFrame(animationFrame);
+          applyWidth();
+          requestAnimationFrame(() => {
+            setWidth = getSetWidth();
+            position = 0;
+            track.style.transform = `translate3d(0,0,0)`;
+            animationFrame = requestAnimationFrame(animate);
+          });
+        });
+        viewportObserver.observe(viewportEl, { attributes: true, attributeFilter: ["class"] });
+      }
 
       animationFrame = requestAnimationFrame(animate);
     },
@@ -3182,26 +3712,49 @@
       document.head.appendChild(style);
     }
 
-    if (comp.injectScript) {
-      const scriptId = `script-${comp.id}`;
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement("script");
-        script.id = scriptId;
-        script.textContent = comp.js;
-        document.head.appendChild(script);
+    function injectComponentScript() {
+      if (comp.injectScript) {
+        const scriptId = `script-${comp.id}`;
+        if (!document.getElementById(scriptId)) {
+          const script = document.createElement("script");
+          script.id = scriptId;
+          script.textContent = comp.js;
+          document.head.appendChild(script);
+        }
       }
     }
 
-    container.innerHTML = comp.preview;
-    if (previewInits[comp.id]) {
-      const inner = container.firstElementChild;
-      if (inner) {
-        try {
-          previewInits[comp.id](inner);
-        } catch (err) {
-          console.error(`Preview init failed for ${comp.id}:`, err);
+    function runPreviewScript() {
+      injectComponentScript();
+      container.innerHTML = comp.preview;
+      if (previewInits[comp.id]) {
+        const inner = container.firstElementChild;
+        if (inner) {
+          try {
+            previewInits[comp.id](inner);
+          } catch (err) {
+            console.error(`Preview init failed for ${comp.id}:`, err);
+          }
         }
       }
+    }
+
+    if (comp.deps && comp.deps.length) {
+      const missing = comp.deps.filter(url => !document.querySelector(`script[src="${url}"]`));
+      if (missing.length) {
+        let loaded = 0;
+        missing.forEach(url => {
+          const s = document.createElement("script");
+          s.src = url;
+          s.onload = () => { loaded++; if (loaded === missing.length) runPreviewScript(); };
+          s.onerror = () => { loaded++; if (loaded === missing.length) runPreviewScript(); };
+          document.head.appendChild(s);
+        });
+      } else {
+        runPreviewScript();
+      }
+    } else {
+      runPreviewScript();
     }
   }
 
@@ -3218,6 +3771,492 @@
       .split("\n")
       .map((line) => `<span class="code-line"><span class="code-line__text">${line || " "}</span></span>`)
       .join("");
+  }
+
+  function getComponentRootClasses(comp) {
+    const html = comp.html || comp.preview || "";
+    const template = document.createElement("template");
+    template.innerHTML = html.trim();
+    const root = template.content.firstElementChild;
+    if (root && root.classList.length) return Array.from(root.classList).join(" ");
+    return comp.id || "component";
+  }
+
+  function getComponentDependencies(comp) {
+    const deps = new Map();
+    (comp.deps || []).forEach((url) => {
+      url = normalizeDependencyUrl(url);
+      let label = url;
+      if (/three/i.test(url)) label = "Three.js";
+      if (/gsap/i.test(url)) label = "GSAP";
+      deps.set(label, url);
+    });
+
+    const source = [comp.html, comp.css, comp.js].filter(Boolean).join("\n");
+    if (/\bTHREE\b|three\.js|threejs/i.test(source) && !deps.has("Three.js")) {
+      deps.set("Three.js", "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js");
+    }
+    if (/\bgsap\b|gsap\.min\.js/i.test(source) && !deps.has("GSAP")) {
+      deps.set("GSAP", "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js");
+    }
+
+    return Array.from(deps, ([name, url]) => ({ name, url }));
+  }
+
+  function normalizeDependencyUrl(value) {
+    const text = String(value || "").trim();
+    const markdownMatch = text.match(/\[[^\]]+\]\((https?:\/\/[^)]+)\)/);
+    if (markdownMatch) return markdownMatch[1].trim();
+    const urlMatch = text.match(/https?:\/\/[^\s)]+/);
+    return urlMatch ? urlMatch[0].trim() : text;
+  }
+
+  function getDependencyEmbedCode(dep) {
+    const url = normalizeDependencyUrl(dep && dep.url ? dep.url : dep);
+    if (/\.js(?:\?|#|$)/i.test(url)) return `<script src="${url}"></script>`;
+    if (/\.css(?:\?|#|$)/i.test(url)) return `<link rel="stylesheet" href="${url}" />`;
+    return url;
+  }
+
+  const implementationPlatforms = {
+    elementor: {
+      name: "Elementor",
+      cssArea: "Elementor Custom CSS, Site Settings Custom CSS, or your theme CSS area",
+      jsArea: "Elementor Custom Code or a JavaScript injection area",
+      notes: "Use Elementor's native widgets and containers first, so images, slides, and text stay editable in Elementor. Add the classes below, then paste only the component CSS and JavaScript."
+    },
+    divi: {
+      name: "Divi",
+      cssArea: "Divi Theme Options Custom CSS, Page Settings Custom CSS, or the Divi Builder Custom CSS area",
+      jsArea: "Divi Theme Options Integration, a page-level code area, or a Code Module script block after the modules",
+      notes: "Use Divi Sections, Rows, Columns, and Modules as the editable content source. Add CSS classes in the Advanced tab, then paste only the component CSS and JavaScript."
+    },
+    wordpress: {
+      name: "WordPress",
+      cssArea: "Appearance > Customize > Additional CSS, Site Editor Styles, or your child theme CSS",
+      jsArea: "your theme, a snippets/custom code plugin, or a footer JavaScript area",
+      notes: "Use core WordPress blocks where possible so content stays editable. Add block classes in the Advanced panel, then paste only the component CSS and JavaScript."
+    },
+    gohighlevel: {
+      name: "GoHighLevel",
+      cssArea: "the page or funnel Custom CSS area",
+      jsArea: "the page or funnel tracking/custom JavaScript area, usually before the closing body tag",
+      notes: "Use GoHighLevel native Sections, Rows, Columns, Image elements, and Custom Class fields so users can keep editing images and content in the builder."
+    },
+    webflow: {
+      name: "Webflow",
+      cssArea: "Page Settings Custom Code, Site Settings Custom Code, or an Embed style block",
+      jsArea: "the Before </body> custom code area",
+      notes: "Use Webflow Sections, Containers, Collection Lists, Sliders, and Div Blocks first so content stays editable in Designer. Add classes, then paste only CSS and JavaScript."
+    },
+    wix: {
+      name: "Wix",
+      cssArea: "Wix Custom CSS, the site-level CSS panel, or the page custom code area when CSS injection is available",
+      jsArea: "Wix Velo page code, site code, or Tracking & Analytics custom code before the closing body tag",
+      notes: "Use Wix native Sections, Containers, Repeaters, Galleries, Sliders, Images, and Text elements first so clients can edit content in Wix. Add classes/IDs where Wix allows them, then paste only CSS and JavaScript."
+    }
+  };
+
+  function getComponentImplementationKind(comp) {
+    const id = comp.id || "";
+    if (id.includes("ghl-infinite")) return "ghlCarousel";
+    if (comp.category === "gallery") return "gallery";
+    if (comp.category === "sliders") return "slider";
+    if (comp.category === "reviews") return "reviews";
+    if (comp.category === "cards") return "cards";
+    if (comp.category === "hero") return "hero";
+    return "generic";
+  }
+
+  function getNativeBuilderPlan(comp, platformKey) {
+    const platform = implementationPlatforms[platformKey] || implementationPlatforms.elementor;
+    const rootClass = getComponentRootClasses(comp);
+    const kind = getComponentImplementationKind(comp);
+
+    const plans = {
+      slider: {
+        elementor: {
+          structure: ["Container", "Image Carousel / Slides Widget"],
+          elements: ["Container", "Image Carousel widget for editable slides", "Use Elementor's image picker to edit images"],
+          classes: [{ label: "Parent Container Advanced > CSS Classes", value: rootClass }, { label: "Alternative: Image Carousel widget Advanced > CSS Classes", value: rootClass }],
+          selectors: [
+            { label: "Carousel wrapper", value: `.${rootClass} .elementor-image-carousel-wrapper` },
+            { label: "Track", value: `.${rootClass} .elementor-image-carousel` },
+            { label: "Slides", value: `.${rootClass} .swiper-slide` },
+            { label: "Images", value: `.${rootClass} .swiper-slide-image` },
+            { label: "Arrows", value: `.${rootClass} .elementor-swiper-button` },
+            { label: "Dots", value: `.${rootClass} .swiper-pagination-bullet` }
+          ],
+          note: "Elementor does not let you add custom classes directly to each carousel image. Put the required class on the parent Container that wraps the Image Carousel. If you prefer, you can put the same class directly on the Image Carousel widget instead."
+        },
+        divi: {
+          structure: ["Section", "Row", "Slider Module or Gallery Module"],
+          elements: ["Section", "Row", "Slider/Gallery Module for editable slides", "Optional Button modules for custom arrows"],
+          classes: [{ label: "Section or Row", value: rootClass }, { label: "Slider/Gallery Module", value: "component-track" }, { label: "Each slide/item", value: "component-slide" }]
+        },
+        wordpress: {
+          structure: ["Group Block", "Gallery / Media & Text / Slider plugin block"],
+          elements: ["Group block", "Gallery block or slider plugin block for editable images", "Optional Button blocks for arrows"],
+          classes: [{ label: "Group block", value: rootClass }, { label: "Gallery/slider block", value: "component-track" }, { label: "Each image/slide", value: "component-slide" }]
+        },
+        gohighlevel: {
+          structure: ["Section", "Row", "Image/Carousel elements"],
+          elements: ["Section", "Row", "Native Image elements or Carousel element", "Optional Button/Icon elements for arrows"],
+          classes: [{ label: "Section", value: rootClass }, { label: "Row/Carousel", value: "component-track" }, { label: "Each image/slide", value: "component-slide" }]
+        },
+        webflow: {
+          structure: ["Section", "Container", "Slider or Collection List"],
+          elements: ["Section", "Container", "Slider component or Collection List for editable slides", "Optional Link Blocks for arrows"],
+          classes: [{ label: "Section", value: rootClass }, { label: "Slider/List", value: "component-track" }, { label: "Each slide/item", value: "component-slide" }]
+        },
+        wix: {
+          structure: ["Section", "Container", "Slideshow / Pro Gallery / Repeater"],
+          elements: ["Section", "Container", "Wix Slideshow, Pro Gallery, or Repeater for editable slides", "Optional Button/Icon elements for custom arrows"],
+          classes: [{ label: "Section or container", value: rootClass }, { label: "Slideshow/gallery/repeater", value: "component-track" }, { label: "Each slide/item", value: "component-slide" }]
+        }
+      },
+      gallery: {
+        elementor: {
+          structure: ["Container", "Basic Gallery Widget"],
+          elements: ["Container", "Basic Gallery widget", "Use Elementor's Basic Gallery media picker to edit images"],
+          classes: [{ label: "Parent Container Advanced > CSS Classes", value: rootClass }, { label: "Alternative: Basic Gallery widget Advanced > CSS Classes", value: rootClass }],
+          selectors: [
+            { label: "Basic Gallery wrapper", value: `.${rootClass} .elementor-image-gallery` },
+            { label: "Basic Gallery grid", value: `.${rootClass} .gallery` },
+            { label: "Basic Gallery items", value: `.${rootClass} .gallery-item` },
+            { label: "Basic Gallery image wrapper", value: `.${rootClass} .gallery-icon` },
+            { label: "Basic Gallery images", value: `.${rootClass} .gallery-icon img` },
+            { label: "Fallback carousel wrapper", value: `.${rootClass} .elementor-image-carousel-wrapper` },
+            { label: "Fallback carousel slides", value: `.${rootClass} .swiper-slide` },
+            { label: "Fallback carousel images", value: `.${rootClass} .swiper-slide-image` }
+          ],
+          note: "Use Elementor's Basic Gallery widget as the editable image source. Put the required class on the parent Container that contains the Basic Gallery widget. If you place the class on the Basic Gallery widget itself, that also works. Do not add classes to individual images."
+        },
+        divi: {
+          structure: ["Section", "Row", "Gallery Module"],
+          elements: ["Section", "Row", "Gallery Module for editable images"],
+          classes: [{ label: "Section or Row", value: rootClass }, { label: "Gallery Module", value: "component-gallery" }, { label: "Each gallery item", value: "component-gallery-item" }]
+        },
+        wordpress: {
+          structure: ["Group Block", "Gallery Block"],
+          elements: ["Group block", "Gallery block for editable images"],
+          classes: [{ label: "Group block", value: rootClass }, { label: "Gallery block", value: "component-gallery" }, { label: "Each image", value: "component-gallery-item" }]
+        },
+        gohighlevel: {
+          structure: ["Section", "Row", "Image elements / Gallery"],
+          elements: ["Section", "Row", "Native Image elements or Gallery element"],
+          classes: [{ label: "Section", value: rootClass }, { label: "Row/Gallery", value: "component-gallery" }, { label: "Each image item", value: "component-gallery-item" }]
+        },
+        webflow: {
+          structure: ["Section", "Container", "Collection List / Image Grid"],
+          elements: ["Section", "Container", "Collection List or Div grid for editable images"],
+          classes: [{ label: "Section", value: rootClass }, { label: "Grid/List", value: "component-gallery" }, { label: "Each image/item", value: "component-gallery-item" }]
+        },
+        wix: {
+          structure: ["Section", "Container", "Pro Gallery / Repeater"],
+          elements: ["Section", "Container", "Wix Pro Gallery or Repeater for editable images", "Image elements inside repeater items when a custom layout is needed"],
+          classes: [{ label: "Section or container", value: rootClass }, { label: "Gallery/repeater", value: "component-gallery" }, { label: "Each image/item", value: "component-gallery-item" }]
+        }
+      },
+      reviews: {
+        elementor: {
+          structure: ["Container.review-slider", "Repeating Container.review-card", "Image + Heading + Text widgets"],
+          elements: ["Container for the slider", "One inner Container per testimonial", "Image widget for avatar", "Heading/Text widgets for name, role, quote"],
+          classes: [{ label: "Slider container Advanced > CSS Classes", value: rootClass }, { label: "Each testimonial container Advanced > CSS Classes", value: "review-card" }, { label: "Author container Advanced > CSS Classes", value: "review-author" }],
+          selectors: [
+            { label: "Testimonial cards", value: `.${rootClass} .review-card` },
+            { label: "Author row", value: `.${rootClass} .review-author` },
+            { label: "Avatar image", value: `.${rootClass} .review-author img` }
+          ]
+        },
+        divi: {
+          structure: ["Section", "Row.review-slider", "Column/Blurb Module.review-card"],
+          elements: ["Section", "Row for the slider", "Blurb/Testimonial modules or Columns for each review", "Image/Text fields stay editable in Divi"],
+          classes: [{ label: "Slider row", value: rootClass }, { label: "Each review module/column", value: "review-card" }, { label: "Author group", value: "review-author" }]
+        },
+        wordpress: {
+          structure: ["Group.review-slider", "Group.review-card", "Image + Paragraph/Heading blocks"],
+          elements: ["Group block for the slider", "One Group block per testimonial", "Image, Heading, and Paragraph blocks inside each testimonial"],
+          classes: [{ label: "Slider group", value: rootClass }, { label: "Each testimonial group", value: "review-card" }, { label: "Author group", value: "review-author" }]
+        },
+        gohighlevel: {
+          structure: ["Section", "Row.review-slider", "Columns / Elements.review-card"],
+          elements: ["Section", "Row for the slider", "One Column or group of elements per testimonial", "Image/Text elements stay editable"],
+          classes: [{ label: "Slider row", value: rootClass }, { label: "Each testimonial column/group", value: "review-card" }, { label: "Author row/group", value: "review-author" }]
+        },
+        webflow: {
+          structure: ["Section", "Container.review-slider", "Div Block.review-card"],
+          elements: ["Section", "Container for the slider", "One Div Block per testimonial", "Image, Heading, and Text elements inside each card"],
+          classes: [{ label: "Slider container", value: rootClass }, { label: "Each testimonial div", value: "review-card" }, { label: "Author wrapper", value: "review-author" }]
+        },
+        wix: {
+          structure: ["Section", "Container.review-slider", "Repeater Item.review-card"],
+          elements: ["Section", "Container for the slider", "Wix Repeater for editable testimonials", "Image and Text elements inside each repeater item"],
+          classes: [{ label: "Slider container", value: rootClass }, { label: "Each repeater item", value: "review-card" }, { label: "Author group/container", value: "review-author" }]
+        }
+      },
+      ghlCarousel: {
+        gohighlevel: {
+          structure: ["Section.slider-section", "Row.carousel", "Inner Row/Columns.inner", "Columns.c-column"],
+          elements: ["Section", "Row", "Columns with native Image elements so images stay editable", "Pagination/arrow overlay generated by JavaScript when needed"],
+          classes: [{ label: "Section", value: "slider-section" }, { label: "Row", value: "carousel" }, { label: "Inner row/wrapper", value: "inner" }, { label: "Each column", value: "c-column" }]
+        },
+        wix: {
+          structure: ["Section.slider-section", "Container.carousel", "Repeater / Image items"],
+          elements: ["Section", "Container", "Wix Repeater or Pro Gallery with editable Image elements", "JavaScript handles the loop behavior around the editable items"],
+          classes: [{ label: "Section", value: "slider-section" }, { label: "Container", value: "carousel" }, { label: "Repeater/list wrapper", value: "inner" }, { label: "Each item", value: "c-column" }]
+        }
+      }
+    };
+
+    const fallback = {
+      structure: ["Wrapper element", "Native builder elements"],
+      elements: ["Use the closest native builder elements for the content.", "Add the required classes below.", "Paste only the CSS and JavaScript."],
+      classes: [{ label: "Root wrapper", value: rootClass }],
+      selectors: []
+    };
+
+    const kindPlans = plans[kind] || {};
+    const plan = kindPlans[platformKey] || (kind === "ghlCarousel" ? plans.ghlCarousel.gohighlevel : null) || kindPlans.elementor || fallback;
+    const firstClassStep = platformKey === "elementor"
+      ? "In Elementor, select the parent Container that contains the native widget, open Advanced > CSS Classes, and paste the required class there. Do not add classes to each generated image or slide."
+      : "Add the required CSS classes to the matching builder elements.";
+    const steps = [
+      `Build the layout using ${platform.name}'s native elements listed below.`,
+      firstClassStep,
+      "Edit images, text, links, and slides in the builder UI as usual.",
+      ...(plan.note ? [plan.note] : []),
+      `Paste the component CSS into ${platform.cssArea}.`,
+      `Paste the component JavaScript into ${platform.jsArea}.`,
+      "Load any required external dependencies before the component JavaScript.",
+      "Use the HTML tab only as a structure reference, not as the primary install method."
+    ];
+
+    return { ...plan, steps, showHtml: false };
+  }
+
+  function formatStructure(items) {
+    return items.map((item, index) => `${"  ".repeat(index)}${index === 0 ? "" : "└── "}${item}`).join("\n");
+  }
+
+  function getImplementationSetupText(comp, platformKey) {
+    const platform = implementationPlatforms[platformKey] || implementationPlatforms.elementor;
+    const plan = getNativeBuilderPlan(comp, platformKey);
+    const deps = getComponentDependencies(comp);
+    const implementationCss = getImplementationCss(comp, platformKey);
+    const implementationJs = getImplementationJs(comp, platformKey);
+    const depLines = deps.length ? deps.map((dep) => `- ${dep.name}: ${getDependencyEmbedCode(dep)}`).join("\n") : "- None";
+    const classLines = plan.classes.map((item) => `- ${item.label}: ${item.value}`).join("\n");
+    const elementLines = plan.elements.map((item) => `- ${item}`).join("\n");
+    const selectorLines = (plan.selectors || []).length
+      ? plan.selectors.map((item) => `- ${item.label}: ${item.value}`).join("\n")
+      : "- Use the classes above.";
+
+    return `${platform.name.toUpperCase()}
+
+Component: ${comp.name}
+
+Builder Elements:
+${elementLines}
+
+Required Classes:
+${classLines}
+
+CSS/JS Target Selectors:
+${selectorLines}
+
+Structure:
+${formatStructure(plan.structure)}
+
+Steps:
+${plan.steps.map((step, index) => `${index + 1}. ${step}`).join("\n")}
+
+Notes:
+${platform.notes}
+
+${plan.showHtml ? `HTML:\n${comp.html || ""}\n` : "HTML:\nUse the HTML tab only as a structure reference. Build with native builder elements for editable content.\n"}
+
+CSS:
+${implementationCss}
+
+JavaScript:
+${implementationJs}
+
+Dependencies:
+${depLines}`;
+  }
+
+  function renderImplementationBlock(title, value, filename) {
+    return `<section class="implementation-block">
+      <div class="implementation-block__header">
+        <span>${title}</span>
+        <button class="code-editor__copy" type="button" data-copy-nearby>Copy</button>
+      </div>
+      <pre class="implementation-code" ${filename ? `aria-label="${filename}"` : ""}><code data-copy-source>${escapeHtml(value || "")}</code></pre>
+    </section>`;
+  }
+
+  function getImplementationCss(comp, platformKey) {
+    let css = comp.css || "";
+    if (platformKey === "elementor" && comp.id === "unwoven") {
+      css += `
+
+/* Elementor adapter: use Basic Gallery as the editable image source. Carousel selectors are supported as a fallback. */
+.unwoven-component,
+.component-gallery {
+  min-height: 420px;
+}
+
+.unwoven-component .elementor-image-carousel-wrapper,
+.unwoven-component .elementor-image-gallery,
+.component-gallery .elementor-image-carousel-wrapper,
+.component-gallery .elementor-image-gallery {
+  display: none !important;
+}
+
+.unwoven-component .unwoven-stage,
+.component-gallery .unwoven-stage {
+  min-height: 420px;
+}`;
+    }
+    return css;
+  }
+
+  function getImplementationJs(comp, platformKey) {
+    let js = comp.js || "";
+    if (platformKey === "elementor" && comp.id === "unwoven") {
+      const adapter = `(function () {
+  "use strict";
+
+  function prepareElementorUnwoven() {
+    document.querySelectorAll(".unwoven-component, .component-gallery").forEach(function (component) {
+      if (component.querySelector(".unwoven-stage")) return;
+
+      const imageUrls = Array.from(
+        component.querySelectorAll(".swiper-slide:not(.swiper-slide-duplicate) .swiper-slide-image, .gallery-icon img")
+      ).map(function (image) {
+        return image.currentSrc || image.src;
+      }).filter(Boolean);
+
+      if (!imageUrls.length) return;
+
+      component.classList.add("unwoven-component");
+
+      const stage = document.createElement("main");
+      stage.className = "unwoven-stage";
+      stage.setAttribute("aria-hidden", "true");
+      stage.dataset.imageUrls = JSON.stringify(imageUrls);
+      component.appendChild(stage);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", prepareElementorUnwoven);
+  } else {
+    prepareElementorUnwoven();
+  }
+})();`;
+      js = `${adapter}\n\n${js}`;
+    }
+    return js;
+  }
+
+  function renderImplementationPanel(comp, platformKey = "elementor") {
+    const platform = implementationPlatforms[platformKey] || implementationPlatforms.elementor;
+    const plan = getNativeBuilderPlan(comp, platformKey);
+    const deps = getComponentDependencies(comp);
+    const implementationCss = getImplementationCss(comp, platformKey);
+    const implementationJs = getImplementationJs(comp, platformKey);
+    const setupText = getImplementationSetupText(comp, platformKey);
+    const container = document.getElementById("modal-implementation");
+    if (!container) return;
+
+    container.dataset.platform = platformKey;
+    container.innerHTML = `
+      <div class="implementation-panel__header">
+        <div>
+          <span class="implementation-panel__eyebrow">Implementation</span>
+          <h3>${platform.name}</h3>
+          <p>${platform.notes}</p>
+        </div>
+        <button class="implementation-copy-setup" type="button" data-copy-setup>Copy Setup</button>
+      </div>
+
+      <div class="implementation-platforms" role="tablist" aria-label="Implementation platform">
+        ${Object.entries(implementationPlatforms).map(([key, item]) => `
+          <button class="implementation-platform ${key === platformKey ? "is-active" : ""}" type="button" data-impl-platform="${key}" role="tab" aria-selected="${key === platformKey ? "true" : "false"}">${item.name}</button>
+        `).join("")}
+      </div>
+
+      <section class="implementation-section">
+        <h4>Structure</h4>
+        <pre class="implementation-structure">${escapeHtml(formatStructure(plan.structure))}</pre>
+      </section>
+
+      <section class="implementation-section">
+        <h4>Builder Elements</h4>
+        <ul class="implementation-native-list">
+          ${plan.elements.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+        </ul>
+      </section>
+
+      <section class="implementation-section">
+        <h4>Steps</h4>
+        <ol class="implementation-steps">
+          ${plan.steps.map((step) => `<li>${escapeHtml(step)}</li>`).join("")}
+        </ol>
+      </section>
+
+      <section class="implementation-section">
+        <h4>Required Classes</h4>
+        <div class="implementation-class-list">
+          ${plan.classes.map((item) => `
+            <div class="implementation-field">
+              <div>
+                <span>${escapeHtml(item.label)}</span>
+                <strong data-copy-source>${escapeHtml(item.value)}</strong>
+              </div>
+              <button class="code-editor__copy" type="button" data-copy-nearby>Copy</button>
+            </div>
+          `).join("")}
+        </div>
+      </section>
+
+      ${(plan.selectors || []).length ? `
+        <section class="implementation-section">
+          <h4>CSS/JS Target Selectors</h4>
+          <div class="implementation-class-list">
+            ${plan.selectors.map((item) => `
+              <div class="implementation-field">
+                <div>
+                  <span>${escapeHtml(item.label)}</span>
+                  <strong data-copy-source>${escapeHtml(item.value)}</strong>
+                </div>
+                <button class="code-editor__copy" type="button" data-copy-nearby>Copy</button>
+              </div>
+            `).join("")}
+          </div>
+        </section>
+      ` : ""}
+
+      ${plan.showHtml ? renderImplementationBlock("HTML", comp.html || "", "component.html") : `
+        <section class="implementation-section">
+          <h4>HTML Reference</h4>
+          <p class="implementation-empty">Do not paste full HTML for this builder setup. Use the existing HTML tab only as a visual structure reference while creating editable native builder elements.</p>
+        </section>
+      `}
+      ${renderImplementationBlock("CSS", implementationCss, "component.css")}
+      ${renderImplementationBlock("JavaScript", implementationJs, "component.js")}
+
+      <section class="implementation-section">
+        <h4>Dependencies</h4>
+        ${deps.length ? `<div class="implementation-deps">
+          ${deps.map((dep) => `<div class="implementation-dep"><span>✓ ${escapeHtml(dep.name)}</span><code data-copy-source>${escapeHtml(getDependencyEmbedCode(dep))}</code><button class="code-editor__copy" type="button" data-copy-nearby>Copy</button></div>`).join("")}
+        </div>` : `<p class="implementation-empty">No external dependencies required.</p>`}
+      </section>
+
+      <textarea class="implementation-setup-source" data-setup-source readonly>${escapeHtml(setupText)}</textarea>
+    `;
   }
 
   function setPreviewViewport(size) {
@@ -3294,6 +4333,7 @@ ${comp.js || ""}
     htmlCode.innerHTML = renderCode(comp.html);
     cssCode.innerHTML = renderCode(comp.css);
     jsCode.innerHTML = renderCode(comp.js);
+    renderImplementationPanel(comp);
 
     modal.querySelectorAll(".code-tabs__tab").forEach((tab) => {
       tab.classList.remove("is-active");
@@ -3362,22 +4402,31 @@ ${comp.js || ""}
         if (!activePanel) return;
         const codeEl = activePanel.querySelector("code");
         const code = codeEl.dataset.rawCode || codeEl.textContent;
-
-        try {
-          await navigator.clipboard.writeText(code);
-          showCopyFeedback(copyBtn);
-        } catch {
-          const textarea = document.createElement("textarea");
-          textarea.value = code;
-          textarea.style.position = "fixed";
-          textarea.style.opacity = "0";
-          document.body.appendChild(textarea);
-          textarea.select();
-          document.execCommand("copy");
-          document.body.removeChild(textarea);
-          showCopyFeedback(copyBtn);
-        }
+        copyText(code, copyBtn);
       };
+    });
+
+    const implementationPanel = document.getElementById("modal-implementation");
+    implementationPanel.addEventListener("click", (event) => {
+      const platformBtn = event.target.closest("[data-impl-platform]");
+      if (platformBtn) {
+        renderImplementationPanel(activeModalComponent, platformBtn.dataset.implPlatform);
+        return;
+      }
+
+      const setupBtn = event.target.closest("[data-copy-setup]");
+      if (setupBtn) {
+        const setupSource = implementationPanel.querySelector("[data-setup-source]");
+        copyText(setupSource ? setupSource.value : "", setupBtn);
+        return;
+      }
+
+      const nearbyBtn = event.target.closest("[data-copy-nearby]");
+      if (nearbyBtn) {
+        const block = nearbyBtn.closest(".implementation-block, .implementation-field");
+        const source = block ? block.querySelector("[data-copy-source]") : null;
+        copyText(source ? source.textContent : "", nearbyBtn);
+      }
     });
 
     modal.querySelectorAll("[data-viewport]").forEach((btn) => {
@@ -3466,6 +4515,23 @@ ${comp.js || ""}
       toast.classList.remove("is-visible");
       setTimeout(() => (toast.hidden = true), 200);
     }, 2000);
+  }
+
+  async function copyText(text, btn) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showCopyFeedback(btn);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      showCopyFeedback(btn);
+    }
   }
 
   // ============================================================
