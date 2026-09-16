@@ -3399,6 +3399,44 @@ ${comp.js || ""}
       setTimeout(() => URL.revokeObjectURL(url), 30000);
     };
 
+    // Resize handle for preview/code split
+    const resizeHandle = modal.querySelector("[data-resize-handle]");
+    const previewStage = modal.querySelector(".preview-stage");
+    const codeTabs = modal.querySelector(".code-tabs");
+
+    if (resizeHandle && previewStage && codeTabs) {
+      let isResizing = false;
+      let startY = 0;
+      let startPreviewHeight = 0;
+
+      resizeHandle.addEventListener("mousedown", (e) => {
+        isResizing = true;
+        startY = e.clientY;
+        startPreviewHeight = previewStage.offsetHeight;
+        document.body.style.cursor = "ns-resize";
+        document.body.style.userSelect = "none";
+        e.preventDefault();
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!isResizing) return;
+        const delta = e.clientY - startY;
+        const newHeight = Math.max(100, Math.min(startPreviewHeight + delta, modalBody.offsetHeight - 100));
+        previewStage.style.height = newHeight + "px";
+        previewStage.style.flex = "none";
+        codeTabs.style.flex = "1";
+        requestAnimationFrame(updatePreviewScale);
+      });
+
+      document.addEventListener("mouseup", () => {
+        if (isResizing) {
+          isResizing = false;
+          document.body.style.cursor = "";
+          document.body.style.userSelect = "";
+        }
+      });
+    }
+
     modal.querySelectorAll("[data-modal-view]").forEach((btn) => {
       btn.onclick = () => {
         const showCode = btn.dataset.modalView === "code";
