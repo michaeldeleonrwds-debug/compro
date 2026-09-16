@@ -1013,6 +1013,27 @@ html[data-theme="light"] .component-card:hover {
   color: var(--bg);
 }
 
+/* Code Toggle Button */
+.preview-action--code {
+  font-family: monospace;
+  font-size: 0.8rem;
+}
+
+.preview-action--code.is-active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Code Hidden State */
+.modal__body.is-code-hidden .code-tabs {
+  display: none;
+}
+
+.modal__body.is-code-hidden .preview-stage {
+  flex: 1;
+}
+
 .preview-workspace {
   min-height: 0;
   flex: 1;
