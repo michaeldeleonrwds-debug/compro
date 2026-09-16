@@ -1193,6 +1193,512 @@
       js: `// CSS animation handles continuous scroll.`
     },
 {
+  id: "blog-slider",
+  name: "Blog Slider",
+  description: "Fade transition blog card slider with pagination and autoplay.",
+  category: "sliders",
+  tags: ["free", "interactive", "javascript"],
+  injectScript: true,
+  preview: `<div class="comp blog-slider">
+    <div class="blog-slider__wrp">
+      <div class="blog-slider__item swiper-slide-active">
+        <div class="blog-slider__img">
+          <img src="${images[0]}" alt="" />
+        </div>
+        <div class="blog-slider__content">
+          <span class="blog-slider__code">26 December 2019</span>
+          <div class="blog-slider__title">Lorem Ipsum Dolor</div>
+          <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
+          <a href="#" class="blog-slider__button">READ MORE</a>
+        </div>
+      </div>
+      <div class="blog-slider__item">
+        <div class="blog-slider__img">
+          <img src="${images[1]}" alt="" />
+        </div>
+        <div class="blog-slider__content">
+          <span class="blog-slider__code">26 December 2019</span>
+          <div class="blog-slider__title">Lorem Ipsum Dolor2</div>
+          <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
+          <a href="#" class="blog-slider__button">READ MORE</a>
+        </div>
+      </div>
+    </div>
+    <div class="blog-slider__pagination"></div>
+  </div>`,
+  html: `<div class="blog-slider">
+  <div class="blog-slider__wrp swiper-wrapper">
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <span class="blog-slider__code">26 December 2019</span>
+        <div class="blog-slider__title">Lorem Ipsum Dolor</div>
+        <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi? </div>
+        <a href="#" class="blog-slider__button">READ MORE</a>
+      </div>
+    </div>
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/jason-leung-798979-unsplash.webp" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <span class="blog-slider__code">26 December 2019</span>
+        <div class="blog-slider__title">Lorem Ipsum Dolor2</div>
+        <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>
+        <a href="#" class="blog-slider__button">READ MORE</a>
+      </div>
+    </div>
+    <div class="blog-slider__item swiper-slide">
+      <div class="blog-slider__img">
+        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+      </div>
+      <div class="blog-slider__content">
+        <span class="blog-slider__code">26 December 2019</span>
+        <div class="blog-slider__title">Lorem Ipsum Dolor</div>
+        <div class="blog-slider__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae voluptate repellendus magni illo ea animi?</div>
+        <a href="#" class="blog-slider__button">READ MORE</a>
+      </div>
+    </div>
+  </div>
+  <div class="blog-slider__pagination"></div>
+</div>`,
+  css: `* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #FFE53B;
+  background-image: linear-gradient(147deg, #FFE53B 0%, #fd3838 74%);
+  min-height: 100vh;
+  font-family: 'Fira Sans', sans-serif;
+  display: flex;
+}
+
+.blog-slider {
+  width: 95%;
+  position: relative;
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding: 25px;
+  border-radius: 25px;
+  height: 400px;
+  transition: all .3s;
+}
+
+@media screen and (max-width: 992px) {
+  .blog-slider {
+    max-width: 680px;
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .blog-slider {
+    min-height: 500px;
+    height: auto;
+    margin: 180px auto;
+  }
+}
+
+@media screen and (max-height: 500px) and (min-width: 992px) {
+  .blog-slider {
+    height: 350px;
+  }
+}
+
+.blog-slider__item {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .blog-slider__item {
+    flex-direction: column;
+  }
+}
+
+.blog-slider__item.swiper-slide-active .blog-slider__img img {
+  opacity: 1;
+  transition-delay: .3s;
+}
+
+.blog-slider__item.swiper-slide-active .blog-slider__content > * {
+  opacity: 1;
+  transform: none;
+}
+
+.blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(1) {
+  transition-delay: 0.3s;
+}
+
+.blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(2) {
+  transition-delay: 0.4s;
+}
+
+.blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(3) {
+  transition-delay: 0.5s;
+}
+
+.blog-slider__item.swiper-slide-active .blog-slider__content > *:nth-child(4) {
+  transition-delay: 0.6s;
+}
+
+.blog-slider__img {
+  width: 300px;
+  flex-shrink: 0;
+  height: 300px;
+  background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+  box-shadow: 4px 13px 30px 1px rgba(252, 56, 56, 0.2);
+  border-radius: 20px;
+  transform: translateX(-80px);
+  overflow: hidden;
+}
+
+.blog-slider__img:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+  border-radius: 20px;
+  opacity: 0.8;
+}
+
+.blog-slider__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  border-radius: 20px;
+  transition: all .3s;
+}
+
+@media screen and (max-width: 992px) {
+  .blog-slider__img {
+    /* width: 45%; */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .blog-slider__img {
+    transform: translateY(-50%);
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .blog-slider__img {
+    width: 95%;
+  }
+}
+
+@media screen and (max-height: 500px) and (min-width: 992px) {
+  .blog-slider__img {
+    height: 270px;
+  }
+}
+
+.blog-slider__content {
+  padding-right: 25px;
+}
+
+@media screen and (max-width: 992px) {
+  .blog-slider__content {
+    /* width: 55%; */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .blog-slider__content {
+    margin-top: -80px;
+    text-align: center;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .blog-slider__content {
+    padding: 0;
+  }
+}
+
+.blog-slider__content > * {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: all .4s;
+}
+
+.blog-slider__code {
+  color: #7b7992;
+  margin-bottom: 15px;
+  display: block;
+  font-weight: 500;
+}
+
+.blog-slider__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #0d0925;
+  margin-bottom: 20px;
+}
+
+.blog-slider__text {
+  color: #4e4a67;
+  margin-bottom: 30px;
+  line-height: 1.5em;
+}
+
+.blog-slider__button {
+  display: inline-flex;
+  background-image: linear-gradient(147deg, #fe8a39 0%, #fd3838 74%);
+  padding: 15px 35px;
+  border-radius: 50px;
+  color: #fff;
+  box-shadow: 0px 14px 80px rgba(252, 56, 56, 0.4);
+  text-decoration: none;
+  font-weight: 500;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+@media screen and (max-width: 576px) {
+  .blog-slider__button {
+    width: 100%;
+  }
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-custom,
+.swiper-pagination-fraction {
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+}
+
+.blog-slider__pagination {
+  position: absolute;
+  z-index: 21;
+  right: 20px;
+  width: 11px !important;
+  text-align: center;
+  left: auto !important;
+  top: 50%;
+  bottom: auto !important;
+  transform: translateY(-50%);
+}
+
+@media screen and (max-width: 768px) {
+  .blog-slider__pagination {
+    transform: translateX(-50%);
+    left: 50% !important;
+    top: 205px;
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 8px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 5px;
+  }
+}
+
+.swiper-pagination-bullet {
+  width: 11px;
+  height: 11px;
+  display: block;
+  border-radius: 10px;
+  background: #062744;
+  opacity: 0.2;
+  transition: all .3s;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background: #fd3838;
+  height: 30px;
+  box-shadow: 0px 0px 20px rgba(252, 56, 56, 0.3);
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-pagination-bullet-active {
+    height: 11px;
+    width: 30px;
+  }
+}
+
+/* Preview overrides */
+.component-card__preview .blog-slider {
+  height: 220px !important;
+  padding: 15px !important;
+}
+
+.component-card__preview .blog-slider__img {
+  width: 120px !important;
+  height: 120px !important;
+  transform: none !important;
+}
+
+.component-card__preview .blog-slider__title {
+  font-size: 14px !important;
+}
+
+.component-card__preview .blog-slider__text {
+  font-size: 11px !important;
+  margin-bottom: 10px !important;
+}
+
+.component-card__preview .blog-slider__button {
+  padding: 8px 16px !important;
+  font-size: 10px !important;
+}
+
+.component-card__preview .blog-slider__pagination {
+  display: none !important;
+}
+
+.modal__preview .blog-slider {
+  height: 420px !important;
+}
+
+.modal__preview .blog-slider__img {
+  width: 250px !important;
+  height: 250px !important;
+}
+`,
+  js: `(function() {
+  function initBlogSlider(root) {
+    const slider = root.classList && root.classList.contains('blog-slider')
+      ? root
+      : root.querySelector('.blog-slider');
+    
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.blog-slider__item');
+    const pagination = slider.querySelector('.blog-slider__pagination');
+    
+    if (!slides.length) return;
+    
+    let currentIndex = 0;
+    let autoplayTimer = null;
+    
+    function goToSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('swiper-slide-active');
+        if (i === index) {
+          slide.classList.add('swiper-slide-active');
+        }
+      });
+      
+      if (pagination) {
+        const bullets = pagination.querySelectorAll('.swiper-pagination-bullet');
+        bullets.forEach((bullet, i) => {
+          bullet.classList.remove('swiper-pagination-bullet-active');
+          if (i === index) {
+            bullet.classList.add('swiper-pagination-bullet-active');
+          }
+        });
+      }
+      
+      currentIndex = index;
+    }
+    
+    function nextSlide() {
+      const next = (currentIndex + 1) % slides.length;
+      goToSlide(next);
+    }
+    
+    function prevSlide() {
+      const prev = (currentIndex - 1 + slides.length) % slides.length;
+      goToSlide(prev);
+    }
+    
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayTimer = setInterval(nextSlide, 4000);
+    }
+    
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    }
+    
+    // Create pagination bullets
+    if (pagination) {
+      pagination.innerHTML = '';
+      slides.forEach((_, i) => {
+        const bullet = document.createElement('span');
+        bullet.className = 'swiper-pagination-bullet' + (i === 0 ? ' swiper-pagination-bullet-active' : '');
+        bullet.addEventListener('click', () => {
+          goToSlide(i);
+          startAutoplay();
+        });
+        pagination.appendChild(bullet);
+      });
+    }
+    
+    // Initialize
+    goToSlide(0);
+    startAutoplay();
+    
+    // Pause on hover
+    slider.addEventListener('mouseenter', stopAutoplay);
+    slider.addEventListener('mouseleave', startAutoplay);
+    
+    // Touch support
+    let touchStartX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+      stopAutoplay();
+    }, { passive: true });
+    
+    slider.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].clientX;
+      const diff = touchStartX - touchEndX;
+      
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+      
+      startAutoplay();
+    }, { passive: true });
+  }
+  
+  window.initBlogSlider = initBlogSlider;
+  
+  function autoInit() {
+    document.querySelectorAll('.blog-slider').forEach(initBlogSlider);
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+})();
+`
+},
+{
       id: "masonry-gallery",
       name: "Masonry Gallery",
       description: "Pinterest-style masonry image grid.",
@@ -1792,6 +2298,9 @@
       let i = 0;
       el.querySelector(".bs-next").onclick = () => { i = (i + 1) % slides.length; track.style.transform = `translateX(${-i * 100}%)`; };
       el.querySelector(".bs-prev").onclick = () => { i = (i - 1 + slides.length) % slides.length; track.style.transform = `translateX(${-i * 100}%)`; };
+    },
+    "blog-slider": (el) => {
+      window.initBlogSlider(el);
     },
     "tilt-card": (el) => {
       const inner = el.querySelector(".tc-inner");
