@@ -1013,59 +1013,7 @@ html[data-theme="light"] .component-card:hover {
   color: var(--bg);
 }
 
-/* Code Toggle Button */
-.code-tabs__toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  margin-left: auto;
-  padding: 0;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  cursor: pointer;
-  color: var(--muted);
-  transition: background 0.2s, color 0.2s;
-}
 
-.code-tabs__toggle:hover {
-  background: var(--surface-2);
-  color: var(--text);
-}
-
-.code-tabs__toggle-icon {
-  display: inline-block;
-  font-size: 10px;
-  transition: transform 0.3s ease;
-}
-
-/* Code Hidden State */
-.modal__body.is-code-hidden .code-tabs__toggle-icon {
-  transform: rotate(180deg);
-}
-
-.modal__body.is-code-hidden .code-tabs {
-  height: 0;
-  min-height: 0;
-  overflow: hidden;
-  border-top: none;
-}
-
-.modal__body .code-tabs {
-  transition: height 0.3s ease;
-}
-
-.modal__body.is-code-hidden .preview-stage {
-  flex: 1;
-}
-
-.modal__body.is-code-hidden .preview-workspace {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .preview-workspace {
   min-height: 0;

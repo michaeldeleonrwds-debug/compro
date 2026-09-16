@@ -2947,11 +2947,6 @@ ${comp.js || ""}
       setTimeout(() => URL.revokeObjectURL(url), 30000);
     };
 
-    modal.querySelector("[data-toggle-code]").onclick = () => {
-      modalBody.classList.toggle("is-code-hidden");
-      requestAnimationFrame(updatePreviewScale);
-    };
-
     modal.querySelectorAll("[data-modal-view]").forEach((btn) => {
       btn.onclick = () => {
         const showCode = btn.dataset.modalView === "code";
