@@ -78,7 +78,22 @@
           <div class="ghl-carousel-preview__dots"><span class="active"></span><span></span><span></span><span></span></div>
         </div>
       `,
-      html: `<!--\n  GHL Infinite Draggable Carousel\n  1. Paste the CSS from the CSS tab inside a <style> block.\n  2. Paste the JS from the JavaScript tab inside a <script> block.\n  3. Add your .c-column cards inside .slider-section .carousel > .inner\n-->\n\n<div class="slider-section">\n    <div class="carousel">\n        <div class="inner">\n            <!-- Add your .c-column cards here -->\n        </div>\n    </div>\n</div>\n\n<div id="ghl-loop-pagination"></div>`,
+      html: `<!--
+  GHL Infinite Draggable Carousel
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your .c-column cards inside .slider-section .carousel > .inner
+-->
+
+<div class="slider-section">
+    <div class="carousel">
+        <div class="inner">
+            <!-- Add your .c-column cards here -->
+        </div>
+    </div>
+</div>
+
+<div id="ghl-loop-pagination"></div>`,
       css: `/* GHL Infinite Draggable Carousel CSS */\n.slider-section {\n    width: 100% !important; max-width: 100% !important;\n    position: relative !important; overflow: hidden !important;\n    box-sizing: border-box !important;\n}\n.slider-section .carousel {\n    width: 100% !important; max-width: 100% !important;\n    position: relative !important; overflow: hidden !important;\n    box-sizing: border-box !important;\n}\n.slider-section .carousel > .inner {\n    display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;\n    justify-content: flex-start !important; align-items: stretch !important;\n    width: max-content !important; min-width: max-content !important; max-width: none !important;\n    margin: 0 !important; padding: 0 !important; gap: 0 !important;\n    position: relative !important; box-sizing: border-box !important;\n    user-select: none !important; -webkit-user-select: none !important;\n    touch-action: pan-y !important; cursor: grab !important;\n    will-change: transform !important; transition: transform 450ms ease !important;\n}\n.slider-section .carousel > .inner.ghl-loop-dragging {\n    cursor: grabbing !important; transition: none !important;\n}\n.slider-section .carousel > .inner.ghl-loop-no-transition {\n    transition: none !important;\n}\n.slider-section .carousel > .inner > .c-column {\n    display: block !important; flex-grow: 0 !important; flex-shrink: 0 !important;\n    height: auto !important; padding: 0 !important; float: none !important;\n    box-sizing: border-box !important; position: relative !important;\n}\n.slider-section .carousel > .inner > .c-column > .inner {\n    width: 100% !important; height: 100% !important; box-sizing: border-box !important;\n}\n.slider-section .carousel .c-image,\n.slider-section .carousel .image-container {\n    width: 100% !important; max-width: 100% !important; box-sizing: border-box !important;\n}\n.slider-section .carousel img {\n    display: block !important; width: 100% !important; max-width: 100% !important;\n    height: 260px !important; object-fit: cover !important; object-position: center !important;\n    border-radius: 10px !important; pointer-events: none !important;\n    -webkit-user-drag: none !important; box-sizing: border-box !important;\n}\n#ghl-loop-arrow-overlay {\n    position: absolute !important; pointer-events: none !important;\n    z-index: 2147483000 !important; box-sizing: border-box !important;\n}\n.ghl-loop-arrow {\n    position: absolute !important; top: 50% !important;\n    transform: translateY(-50%) !important; width: 38px !important; height: 38px !important;\n    padding: 0 !important; margin: 0 !important;\n    border: 1px solid rgba(255,255,255,0.85) !important; border-radius: 50% !important;\n    background: rgba(90,90,90,0.90) !important; color: #ffffff !important;\n    display: flex !important; align-items: center !important; justify-content: center !important;\n    font-family: Arial, sans-serif !important; font-size: 25px !important;\n    font-weight: 400 !important; line-height: 1 !important; cursor: pointer !important;\n    pointer-events: auto !important; opacity: 1 !important;\n    transition: background 200ms ease, transform 200ms ease !important;\n}\n#ghl-loop-prev { left: 12px !important; }\n#ghl-loop-next { right: 12px !important; }\n.ghl-loop-arrow:hover { background: #50C1AF !important; }\n#ghl-loop-pagination {\n    width: 100% !important; display: flex !important;\n    align-items: center !important; justify-content: center !important;\n    gap: 6px !important; min-height: 16px !important;\n    margin-top: 28px !important; margin-bottom: 5px !important;\n    box-sizing: border-box !important;\n}\n.ghl-loop-dot {\n    appearance: none !important; -webkit-appearance: none !important;\n    width: 6px !important; height: 6px !important; min-width: 6px !important;\n    padding: 0 !important; margin: 0 !important; border: none !important;\n    border-radius: 999px !important; background: rgba(255,255,255,0.60) !important;\n    opacity: 1 !important; cursor: pointer !important;\n    transition: width 250ms ease, min-width 250ms ease, background 250ms ease !important;\n}\n.ghl-loop-dot.active {\n    width: 34px !important; min-width: 34px !important;\n    background: #ffffff !important;\n}\n@media (max-width: 1024px) {\n    .slider-section .carousel img { height: 230px !important; }\n    #ghl-loop-prev { left: 7px !important; }\n    #ghl-loop-next { right: 7px !important; }\n}\n@media (max-width: 767px) {\n    .slider-section { padding: 20px 30px 20px 10px !important; }\n    button#ghl-loop-next, button#ghl-loop-prev { display: none !important; }\n    .slider-section .carousel img { height: 210px !important; }\n    .ghl-loop-arrow { width: 34px !important; height: 34px !important; font-size: 22px !important; }\n    .ghl-loop-dot.active { width: 26px !important; min-width: 26px !important; }\n}`,
       js: `(function () {\n\n    const CONFIG = {\n        desktopCards: 3, laptopCards: 3, tabletCards: 2, mobileCards: 1,\n        desktopMin: 1281, laptopMin: 1025, tabletMin: 768,\n        desktopGap: 32, laptopGap: 28, tabletGap: 20, mobileGap: 16,\n        slidesPerMove: 1, dragThreshold: 50, transitionSpeed: 450\n    };\n\n    let state = null;\n    let initTimer = null;\n\n    function mod(value, total) {\n        return ((value % total) + total) % total;\n    }\n\n    function cleanClone(clone) {\n        clone.removeAttribute('id');\n        clone.querySelectorAll('[id]').forEach(function (element) {\n            element.removeAttribute('id');\n        });\n        clone.querySelectorAll('img').forEach(function (image) {\n            image.setAttribute('draggable', 'false');\n        });\n        clone.setAttribute('aria-hidden', 'true');\n        clone.classList.add('ghl-loop-clone');\n    }\n\n    function getResponsiveSettings() {\n        const width = window.innerWidth;\n        if (width >= CONFIG.desktopMin) return { visible: CONFIG.desktopCards, gap: CONFIG.desktopGap };\n        if (width >= CONFIG.laptopMin) return { visible: CONFIG.laptopCards, gap: CONFIG.laptopGap };\n        if (width >= CONFIG.tabletMin) return { visible: CONFIG.tabletCards, gap: CONFIG.tabletGap };\n        return { visible: CONFIG.mobileCards, gap: CONFIG.mobileGap };\n    }\n\n    function createArrowOverlay() {\n        const oldOverlay = document.getElementById('ghl-loop-arrow-overlay');\n        if (oldOverlay) oldOverlay.remove();\n\n        const overlay = document.createElement('div');\n        overlay.id = 'ghl-loop-arrow-overlay';\n\n        const previousButton = document.createElement('button');\n        previousButton.type = 'button';\n        previousButton.id = 'ghl-loop-prev';\n        previousButton.className = 'ghl-loop-arrow';\n        previousButton.setAttribute('aria-label', 'Previous slide');\n        previousButton.innerHTML = '&#8249;';\n\n        const nextButton = document.createElement('button');\n        nextButton.type = 'button';\n        nextButton.id = 'ghl-loop-next';\n        nextButton.className = 'ghl-loop-arrow';\n        nextButton.setAttribute('aria-label', 'Next slide');\n        nextButton.innerHTML = '&#8250;';\n\n        overlay.appendChild(previousButton);\n        overlay.appendChild(nextButton);\n        document.body.appendChild(overlay);\n\n        return { overlay, previousButton, nextButton };\n    }\n\n    function initCarousel() {\n\n        const section = document.querySelector('.slider-section');\n        if (!section) return;\n\n        const carousel = section.querySelector('.carousel');\n        if (!carousel) return;\n\n        const track = carousel.querySelector(':scope > .inner');\n        if (!track) return;\n\n        const pagination = document.getElementById('ghl-loop-pagination');\n        if (!pagination) return;\n\n        if (state && state.track === track && track.querySelectorAll(':scope > .ghl-loop-clone').length > 0) {\n            state.calculateLayout();\n            state.positionArrowOverlay();\n            return;\n        }\n\n        if (state) {\n            if (state.abortController) state.abortController.abort();\n            if (state.resizeObserver) state.resizeObserver.disconnect();\n            if (state.overlay) state.overlay.remove();\n        }\n\n        track.querySelectorAll(':scope > .ghl-loop-clone').forEach(function (clone) {\n            clone.remove();\n        });\n\n        const originals = Array.from(\n            track.querySelectorAll(':scope > .c-column:not(.ghl-loop-clone)')\n        );\n\n        const originalCount = originals.length;\n        if (originalCount === 0) return;\n\n        const beforeFragment = document.createDocumentFragment();\n        originals.forEach(function (card) {\n            const clone = card.cloneNode(true);\n            cleanClone(clone);\n            beforeFragment.appendChild(clone);\n        });\n        track.insertBefore(beforeFragment, track.firstChild);\n\n        const afterFragment = document.createDocumentFragment();\n        originals.forEach(function (card) {\n            const clone = card.cloneNode(true);\n            cleanClone(clone);\n            afterFragment.appendChild(clone);\n        });\n        track.appendChild(afterFragment);\n\n        const allCards = Array.from(track.querySelectorAll(':scope > .c-column'));\n\n        let logicalIndex = 0;\n        let physicalIndex = originalCount;\n        let cardWidth = 0;\n        let gap = 0;\n        let cardsVisible = 1;\n        let isDragging = false;\n        let dragStartX = 0;\n        let dragCurrentX = 0;\n        let dragStartTranslate = 0;\n\n        const abortController = new AbortController();\n        const eventSignal = abortController.signal;\n\n        const arrowData = createArrowOverlay();\n        const overlay = arrowData.overlay;\n        const previousButton = arrowData.previousButton;\n        const nextButton = arrowData.nextButton;\n\n        function positionArrowOverlay() {\n            const rect = carousel.getBoundingClientRect();\n            overlay.style.left = (rect.left + window.scrollX) + 'px';\n            overlay.style.top = (rect.top + window.scrollY) + 'px';\n            overlay.style.width = rect.width + 'px';\n            overlay.style.height = rect.height + 'px';\n        }\n\n        function getTranslate(index) {\n            return -(index * (cardWidth + gap));\n        }\n\n        function setTrackPosition(animate) {\n            if (animate) {\n                track.classList.remove('ghl-loop-no-transition');\n                track.classList.remove('ghl-loop-dragging');\n            } else {\n                track.classList.add('ghl-loop-no-transition');\n            }\n\n            const translate = getTranslate(physicalIndex);\n            track.style.setProperty('transform', 'translate3d(' + translate + 'px,0,0)', 'important');\n            updatePagination();\n\n            if (!animate) {\n                requestAnimationFrame(function () {\n                    requestAnimationFrame(function () {\n                        track.classList.remove('ghl-loop-no-transition');\n                    });\n                });\n            }\n        }\n\n        function normalizeInfinitePosition() {\n            let changed = false;\n            while (physicalIndex >= originalCount * 2) {\n                physicalIndex -= originalCount;\n                changed = true;\n            }\n            while (physicalIndex < originalCount) {\n                physicalIndex += originalCount;\n                changed = true;\n            }\n            logicalIndex = mod(physicalIndex - originalCount, originalCount);\n            if (changed) setTrackPosition(false);\n            updatePagination();\n        }\n\n        function buildPagination() {\n            pagination.innerHTML = '';\n            for (let index = 0; index < originalCount; index++) {\n                const dot = document.createElement('button');\n                dot.type = 'button';\n                dot.className = 'ghl-loop-dot';\n                dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));\n                dot.addEventListener('click', function () {\n                    goToLogicalIndex(index);\n                }, { signal: eventSignal });\n                pagination.appendChild(dot);\n            }\n            updatePagination();\n        }\n\n        function updatePagination() {\n            const dots = Array.from(pagination.children);\n            dots.forEach(function (dot, index) {\n                dot.classList.toggle('active', index === logicalIndex);\n            });\n        }\n\n        function goToLogicalIndex(targetLogicalIndex) {\n            const candidates = [\n                targetLogicalIndex,\n                targetLogicalIndex + originalCount,\n                targetLogicalIndex + (originalCount * 2)\n            ];\n            let targetPhysical = candidates[0];\n            let smallestDistance = Math.abs(targetPhysical - physicalIndex);\n            candidates.forEach(function (candidate) {\n                const distance = Math.abs(candidate - physicalIndex);\n                if (distance < smallestDistance) {\n                    smallestDistance = distance;\n                    targetPhysical = candidate;\n                }\n            });\n            logicalIndex = targetLogicalIndex;\n            physicalIndex = targetPhysical;\n            setTrackPosition(true);\n        }\n\n        function nextSlide() {\n            physicalIndex += CONFIG.slidesPerMove;\n            logicalIndex = mod(logicalIndex + CONFIG.slidesPerMove, originalCount);\n            setTrackPosition(true);\n        }\n\n        function previousSlide() {\n            physicalIndex -= CONFIG.slidesPerMove;\n            logicalIndex = mod(logicalIndex - CONFIG.slidesPerMove, originalCount);\n            setTrackPosition(true);\n        }\n\n        function calculateLayout() {\n            const settings = getResponsiveSettings();\n            cardsVisible = Math.max(1, Math.min(settings.visible, originalCount));\n            gap = settings.gap;\n\n            const viewportWidth = carousel.getBoundingClientRect().width;\n            if (viewportWidth <= 0) return;\n\n            cardWidth = (viewportWidth - (gap * (cardsVisible - 1))) / cardsVisible;\n\n            allCards.forEach(function (card) {\n                card.style.setProperty('flex', '0 0 ' + cardWidth + 'px', 'important');\n                card.style.setProperty('width', cardWidth + 'px', 'important');\n                card.style.setProperty('min-width', cardWidth + 'px', 'important');\n                card.style.setProperty('max-width', cardWidth + 'px', 'important');\n                card.style.setProperty('margin-left', '0px', 'important');\n                card.style.setProperty('margin-right', gap + 'px', 'important');\n                card.style.setProperty('padding', '0px', 'important');\n                card.style.setProperty('float', 'none', 'important');\n                card.style.setProperty('box-sizing', 'border-box', 'important');\n            });\n\n            physicalIndex = originalCount + logicalIndex;\n            setTrackPosition(false);\n            positionArrowOverlay();\n        }\n\n        track.addEventListener('transitionend', function (event) {\n            if (event.propertyName !== 'transform') return;\n            normalizeInfinitePosition();\n        }, { signal: eventSignal });\n\n        previousButton.addEventListener('click', previousSlide, { signal: eventSignal });\n        nextButton.addEventListener('click', nextSlide, { signal: eventSignal });\n\n        function startDrag(event) {\n            if (event.button !== undefined && event.button !== 0) return;\n            isDragging = true;\n            dragStartX = event.clientX;\n            dragCurrentX = dragStartX;\n            dragStartTranslate = getTranslate(physicalIndex);\n            track.classList.add('ghl-loop-dragging');\n            if (track.setPointerCapture && event.pointerId !== undefined) {\n                try {\n                    track.setPointerCapture(event.pointerId);\n                } catch (error) { /* safe */ }\n            }\n        }\n\n        function drag(event) {\n            if (!isDragging) return;\n            dragCurrentX = event.clientX;\n            const distance = dragCurrentX - dragStartX;\n            const translate = dragStartTranslate + distance;\n            track.style.setProperty('transform', 'translate3d(' + translate + 'px,0,0)', 'important');\n        }\n\n        function endDrag() {\n            if (!isDragging) return;\n            isDragging = false;\n            track.classList.remove('ghl-loop-dragging');\n            const distance = dragCurrentX - dragStartX;\n            if (distance < -CONFIG.dragThreshold) nextSlide();\n            else if (distance > CONFIG.dragThreshold) previousSlide();\n            else setTrackPosition(true);\n        }\n\n        track.addEventListener('pointerdown', startDrag, { signal: eventSignal });\n        track.addEventListener('pointermove', drag, { signal: eventSignal });\n        track.addEventListener('pointerup', endDrag, { signal: eventSignal });\n        track.addEventListener('pointercancel', endDrag, { signal: eventSignal });\n\n        track.querySelectorAll('img').forEach(function (image) {\n            image.setAttribute('draggable', 'false');\n        });\n\n        let resizeTimer;\n        window.addEventListener('resize', function () {\n            clearTimeout(resizeTimer);\n            resizeTimer = setTimeout(calculateLayout, 120);\n        }, { signal: eventSignal });\n\n        window.addEventListener('orientationchange', function () {\n            setTimeout(calculateLayout, 150);\n        }, { signal: eventSignal });\n\n        let scrollFrame = null;\n        window.addEventListener('scroll', function () {\n            if (scrollFrame) return;\n            scrollFrame = requestAnimationFrame(function () {\n                scrollFrame = null;\n                positionArrowOverlay();\n            });\n        }, { passive: true, signal: eventSignal });\n\n        let resizeObserver = null;\n        if (typeof ResizeObserver !== 'undefined') {\n            let previousWidth = 0;\n            resizeObserver = new ResizeObserver(function (entries) {\n                entries.forEach(function (entry) {\n                    const width = entry.contentRect.width;\n                    if (Math.abs(width - previousWidth) > 1) {\n                        previousWidth = width;\n                        calculateLayout();\n                    }\n                });\n            });\n            resizeObserver.observe(carousel);\n        }\n\n        buildPagination();\n        calculateLayout();\n\n        state = {\n            section, carousel, track, originalCount,\n            overlay, abortController, resizeObserver,\n            calculateLayout, positionArrowOverlay\n        };\n\n        setTimeout(calculateLayout, 200);\n        setTimeout(calculateLayout, 600);\n        setTimeout(calculateLayout, 1200);\n    }\n\n    function startCarousel() {\n        clearTimeout(initTimer);\n        initTimer = setTimeout(function () {\n            try {\n                initCarousel();\n            } catch (error) {\n                console.error('GHL Infinite Carousel Error:', error);\n            }\n        }, 50);\n    }\n\n    if (document.readyState === 'loading') {\n        document.addEventListener('DOMContentLoaded', startCarousel);\n    } else {\n        startCarousel();\n    }\n\n    document.addEventListener('hydrationDone', function () {\n        startCarousel();\n        setTimeout(startCarousel, 400);\n    });\n\n    window.addEventListener('load', function () {\n        startCarousel();\n        setTimeout(startCarousel, 700);\n    });\n\n    const pageObserver = new MutationObserver(function () {\n        clearTimeout(pageObserver.timer);\n        pageObserver.timer = setTimeout(function () {\n            const currentTrack = document.querySelector('.slider-section .carousel > .inner');\n            if (!currentTrack) return;\n            if (!state || state.track !== currentTrack) {\n                startCarousel();\n                return;\n            }\n            const cloneCount = currentTrack.querySelectorAll(':scope > .ghl-loop-clone').length;\n            if (cloneCount < state.originalCount * 2) startCarousel();\n        }, 120);\n    });\n\n    function startPageObserver() {\n        const section = document.querySelector('.slider-section');\n        if (!section) return;\n        pageObserver.observe(section, { childList: true, subtree: true });\n    }\n\n    if (document.readyState === 'loading') {\n        document.addEventListener('DOMContentLoaded', startPageObserver);\n    } else {\n        startPageObserver();\n    }\n\n})();`
     },
@@ -100,7 +115,20 @@
           </div>
         </div>
       `,
-      html: `<!--\n  GHL Infinite Scroll Carousel\n  1. Paste the CSS from the CSS tab inside a <style> block.\n  2. Paste the JS from the JavaScript tab inside a <script> block.\n  3. Add your .c-column cards inside .slider-section .carousel > .inner\n-->\n\n<div class="slider-section">\n    <div class="carousel">\n        <div class="inner">\n            <!-- Add your .c-column cards here -->\n        </div>\n    </div>\n</div>`,
+      html: `<!--
+  GHL Infinite Scroll Carousel
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your .c-column cards inside .slider-section .carousel > .inner
+-->
+
+<div class="slider-section">
+    <div class="carousel">
+        <div class="inner">
+            <!-- Add your .c-column cards here -->
+        </div>
+    </div>
+</div>`,
       css: `/* GHL Infinite Scroll Carousel CSS */\n.slider-section {\n    width: 100% !important; max-width: 100% !important;\n    position: relative !important; overflow: hidden !important;\n    box-sizing: border-box !important;\n}\n.slider-section .carousel {\n    display: block !important; width: 100% !important; max-width: 100% !important;\n    margin: 0 !important; padding: 0 !important;\n    position: relative !important; overflow: hidden !important;\n    box-sizing: border-box !important;\n    animation: none !important; transition: none !important;\n}\n.slider-section .carousel > .inner {\n    display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important;\n    justify-content: flex-start !important; align-items: stretch !important;\n    width: max-content !important; min-width: max-content !important; max-width: none !important;\n    margin: 0 !important; padding: 0 !important; gap: 0 !important;\n    overflow: visible !important; float: none !important;\n    position: relative !important; animation: none !important; transition: none !important;\n    will-change: transform !important; box-sizing: border-box !important;\n}\n.slider-section .carousel > .inner > .c-column {\n    display: block !important; flex-grow: 0 !important; flex-shrink: 0 !important;\n    flex-basis: auto !important; width: auto !important; min-width: 0 !important;\n    max-width: none !important; height: auto !important; margin-top: 0 !important;\n    margin-bottom: 0 !important; padding: 0 !important; float: none !important;\n    box-sizing: border-box !important; position: relative !important;\n    animation: none !important; transition: none !important; transform: none !important;\n}\n.slider-section .carousel > .inner > .c-column > .inner {\n    display: block !important; width: 100% !important; min-width: 0 !important;\n    max-width: 100% !important; margin: 0 !important; padding: 0 !important;\n    box-sizing: border-box !important; transform: none !important;\n    animation: none !important; transition: none !important;\n}\n.slider-section .carousel .c-image,\n.slider-section .carousel .image-container,\n.slider-section .carousel picture {\n    display: block !important; width: 100% !important; max-width: 100% !important;\n    margin: 0 !important; padding: 0 !important; box-sizing: border-box !important;\n}\n.slider-section .carousel img {\n    display: block !important; width: 100% !important; max-width: 100% !important;\n    height: 478px !important; object-fit: cover !important; object-position: center !important;\n    margin: 0 !important; padding: 0 !important; border-radius: 10px !important;\n    box-sizing: border-box !important; animation: none !important; transition: none !important;\n}\n.slider-section .carousel::before,\n.slider-section .carousel::after,\n.slider-section .carousel > .inner::before,\n.slider-section .carousel > .inner::after {\n    display: none !important; content: none !important;\n}\n@media (min-width: 1025px) {\n    .slider-section .carousel > .inner { height: 478px !important; }\n}\n@media (min-width: 768px) and (max-width: 1024px) {\n    .slider-section .carousel > .inner { height: 420px !important; }\n    .slider-section .carousel img { height: 420px !important; }\n}\n@media (max-width: 767px) {\n    .slider-section .carousel > .inner { height: 350px !important; }\n    .slider-section .carousel img { height: 350px !important; }\n}\n@media (max-width: 480px) {\n    .slider-section .carousel > .inner { height: 320px !important; }\n    .slider-section .carousel img { height: 320px !important; }\n}`,
       js: `(function () {\n\n    function initInfiniteCarousel() {\n\n        const section = document.querySelector('.slider-section');\n        if (!section) { console.log('Carousel: section not found'); return; }\n\n        const carousel = section.querySelector('.carousel');\n        if (!carousel) { console.log('Carousel: carousel not found'); return; }\n\n        const track = carousel.querySelector(':scope > .inner');\n        if (!track) { console.log('Carousel: inner not found'); return; }\n\n        track.removeAttribute('data-custom-infinite-carousel');\n        track.removeAttribute('data-infinite-ready');\n\n        track.style.setProperty('animation', 'none', 'important');\n        track.style.setProperty('transition', 'none', 'important');\n        track.style.setProperty('transform', 'translate3d(0,0,0)', 'important');\n\n        const originals = Array.from(track.querySelectorAll(':scope > .c-column'));\n        if (originals.length === 0) { console.log('Carousel: no columns found'); return; }\n\n        console.log('Carousel: found', originals.length, 'original cards');\n\n        track.querySelectorAll('.infinite-carousel-clone').forEach(function (clone) {\n            clone.remove();\n        });\n\n        const cards = originals.slice();\n        const copies = 4;\n\n        for (let copy = 0; copy < copies; copy++) {\n            cards.forEach(function (card) {\n                const clone = card.cloneNode(true);\n                clone.removeAttribute('id');\n                clone.classList.add('infinite-carousel-clone');\n                clone.setAttribute('aria-hidden', 'true');\n                track.appendChild(clone);\n            });\n        }\n\n        track.style.setProperty('display', 'flex', 'important');\n        track.style.setProperty('flex-direction', 'row', 'important');\n        track.style.setProperty('flex-wrap', 'nowrap', 'important');\n        track.style.setProperty('justify-content', 'flex-start', 'important');\n        track.style.setProperty('align-items', 'stretch', 'important');\n        track.style.setProperty('width', 'max-content', 'important');\n        track.style.setProperty('min-width', 'max-content', 'important');\n        track.style.setProperty('max-width', 'none', 'important');\n        track.style.setProperty('margin', '0', 'important');\n        track.style.setProperty('padding', '0', 'important');\n        track.style.setProperty('gap', '0', 'important');\n        track.style.setProperty('float', 'none', 'important');\n        track.style.setProperty('overflow', 'visible', 'important');\n        track.style.setProperty('position', 'relative', 'important');\n\n        const allCards = Array.from(track.querySelectorAll(':scope > .c-column'));\n\n        function getCardWidth() {\n            const viewport = section.getBoundingClientRect().width;\n            if (window.innerWidth <= 767) return viewport - 32;\n            if (window.innerWidth <= 1024) return (viewport - 52) / 2;\n            return (viewport - 104) / 4;\n        }\n\n        function applyCardWidth() {\n            const width = getCardWidth();\n            let margin;\n            if (window.innerWidth <= 480) margin = 6;\n            else if (window.innerWidth <= 767) margin = 8;\n            else margin = 13;\n\n            allCards.forEach(function (card) {\n                card.style.setProperty('display', 'block', 'important');\n                card.style.setProperty('flex', '0 0 ' + width + 'px', 'important');\n                card.style.setProperty('width', width + 'px', 'important');\n                card.style.setProperty('min-width', width + 'px', 'important');\n                card.style.setProperty('max-width', width + 'px', 'important');\n                card.style.setProperty('margin-left', margin + 'px', 'important');\n                card.style.setProperty('margin-right', margin + 'px', 'important');\n                card.style.setProperty('margin-top', '0', 'important');\n                card.style.setProperty('margin-bottom', '0', 'important');\n                card.style.setProperty('padding', '0', 'important');\n                card.style.setProperty('float', 'none', 'important');\n                card.style.setProperty('box-sizing', 'border-box', 'important');\n            });\n        }\n\n        applyCardWidth();\n        track.getBoundingClientRect();\n\n        function getSetWidth() {\n            if (cards.length === 0) return 0;\n            const first = allCards[0];\n            const nextSetFirst = allCards[cards.length];\n            if (!first || !nextSetFirst) return 0;\n            const firstRect = first.getBoundingClientRect();\n            const nextRect = nextSetFirst.getBoundingClientRect();\n            return (nextRect.left - firstRect.left);\n        }\n\n        let setWidth = getSetWidth();\n        console.log('Carousel set width:', setWidth);\n\n        let position = 0;\n        const speed = 0.4;\n        let animationFrame;\n\n        function animate() {\n            position -= speed;\n            if (setWidth > 0 && position <= -setWidth) {\n                position += setWidth;\n            }\n            track.style.setProperty('transform', 'translate3d(' + position + 'px, 0, 0)', 'important');\n            animationFrame = requestAnimationFrame(animate);\n        }\n\n        let resizeTimer;\n        window.addEventListener('resize', function () {\n            clearTimeout(resizeTimer);\n            cancelAnimationFrame(animationFrame);\n            resizeTimer = setTimeout(function () {\n                applyCardWidth();\n                requestAnimationFrame(function () {\n                    setWidth = getSetWidth();\n                    position = 0;\n                    track.style.setProperty('transform', 'translate3d(0,0,0)', 'important');\n                    animationFrame = requestAnimationFrame(animate);\n                });\n            }, 250);\n        });\n\n        track.setAttribute('data-custom-infinite-carousel', 'true');\n        animationFrame = requestAnimationFrame(animate);\n        console.log('Infinite carousel started');\n    }\n\n    function start() {\n        try {\n            initInfiniteCarousel();\n        } catch (error) {\n            console.error('Carousel error:', error);\n        }\n    }\n\n    if (document.readyState === 'loading') {\n        document.addEventListener('DOMContentLoaded', start);\n    } else {\n        start();\n    }\n\n    setTimeout(start, 500);\n    setTimeout(start, 1500);\n    setTimeout(start, 3000);\n\n})();`
     },
@@ -168,59 +196,24 @@
               </div>
             </div>
         </div>`,
-      html: `<div class="review-slider">
+      html: `<!--
+  Review Testimonial Slider
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your review cards inside .review-slider
+  4. Each card needs: .review-stars, blockquote, .review-author with img and text
+-->
+
+<div class="review-slider">
+  <!-- Add your review cards here -->
   <div class="review-card">
     <div class="review-stars">★★★★★</div>
-    <blockquote>"Clean code and smooth animations out of the box."</blockquote>
+    <blockquote>"Your testimonial text here."</blockquote>
     <div class="review-author">
-      <img src="${images[4]}" alt="" />
+      <img src="https://placehold.co/48x48" alt="" />
       <div>
-        <strong>Marcus Reid</strong>
-        <span>Developer</span>
-      </div>
-    </div>
-  </div>
-  <div class="review-card">
-    <div class="review-stars">★★★★★</div>
-    <blockquote>"Super easy to customize and drop into any project."</blockquote>
-    <div class="review-author">
-      <img src="${images[5]}" alt="" />
-      <div>
-        <strong>Avery L.</strong>
-        <span>Product Designer</span>
-      </div>
-    </div>
-  </div>
-  <div class="review-card">
-    <div class="review-stars">★★★★★</div>
-    <blockquote>"Our clients love the polished, premium feel."</blockquote>
-    <div class="review-author">
-      <img src="${images[6]}" alt="" />
-      <div>
-        <strong>Morgan K.</strong>
-        <span>Agency Owner</span>
-      </div>
-    </div>
-  </div>
-  <div class="review-card">
-    <div class="review-stars">★★★★★</div>
-    <blockquote>"Best testimonial slider we've used by a wide margin."</blockquote>
-    <div class="review-author">
-      <img src="${images[7]}" alt="" />
-      <div>
-        <strong>Jordan P.</strong>
-        <span>Founder</span>
-      </div>
-    </div>
-  </div>
-  <div class="review-card">
-    <div class="review-stars">★★★★★</div>
-    <blockquote>"Looks premium out of the box with minimal tweaks."</blockquote>
-    <div class="review-author">
-      <img src="${images[8]}" alt="" />
-      <div>
-        <strong>Riley S.</strong>
-        <span>Engineer</span>
+        <strong>Customer Name</strong>
+        <span>Customer Title</span>
       </div>
     </div>
   </div>
@@ -1133,7 +1126,23 @@
           <button class="bs-next" aria-label="Next">→</button>
         </div>
       `,
-      html: `<div class="basic-slider">\n  <button class="bs-prev" aria-label="Previous">←</button>\n  <div class="bs-window"><div class="bs-track">\n    <div class="bs-slide">1</div>\n    <div class="bs-slide">2</div>\n    <div class="bs-slide">3</div>\n  </div></div>\n  <button class="bs-next" aria-label="Next">→</button>\n</div>`,
+      html: `<!--
+  Basic Slider
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your slides inside .bs-track
+-->
+
+<div class="basic-slider">
+  <button class="bs-prev" aria-label="Previous">←</button>
+  <div class="bs-window"><div class="bs-track">
+    <!-- Add your slides here -->
+    <div class="bs-slide">Slide 1</div>
+    <div class="bs-slide">Slide 2</div>
+    <div class="bs-slide">Slide 3</div>
+  </div></div>
+  <button class="bs-next" aria-label="Next">→</button>
+</div>`,
       css: `.basic-slider {\n  display: flex; align-items: center; gap: 12px; width: 100%; max-width: 400px;\n}\n.bs-window { overflow: hidden; border-radius: 12px; flex: 1; }\n.bs-track { display: flex; transition: transform 500ms cubic-bezier(0.22,1,0.36,1); }\n.bs-slide {\n  flex: 0 0 100%; aspect-ratio: 16/10; display: grid; place-items: center;\n  color: #fff; font-size: 2rem; font-weight: 800; border-radius: 12px;\n  background: linear-gradient(135deg,#6366f1,#8b5cf6);\n}\n.bs-prev, .bs-next {\n  width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.12);\n  border-radius: 50%; background: #1f222c; color: #fff; cursor: pointer;\n}`,
       js: `const slider = document.querySelector('.basic-slider');\nconst track = slider.querySelector('.bs-track');\nconst slides = slider.querySelectorAll('.bs-slide');\nlet i = 0;\nfunction update(){ track.style.transform = \`translateX(\${-i*100}%)\`; }\\nslider.querySelector('.bs-next').onclick = () => { i = (i+1)%slides.length; update(); };\\nslider.querySelector('.bs-prev').onclick = () => { i = (i-1+slides.length)%slides.length; update(); };\\nupdate();`
     },
@@ -1155,7 +1164,20 @@
           </div>
         </div>
       `,
-      html: `<div class="product-slider">\n  <div class="ps-track">\n    <div class="ps-card"><div class="ps-img"><img src="image1.jpg" alt="" /></div></div>\n    <div class="ps-card"><div class="ps-img"><img src="image2.jpg" alt="" /></div></div>\n    <div class="ps-card"><div class="ps-img"><img src="image3.jpg" alt="" /></div></div>\n  </div>\n</div>`,
+      html: `<!--
+  Product Slider
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your product cards inside .ps-track
+-->
+
+<div class="product-slider">
+  <div class="ps-track">
+    <!-- Add your product cards here -->
+    <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
+    <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
+    <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
+  </div>
+</div>`,
       css: `.product-slider { overflow: hidden; border-radius: 14px; width: 100%; max-width: 320px; }\n.ps-track { display: flex; gap: 12px; animation: psScroll 6s linear infinite; }\n@keyframes psScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }\n.ps-card {\n  flex: 0 0 140px; background: #15171d; border: 1px solid rgba(255,255,255,0.08);\n  border-radius: 14px; padding: 12px; text-align: center; color: #f5f7ff;\n}\n.ps-img { aspect-ratio: 1; border-radius: 10px; background: linear-gradient(135deg,#6366f1,#8b5cf6); margin-bottom: 10px; overflow: hidden; }\n.ps-img img { width: 100%; height: 100%; object-fit: cover; display: block; }`,
       js: `// CSS animation handles continuous scroll.`
     },
@@ -1174,7 +1196,20 @@
           <div class="mg-item"></div>
         </div>
       `,
-      html: `<div class="masonry-gallery">\n  <div class="mg-item mg-item--tall"></div>\n  <div class="mg-item"></div>\n  <div class="mg-item"></div>\n  <div class="mg-item mg-item--wide"></div>\n</div>`,
+      html: `<!--
+  Masonry Gallery
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your gallery items inside .masonry-gallery
+  3. Use .mg-item--tall for tall items, .mg-item--wide for wide items
+-->
+
+<div class="masonry-gallery">
+  <!-- Add your gallery items here -->
+  <div class="mg-item mg-item--tall"></div>
+  <div class="mg-item"></div>
+  <div class="mg-item"></div>
+  <div class="mg-item mg-item--wide"></div>
+</div>`,
       css: `.masonry-gallery {\n  display: grid; grid-template-columns: repeat(3, 1fr); grid-auto-rows: 40px;\n  gap: 8px; width: 100%; max-width: 320px;\n}\n.mg-item { background: linear-gradient(135deg,#6366f1,#8b5cf6); border-radius: 10px; grid-row: span 2; }\n.mg-item--tall { grid-row: span 4; }\n.mg-item--wide { grid-column: span 2; }`,
       js: `// Pure CSS masonry grid. No JavaScript required.`
     },
@@ -1217,7 +1252,23 @@
           </div>
         </div>
       `,
-      html: `<div class="testimonial-slider">\n  <div class="ts-track">\n    <div class="ts-slide"><div class="ts-stars">★★★★★</div><p>"Excellent."</p><cite>Author</cite></div>\n    <div class="ts-slide"><div class="ts-stars">★★★★★</div><p>"Love it."</p><cite>Author</cite></div>\n  </div>\n</div>`,
+      html: `<!--
+  Testimonial Slider
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your testimonial slides inside .ts-track
+  3. Each slide needs: .ts-stars, <p> for quote, <cite> for author
+-->
+
+<div class="testimonial-slider">
+  <div class="ts-track">
+    <!-- Add your testimonial slides here -->
+    <div class="ts-slide">
+      <div class="ts-stars">★★★★★</div>
+      <p>"Your testimonial text here."</p>
+      <cite>Author Name</cite>
+    </div>
+  </div>
+</div>`,
       css: `.testimonial-slider { overflow: hidden; width: 100%; max-width: 300px; border-radius: 14px; }\n.ts-track { display: flex; animation: tsSlide 5s ease-in-out infinite; animation-play-state: paused; }\n@keyframes tsSlide { 0%,45%{transform:translateX(0)} 55%,95%{transform:translateX(-100%)} 100%{transform:translateX(0)} }\n.ts-slide {\n  flex: 0 0 100%; padding: 20px; background: #15171d;\n  border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; color: #f5f7ff;\n}\n.ts-stars { color: #fbbf24; margin-bottom: 10px; letter-spacing: 2px; }\n.ts-slide p { margin: 0 0 14px; font-size: 0.9rem; }\n.ts-slide cite { font-style: normal; font-weight: 700; font-size: 0.8rem; color: #a7adbe; }`,
       js: `// CSS animation starts on hover. No JavaScript required.`
     },
@@ -1237,7 +1288,22 @@
           </div>
         </div>
       `,
-      html: `<div class="review-cards">\n  <div class="rc-card rc-card--back"></div>\n  <div class="rc-card rc-card--mid"></div>\n  <div class="rc-card rc-card--front">\n    <div class="ts-stars">★★★★★</div>\n    <p>"Great components."</p>\n  </div>\n</div>`,
+      html: `<!--
+  Review Cards
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your stacked review cards
+  3. Use .rc-card--back, .rc-card--mid, .rc-card--front for stacking
+-->
+
+<div class="review-cards">
+  <!-- Add your stacked cards here -->
+  <div class="rc-card rc-card--back"></div>
+  <div class="rc-card rc-card--mid"></div>
+  <div class="rc-card rc-card--front">
+    <div class="ts-stars">★★★★★</div>
+    <p>"Your review text here."</p>
+  </div>
+</div>`,
       css: `.review-cards { position: relative; width: 180px; height: 120px; }\n.rc-card {\n  position: absolute; inset: 0; border-radius: 14px; background: #15171d;\n  border: 1px solid rgba(255,255,255,0.08); padding: 16px; color: #f5f7ff;\n  transition: transform 400ms cubic-bezier(0.22,1,0.36,1);\n}\n.rc-card--back { transform: translateY(-16px) scale(0.9); opacity: 0.5; }\n.rc-card--mid { transform: translateY(-8px) scale(0.95); opacity: 0.75; }\n.review-cards:hover .rc-card--back { transform: translateY(-24px) scale(0.88); }\n.review-cards:hover .rc-card--mid { transform: translateY(-12px) scale(0.94); }\n.review-cards:hover .rc-card--front { transform: translateY(4px); }\n.rc-card .ts-stars { color: #fbbf24; margin-bottom: 8px; letter-spacing: 2px; font-size: 0.75rem; }\n.rc-card p { margin: 0; font-size: 0.8rem; }`,
       js: `// Pure CSS stacked card hover effect.`
     },
@@ -1256,7 +1322,21 @@
           </div>
         </div>
       `,
-      html: `<div class="hover-card">\n  <div class="hc-glow"></div>\n  <div class="hc-body">\n    <h4>Hover Me</h4>\n    <p>Hidden details appear on hover.</p>\n  </div>\n</div>`,
+      html: `<!--
+  Hover Card
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your card content inside .hover-card
+  3. Use .hc-glow for the glow effect, .hc-body for content
+-->
+
+<div class="hover-card">
+  <!-- Add your card content here -->
+  <div class="hc-glow"></div>
+  <div class="hc-body">
+    <h4>Card Title</h4>
+    <p>Card description text.</p>
+  </div>
+</div>`,
       css: `.hover-card {\n  position: relative; width: 170px; border-radius: 16px; overflow: hidden;\n  background: #15171d; border: 1px solid rgba(255,255,255,0.08);\n  transition: transform 300ms ease, box-shadow 300ms ease;\n}\n.hover-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.35); }\n.hc-glow {\n  position: absolute; top: 0; left: 0; right: 0; height: 4px;\n  background: linear-gradient(90deg,#6366f1,#8b5cf6); opacity: 0; transition: opacity 300ms ease;\n}\n.hover-card:hover .hc-glow { opacity: 1; }\n.hc-body { padding: 18px; color: #f5f7ff; }\n.hc-body h4 { margin: 0 0 8px; font-size: 1rem; }\n.hc-body p { margin: 0; font-size: 0.8rem; color: #a7adbe; }`,
       js: `// Pure CSS hover card.`
     },
@@ -1273,7 +1353,16 @@
           </div>
         </div>
       `,
-      html: `<div class="tilt-card">\n  <div class="tc-inner"><span>Tilt Card</span></div>\n</div>`,
+      html: `<!--
+  Tilt Card
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your card content inside .tilt-card
+-->
+
+<div class="tilt-card">
+  <!-- Add your card content here -->
+  <div class="tc-inner"><span>Card Content</span></div>
+</div>`,
       css: `.tilt-card {\n  width: 160px; height: 110px; perspective: 800px; cursor: pointer;\n}\n.tc-inner {\n  width: 100%; height: 100%; border-radius: 16px;\n  background: linear-gradient(135deg,#6366f1,#8b5cf6);\n  display: grid; place-items: center; color: #fff; font-weight: 800;\n  box-shadow: 0 16px 40px rgba(99,102,241,0.35);\n  transition: transform 150ms ease;\n}`,
       js: `const card = document.querySelector('.tilt-card');\nconst inner = card.querySelector('.tc-inner');\ncard.addEventListener('mousemove', e => {\n  const r = card.getBoundingClientRect();\n  const x = (e.clientX - r.left) / r.width - 0.5;\n  const y = (e.clientY - r.top) / r.height - 0.5;\n  inner.style.transform = \`rotateY(\${x*30}deg) rotateX(\${-y*30}deg)\`;\n});\ncard.addEventListener('mouseleave', () => inner.style.transform = 'rotateY(0) rotateX(0)');`
     },
@@ -1291,7 +1380,20 @@
           </div>
         </div>
       `,
-      html: `<div class="infinite-text">\n  <div class="it-track">\n    <span>PREMIUM COMPONENTS • PREMIUM COMPONENTS • </span>\n    <span>PREMIUM COMPONENTS • PREMIUM COMPONENTS • </span>\n  </div>\n</div>`,
+      html: `<!--
+  Infinite Text
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your scrolling text inside .infinite-text
+  3. Duplicate the <span> elements for continuous scrolling
+-->
+
+<div class="infinite-text">
+  <div class="it-track">
+    <!-- Add your scrolling text here -->
+    <span>Your text here • </span>
+    <span>Your text here • </span>
+  </div>
+</div>`,
       css: `.infinite-text { overflow: hidden; width: 100%; white-space: nowrap; }\n.it-track { display: inline-block; animation: itScroll 8s linear infinite; animation-play-state: paused; }\n@keyframes itScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }\n.it-track span { font-size: 1.2rem; font-weight: 800; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.5); }`,
       js: `// Pure CSS infinite marquee.`
     },
@@ -1309,7 +1411,21 @@
           </div>
         </div>
       `,
-      html: `<div class="logo-marquee">\n  <div class="lm-track">\n    <div class="lm-logo">A</div>\n    <div class="lm-logo">B</div>\n    <div class="lm-logo">C</div>\n  </div>\n</div>`,
+      html: `<!--
+  Logo Marquee
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your logos inside .lm-track
+  3. Each logo goes in a .lm-logo container
+-->
+
+<div class="logo-marquee">
+  <div class="lm-track">
+    <!-- Add your logos here -->
+    <div class="lm-logo">Logo 1</div>
+    <div class="lm-logo">Logo 2</div>
+    <div class="lm-logo">Logo 3</div>
+  </div>
+</div>`,
       css: `.logo-marquee { overflow: hidden; width: 100%; }\n.lm-track { display: flex; gap: 16px; animation: lmScroll 6s linear infinite; animation-play-state: paused; width: max-content; }\n@keyframes lmScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }\n.lm-logo {\n  width: 56px; height: 56px; border-radius: 14px; background: #1f222c;\n  border: 1px solid rgba(255,255,255,0.08); display: grid; place-items: center;\n  color: #f5f7ff; font-weight: 800;\n}`,
       js: `// Duplicate children in HTML for seamless loop.`
     },
@@ -1325,7 +1441,18 @@
           <p>Move your cursor</p>
         </div>
       `,
-      html: `<div class="cursor-follow">\n  <div class="cf-target"></div>\n  <p>Move your cursor</p>\n</div>`,
+      html: `<!--
+  Cursor Follow
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your target element inside .cursor-follow
+-->
+
+<div class="cursor-follow">
+  <!-- Add your target element here -->
+  <div class="cf-target"></div>
+  <p>Move your cursor over this area</p>
+</div>`,
       css: `.cursor-follow { position: relative; width: 200px; height: 130px; border-radius: 16px; background: #15171d; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: grid; place-items: center; color: #a7adbe; font-size: 0.8rem; }\n.cf-target { position: absolute; width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg,#6366f1,#8b5cf6); pointer-events: none; transition: transform 120ms ease; }`,
       js: `const area = document.querySelector('.cursor-follow');\nconst target = area.querySelector('.cf-target');\narea.addEventListener('mousemove', e => {\n  const r = area.getBoundingClientRect();\n  target.style.transform = \`translate(\${e.clientX - r.left - 16}px, \${e.clientY - r.top - 16}px)\`;\n});`
     },
@@ -1341,7 +1468,18 @@
           <span>Spotlight</span>
         </div>
       `,
-      html: `<div class="cursor-spotlight">\n  <div class="cs-glow"></div>\n  <span>Spotlight</span>\n</div>`,
+      html: `<!--
+  Cursor Spotlight
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your content inside .cursor-spotlight
+-->
+
+<div class="cursor-spotlight">
+  <!-- Add your content here -->
+  <div class="cs-glow"></div>
+  <span>Your content here</span>
+</div>`,
       css: `.cursor-spotlight { position: relative; width: 180px; height: 120px; border-radius: 16px; background: #15171d; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; display: grid; place-items: center; color: #f5f7ff; font-weight: 700; }\n.cs-glow { position: absolute; width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.5), transparent 70%); pointer-events: none; opacity: 0; transition: opacity 200ms ease; }\n.cursor-spotlight:hover .cs-glow { opacity: 1; }`,
       js: `const spot = document.querySelector('.cursor-spotlight');\nconst glow = spot.querySelector('.cs-glow');\nspot.addEventListener('mousemove', e => {\n  const r = spot.getBoundingClientRect();\n  glow.style.transform = \`translate(\${e.clientX - r.left - 60}px, \${e.clientY - r.top - 60}px)\`;\n});`
     },
@@ -1357,7 +1495,18 @@
           <span class="rt-active">Reveal</span>
         </div>
       `,
-      html: `<div class="reveal-text">\n  <span class="rt-base">Reveal</span>\n  <span class="rt-active">Reveal</span>\n</div>`,
+      html: `<!--
+  Reveal Text
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your text inside .reveal-text
+  3. The text appears in both .rt-base and .rt-active
+-->
+
+<div class="reveal-text">
+  <!-- Add your text here -->
+  <span class="rt-base">Your Text</span>
+  <span class="rt-active">Your Text</span>
+</div>`,
       css: `.reveal-text { position: relative; font-size: 2rem; font-weight: 900; cursor: default; }\n.rt-base { color: rgba(255,255,255,0.15); }\n.rt-active { position: absolute; left: 0; top: 0; color: #6366f1; clip-path: inset(0 100% 0 0); transition: clip-path 500ms cubic-bezier(0.22,1,0.36,1); }\n.reveal-text:hover .rt-active { clip-path: inset(0 0 0 0); }`,
       js: `// Pure CSS text reveal.`
     },
@@ -1370,7 +1519,13 @@
       preview: `
         <div class="comp gradient-text">Gradient</div>
       `,
-      html: `<div class="gradient-text">Gradient</div>`,
+      html: `<!--
+  Gradient Text
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your text inside .gradient-text
+-->
+
+<div class="gradient-text">Your Text Here</div>`,
       css: `.gradient-text {\n  font-size: 2rem; font-weight: 900;\n  background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899, #6366f1);\n  background-size: 300% 100%;\n  -webkit-background-clip: text;\n  -webkit-text-fill-color: transparent;\n  animation: gtFlow 3s linear infinite;\n}\n@keyframes gtFlow { 0%{background-position:0% 50%} 100%{background-position:100% 50%} }`,
       js: `// Pure CSS animated gradient text.`
     },
@@ -1385,7 +1540,17 @@
           <button>Hover Me</button>
         </div>
       `,
-      html: `<div class="magnetic-button"><button>Hover Me</button></div>`,
+      html: `<!--
+  Magnetic Button
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your button inside .magnetic-button
+-->
+
+<div class="magnetic-button">
+  <!-- Add your button here -->
+  <button>Hover Me</button>
+</div>`,
       css: `.magnetic-button { padding: 20px; }\n.magnetic-button button {\n  padding: 12px 28px; border: 0; border-radius: 999px;\n  background: linear-gradient(135deg,#6366f1,#8b5cf6); color: #fff;\n  font-weight: 700; cursor: pointer; transition: transform 150ms ease;\n}`,
       js: `const wrap = document.querySelector('.magnetic-button');\nconst btn = wrap.querySelector('button');\nwrap.addEventListener('mousemove', e => {\n  const r = wrap.getBoundingClientRect();\n  const x = e.clientX - r.left - r.width/2;\n  const y = e.clientY - r.top - r.height/2;\n  btn.style.transform = \`translate(\${x*0.3}px, \${y*0.3}px)\`;\n});\nwrap.addEventListener('mouseleave', () => btn.style.transform = 'translate(0,0)');`
     },
@@ -1400,7 +1565,16 @@
           <button><span>Liquid</span></button>
         </div>
       `,
-      html: `<div class="liquid-button"><button><span>Liquid</span></button></div>`,
+      html: `<!--
+  Liquid Button
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your button inside .liquid-button
+-->
+
+<div class="liquid-button">
+  <!-- Add your button here -->
+  <button><span>Button Text</span></button>
+</div>`,
       css: `.liquid-button button {\n  position: relative; padding: 12px 28px; border: 1px solid rgba(255,255,255,0.12);\n  border-radius: 999px; background: transparent; color: #f5f7ff; font-weight: 700; overflow: hidden;\n}\n.liquid-button button::before {\n  content: ''; position: absolute; inset: 0; background: linear-gradient(135deg,#6366f1,#8b5cf6);\n  transform: translateY(100%); transition: transform 400ms cubic-bezier(0.22,1,0.36,1);\n}\n.liquid-button button:hover::before { transform: translateY(0); }\n.liquid-button button span { position: relative; z-index: 1; }`,
       js: `// Pure CSS liquid button.`
     },
@@ -1416,7 +1590,22 @@
           <div class="cn-links"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></div>
         </nav>
       `,
-      html: `<nav class="comp-navbar">\n  <span class="cn-logo">Logo</span>\n  <div class="cn-links"><a href="#">Home</a><a href="#">About</a><a href="#">Contact</a></div>\n</nav>`,
+      html: `<!--
+  Navigation Bar
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your logo and navigation links
+-->
+
+<nav class="comp-navbar">
+  <!-- Add your logo here -->
+  <span class="cn-logo">Your Logo</span>
+  <!-- Add your navigation links here -->
+  <div class="cn-links">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>`,
       css: `.comp-navbar {\n  display: flex; align-items: center; justify-content: space-between; gap: 16px;\n  width: 100%; max-width: 320px; padding: 12px 18px;\n  background: rgba(21,23,29,0.8); backdrop-filter: blur(12px);\n  border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; color: #f5f7ff;\n}\n.cn-logo { font-weight: 800; }\n.cn-links { display: flex; gap: 14px; }\n.cn-links a { font-size: 0.8rem; color: #a7adbe; transition: color 200ms ease; }\n.cn-links a:hover { color: #fff; }`,
       js: `// Pure CSS navbar component.`
     },
@@ -1431,7 +1620,17 @@
           <button class="mm-btn" aria-label="Menu"><span></span><span></span><span></span></button>
         </div>
       `,
-      html: `<div class="mobile-menu">\n  <button class="mm-btn" aria-label="Menu"><span></span><span></span><span></span></button>\n</div>`,
+      html: `<!--
+  Mobile Menu Button
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. The button toggles open/close state
+-->
+
+<div class="mobile-menu">
+  <!-- Add your menu button here -->
+  <button class="mm-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+</div>`,
       css: `.mobile-menu { padding: 10px; }\n.mm-btn { width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.12); border-radius: 10px; background: #15171d; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 5px; }\n.mm-btn span { width: 20px; height: 2px; background: #f5f7ff; border-radius: 2px; transition: transform 300ms ease, opacity 300ms ease; }\n.mm-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }\n.mm-btn.is-open span:nth-child(2) { opacity: 0; }\n.mm-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }`,
       js: `const btn = document.querySelector('.mm-btn');\nbtn.addEventListener('click', () => btn.classList.toggle('is-open'));`
     },
@@ -1447,7 +1646,17 @@
           <p>Premium components for modern sites.</p>
         </div>
       `,
-      html: `<section class="gradient-hero">\n  <h3>Build faster.</h3>\n  <p>Premium components for modern sites.</p>\n</section>`,
+      html: `<!--
+  Gradient Hero Section
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your hero content inside .gradient-hero
+-->
+
+<section class="gradient-hero">
+  <!-- Add your hero content here -->
+  <h3>Your Headline</h3>
+  <p>Your description text.</p>
+</section>`,
       css: `.gradient-hero {\n  width: 100%; max-width: 340px; padding: 36px; border-radius: 18px;\n  background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);\n  background-size: 200% 200%; animation: ghMove 6s ease infinite;\n  color: #fff; text-align: center;\n}\n@keyframes ghMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }\n.gradient-hero h3 { margin: 0 0 8px; font-size: 1.4rem; }\n.gradient-hero p { margin: 0; font-size: 0.85rem; opacity: 0.9; }`,
       js: `// Pure CSS animated gradient hero.`
     },
@@ -1463,7 +1672,18 @@
           <div class="sh-visual"></div>
         </div>
       `,
-      html: `<div class="split-hero">\n  <div class="sh-text"><strong>Ship faster.</strong></div>\n  <div class="sh-visual"></div>\n</div>`,
+      html: `<!--
+  Split Hero Section
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your text and visual content
+-->
+
+<div class="split-hero">
+  <!-- Add your text content here -->
+  <div class="sh-text"><strong>Your Headline</strong></div>
+  <!-- Add your visual content here -->
+  <div class="sh-visual"></div>
+</div>`,
       css: `.split-hero {\n  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 320px;\n  padding: 16px; border-radius: 16px; background: #15171d; border: 1px solid rgba(255,255,255,0.08);\n}\n.sh-text { display: grid; place-items: center; color: #f5f7ff; font-size: 1rem; }\n.sh-visual { min-height: 80px; border-radius: 12px; background: linear-gradient(135deg,#6366f1,#8b5cf6); }`,
       js: `// Pure CSS split hero layout.`
     },
@@ -1478,7 +1698,16 @@
           <div class="spinner"></div>
         </div>
       `,
-      html: `<div class="spinner-loader"><div class="spinner"></div></div>`,
+      html: `<!--
+  Spinner Loader
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add the spinner inside .spinner-loader
+-->
+
+<div class="spinner-loader">
+  <!-- Add your spinner here -->
+  <div class="spinner"></div>
+</div>`,
       css: `.spinner-loader { padding: 10px; }\n.spinner { width: 44px; height: 44px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.1); border-top-color: #6366f1; animation: spin 800ms linear infinite; }\n@keyframes spin { to { transform: rotate(360deg); } }`,
       js: `// Pure CSS spinner.`
     },
@@ -1494,7 +1723,18 @@
           <div class="sk-lines"><div></div><div></div></div>
         </div>
       `,
-      html: `<div class="skeleton-loader">\n  <div class="sk-circle"></div>\n  <div class="sk-lines"><div></div><div></div></div>\n</div>`,
+      html: `<!--
+  Skeleton Loader
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your skeleton elements
+  3. Use .sk-circle for circular placeholders, .sk-lines for text placeholders
+-->
+
+<div class="skeleton-loader">
+  <!-- Add your skeleton elements here -->
+  <div class="sk-circle"></div>
+  <div class="sk-lines"><div></div><div></div></div>
+</div>`,
       css: `.skeleton-loader { display: flex; align-items: center; gap: 12px; width: 220px; }\n.sk-circle { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.08); animation: pulse 1.5s ease-in-out infinite; }\n.sk-lines { flex: 1; display: flex; flex-direction: column; gap: 8px; }\n.sk-lines div { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.08); animation: pulse 1.5s ease-in-out infinite; }\n.sk-lines div:nth-child(2) { width: 70%; }\n@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }`,
       js: `// Pure CSS skeleton loader.`
     },
@@ -1507,7 +1747,13 @@
       preview: `
         <div class="comp gradient-mesh"></div>
       `,
-      html: `<div class="gradient-mesh"></div>`,
+      html: `<!--
+  Gradient Mesh Background
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add the mesh element
+-->
+
+<div class="gradient-mesh"></div>`,
       css: `.gradient-mesh {\n  width: 100%; max-width: 300px; height: 160px; border-radius: 18px;\n  background:\n    radial-gradient(circle at 20% 30%, rgba(99,102,241,0.6), transparent 40%),\n    radial-gradient(circle at 80% 70%, rgba(236,72,153,0.5), transparent 40%),\n    radial-gradient(circle at 50% 50%, rgba(139,92,246,0.4), transparent 50%);\n  background-size: 200% 200%; animation: meshMove 8s ease infinite;\n}\n@keyframes meshMove { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }`,
       js: `// Pure CSS animated mesh gradient.`
     },
@@ -1522,7 +1768,17 @@
           <span></span><span></span><span></span><span></span><span></span>
         </div>
       `,
-      html: `<div class="particle-background">\n  <span></span><span></span><span></span><span></span><span></span>\n</div>`,
+      html: `<!--
+  Particle Background
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your particles inside .particle-background
+  3. Each particle is a <span> element
+-->
+
+<div class="particle-background">
+  <!-- Add your particles here -->
+  <span></span><span></span><span></span><span></span><span></span>
+</div>`,
       css: `.particle-background { position: relative; width: 100%; max-width: 300px; height: 160px; border-radius: 18px; background: #15171d; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; }\n.particle-background span { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.4); animation: float 4s ease-in-out infinite; }\n.particle-background span:nth-child(1){left:10%;top:20%;animation-delay:0s}\n.particle-background span:nth-child(2){left:30%;top:60%;animation-delay:1s}\n.particle-background span:nth-child(3){left:50%;top:30%;animation-delay:2s}\n.particle-background span:nth-child(4){left:70%;top:70%;animation-delay:1.5s}\n.particle-background span:nth-child(5){left:90%;top:40%;animation-delay:0.5s}\n@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }`,
       js: `// Pure CSS floating particles.`
     },
@@ -1539,7 +1795,16 @@
           </div>
         </div>
       `,
-      html: `<div class="floating-object">\n  <div class="fo-cube"><div></div><div></div><div></div><div></div><div></div><div></div></div>\n</div>`,
+      html: `<!--
+  Floating 3D Object
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add the 3D cube inside .floating-object
+-->
+
+<div class="floating-object">
+  <!-- Add your 3D object here -->
+  <div class="fo-cube"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+</div>`,
       css: `.floating-object { width: 120px; height: 120px; perspective: 400px; display: grid; place-items: center; }\n.fo-cube { position: relative; width: 48px; height: 48px; transform-style: preserve-3d; animation: foFloat 4s ease-in-out infinite, foRotate 8s linear infinite; }\n.fo-cube div { position: absolute; width: 48px; height: 48px; background: rgba(99,102,241,0.5); border: 1px solid rgba(255,255,255,0.2); }\n.fo-cube div:nth-child(1){transform:rotateY(0deg) translateZ(24px)}\n.fo-cube div:nth-child(2){transform:rotateY(90deg) translateZ(24px)}\n.fo-cube div:nth-child(3){transform:rotateY(180deg) translateZ(24px)}\n.fo-cube div:nth-child(4){transform:rotateY(-90deg) translateZ(24px)}\n.fo-cube div:nth-child(5){transform:rotateX(90deg) translateZ(24px)}\n.fo-cube div:nth-child(6){transform:rotateX(-90deg) translateZ(24px)}\n@keyframes foFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }\n@keyframes foRotate { to { transform: rotateX(360deg) rotateY(360deg); } }`,
       js: `// Pure CSS 3D floating cube.`
     },
@@ -1569,7 +1834,16 @@
           <input type="text" placeholder="Enter your email" />
         </div>
       `,
-      html: `<div class="input-field"><input type="text" placeholder="Enter your email" /></div>`,
+      html: `<!--
+  Input Field
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your input inside .input-field
+-->
+
+<div class="input-field">
+  <!-- Add your input here -->
+  <input type="text" placeholder="Enter your text" />
+</div>`,
       css: `.input-field { width: 100%; max-width: 260px; }\n.input-field input {\n  width: 100%; height: 44px; padding: 0 16px; border: 1px solid rgba(255,255,255,0.12);\n  border-radius: 12px; background: #15171d; color: #f5f7ff; outline: none;\n  transition: border-color 200ms ease, box-shadow 200ms ease;\n}\n.input-field input:focus { border-color: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15); }\n.input-field input::placeholder { color: #a7adbe; }`,
       js: `// Pure CSS input field.`
     },
@@ -1584,7 +1858,17 @@
           <button class="ts-btn" aria-pressed="false"><span></span></button>
         </div>
       `,
-      html: `<div class="toggle-switch"><button class="ts-btn" aria-pressed="false"><span></span></button></div>`,
+      html: `<!--
+  Toggle Switch
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Paste the JS from the JavaScript tab inside a <script> block.
+  3. Add your toggle button inside .toggle-switch
+-->
+
+<div class="toggle-switch">
+  <!-- Add your toggle button here -->
+  <button class="ts-btn" aria-pressed="false"><span></span></button>
+</div>`,
       css: `.toggle-switch { padding: 10px; }\n.ts-btn { width: 56px; height: 30px; border-radius: 999px; border: 0; background: #2a2e3b; cursor: pointer; position: relative; transition: background 300ms ease; }\n.ts-btn span { position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: transform 300ms cubic-bezier(0.22,1,0.36,1); }\n.ts-btn.is-on { background: linear-gradient(135deg,#6366f1,#8b5cf6); }\n.ts-btn.is-on span { transform: translateX(26px); }`,
       js: `const btn = document.querySelector('.ts-btn');\nbtn.addEventListener('click', () => {\n  btn.classList.toggle('is-on');\n  btn.setAttribute('aria-pressed', btn.classList.contains('is-on'));\n});`
     },
@@ -1606,7 +1890,20 @@
           </div>
         </div>
       `,
-      html: `<div class="accordion">\n  <div class="acc-item">\n    <button class="acc-header">Question <span>+</span></button>\n    <div class="acc-body"><p>Answer text.</p></div>\n  </div>\n</div>`,
+      html: `<!--
+  Accordion
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your accordion items inside .accordion
+  3. Each item needs: .acc-header (button) and .acc-body (content)
+-->
+
+<div class="accordion">
+  <!-- Add your accordion items here -->
+  <div class="acc-item">
+    <button class="acc-header">Question <span>+</span></button>
+    <div class="acc-body"><p>Answer text here.</p></div>
+  </div>
+</div>`,
       css: `.accordion { width: 100%; max-width: 300px; }\n.acc-item { border-bottom: 1px solid rgba(255,255,255,0.08); }\n.acc-header { width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; background: transparent; border: 0; color: #f5f7ff; font-weight: 700; font-size: 0.85rem; }\n.acc-body { max-height: 0; overflow: hidden; transition: max-height 300ms ease; }\n.acc-item.is-open .acc-body { max-height: 100px; }\n.acc-body p { margin: 0 0 12px; font-size: 0.8rem; color: #a7adbe; }`,
       js: `document.querySelectorAll('.acc-header').forEach(h => {\n  h.addEventListener('click', () => h.parentElement.classList.toggle('is-open'));\n});`
     },
@@ -1622,7 +1919,25 @@
           <div class="tab-panels"><div class="tab-panel is-active">Content 1</div><div class="tab-panel">Content 2</div></div>
         </div>
       `,
-      html: `<div class="tabs">\n  <div class="tab-nav"><button class="is-active">Tab 1</button><button>Tab 2</button></div>\n  <div class="tab-panels"><div class="tab-panel is-active">Content 1</div><div class="tab-panel">Content 2</div></div>\n</div>`,
+      html: `<!--
+  Tabs
+  1. Paste the CSS from the CSS tab inside a <style> block.
+  2. Add your tab buttons inside .tab-nav
+  3. Add your tab panels inside .tab-panels
+-->
+
+<div class="tabs">
+  <!-- Add your tab buttons here -->
+  <div class="tab-nav">
+    <button class="is-active">Tab 1</button>
+    <button>Tab 2</button>
+  </div>
+  <!-- Add your tab panels here -->
+  <div class="tab-panels">
+    <div class="tab-panel is-active">Content 1</div>
+    <div class="tab-panel">Content 2</div>
+  </div>
+</div>`,
       css: `.tabs { width: 100%; max-width: 280px; }\n.tab-nav { display: flex; gap: 6px; margin-bottom: 12px; }\n.tab-nav button { padding: 8px 14px; border: 0; border-radius: 8px; background: transparent; color: #a7adbe; font-weight: 700; font-size: 0.8rem; cursor: pointer; }\n.tab-nav button.is-active { background: #1f222c; color: #fff; }\n.tab-panel { display: none; padding: 14px; border-radius: 10px; background: #15171d; border: 1px solid rgba(255,255,255,0.08); color: #f5f7ff; font-size: 0.85rem; }\n.tab-panel.is-active { display: block; }`,
       js: `document.querySelectorAll('.tabs').forEach(tabs => {\n  const btns = tabs.querySelectorAll('.tab-nav button');\n  const panels = tabs.querySelectorAll('.tab-panel');\n  btns.forEach((btn, i) => btn.addEventListener('click', () => {\n    btns.forEach(b => b.classList.remove('is-active'));\n    panels.forEach(p => p.classList.remove('is-active'));\n    btn.classList.add('is-active');\n    panels[i].classList.add('is-active');\n  }));\n});`
     }
