@@ -81,9 +81,9 @@
       html: `<div class="slider-section">
     <div class="carousel">
         <div class="inner">
-            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 1" /></div></div>
-            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 2" /></div></div>
-            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 3" /></div></div>
+            <div class="c-column"><div class="inner"><img src="${images[0]}" alt="" /></div></div>
+            <div class="c-column"><div class="inner"><img src="${images[1]}" alt="" /></div></div>
+            <div class="c-column"><div class="inner"><img src="${images[2]}" alt="" /></div></div>
         </div>
     </div>
 </div>
@@ -113,9 +113,9 @@
       html: `<div class="slider-section">
     <div class="carousel">
         <div class="inner">
-            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 1" /></div></div>
-            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 2" /></div></div>
-            <div class="c-column"><div class="inner"><img src="https://placehold.co/400x300" alt="Card 3" /></div></div>
+            <div class="c-column"><div class="inner"><img src="${images[0]}" alt="" /></div></div>
+            <div class="c-column"><div class="inner"><img src="${images[1]}" alt="" /></div></div>
+            <div class="c-column"><div class="inner"><img src="${images[2]}" alt="" /></div></div>
         </div>
     </div>
 </div>`,
@@ -187,15 +187,58 @@
             </div>
         </div>`,
       html: `<div class="review-slider">
-  
   <div class="review-card">
     <div class="review-stars">★★★★★</div>
-    <blockquote>"Your testimonial text here."</blockquote>
+    <blockquote>"Clean code and smooth animations out of the box."</blockquote>
     <div class="review-author">
-      <img src="https://placehold.co/48x48" alt="" />
+      <img src="${images[4]}" alt="" />
       <div>
-        <strong>Customer Name</strong>
-        <span>Customer Title</span>
+        <strong>Marcus Reid</strong>
+        <span>Developer</span>
+      </div>
+    </div>
+  </div>
+  <div class="review-card">
+    <div class="review-stars">★★★★★</div>
+    <blockquote>"Super easy to customize and drop into any project."</blockquote>
+    <div class="review-author">
+      <img src="${images[5]}" alt="" />
+      <div>
+        <strong>Avery L.</strong>
+        <span>Product Designer</span>
+      </div>
+    </div>
+  </div>
+  <div class="review-card">
+    <div class="review-stars">★★★★★</div>
+    <blockquote>"Our clients love the polished, premium feel."</blockquote>
+    <div class="review-author">
+      <img src="${images[6]}" alt="" />
+      <div>
+        <strong>Morgan K.</strong>
+        <span>Agency Owner</span>
+      </div>
+    </div>
+  </div>
+  <div class="review-card">
+    <div class="review-stars">★★★★★</div>
+    <blockquote>"Best testimonial slider we've used by a wide margin."</blockquote>
+    <div class="review-author">
+      <img src="${images[7]}" alt="" />
+      <div>
+        <strong>Jordan P.</strong>
+        <span>Founder</span>
+      </div>
+    </div>
+  </div>
+  <div class="review-card">
+    <div class="review-stars">★★★★★</div>
+    <blockquote>"Looks premium out of the box with minimal tweaks."</blockquote>
+    <div class="review-author">
+      <img src="${images[8]}" alt="" />
+      <div>
+        <strong>Riley S.</strong>
+        <span>Engineer</span>
       </div>
     </div>
   </div>
@@ -1141,10 +1184,9 @@
       `,
       html: `<div class="product-slider">
   <div class="ps-track">
-    
-    <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
-    <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
-    <div class="ps-card"><div class="ps-img"><img src="https://placehold.co/200x200" alt="" /></div></div>
+    <div class="ps-card"><div class="ps-img"><img src="${images[0]}" alt="" /></div></div>
+    <div class="ps-card"><div class="ps-img"><img src="${images[1]}" alt="" /></div></div>
+    <div class="ps-card"><div class="ps-img"><img src="${images[2]}" alt="" /></div></div>
   </div>
 </div>`,
       css: `.product-slider { overflow: hidden; border-radius: 14px; width: 100%; max-width: 320px; }\n.ps-track { display: flex; gap: 12px; animation: psScroll 6s linear infinite; }\n@keyframes psScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }\n.ps-card {\n  flex: 0 0 140px; background: #15171d; border: 1px solid rgba(255,255,255,0.08);\n  border-radius: 14px; padding: 12px; text-align: center; color: #f5f7ff;\n}\n.ps-img { aspect-ratio: 1; border-radius: 10px; background: linear-gradient(135deg,#6366f1,#8b5cf6); margin-bottom: 10px; overflow: hidden; }\n.ps-img img { width: 100%; height: 100%; object-fit: cover; display: block; }`,
