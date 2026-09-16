@@ -1713,6 +1713,455 @@
 })();
 `
 },
+
+{
+  id: "coverflow-slider",
+  name: "Coverflow Slider",
+  description: "3D coverflow card slider with perspective transforms and touch support.",
+  category: "sliders",
+  tags: ["free", "interactive", "javascript"],
+  injectScript: true,
+  preview: `<div class="comp coverflow-component">
+    <div class="coverflow-stage">
+      <div class="coverflow-card is-active" data-index="0">
+        <img src="${images[0]}" alt="" />
+        <span class="coverflow-number">01</span>
+        <div class="coverflow-info"><span>Geometric Studies</span><strong>Dark Facade</strong></div>
+      </div>
+      <div class="coverflow-card" data-index="1">
+        <img src="${images[1]}" alt="" />
+        <span class="coverflow-number">02</span>
+        <div class="coverflow-info"><span>Urban Series</span><strong>Blue Sky</strong></div>
+      </div>
+      <div class="coverflow-card" data-index="2">
+        <img src="${images[2]}" alt="" />
+        <span class="coverflow-number">03</span>
+        <div class="coverflow-info"><span>Color Theory</span><strong>Orange Lines</strong></div>
+      </div>
+      <div class="coverflow-card" data-index="3">
+        <img src="${images[3]}" alt="" />
+        <span class="coverflow-number">04</span>
+        <div class="coverflow-info"><span>Minimalism</span><strong>White Panels</strong></div>
+      </div>
+    </div>
+    <button class="coverflow-arrow coverflow-prev" aria-label="Previous">←</button>
+    <button class="coverflow-arrow coverflow-next" aria-label="Next">→</button>
+    <div class="coverflow-dots"></div>
+  </div>`,
+  html: `<div class="coverflow-component">
+    <div class="coverflow-stage">
+        <div class="coverflow-card" data-index="0">
+            <img src="https://images.pexels.com/photos/17187918/pexels-photo-17187918.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Dark Facade">
+            <span class="coverflow-number">01</span>
+            <div class="coverflow-info"><span>Geometric Studies</span><strong>Dark Facade</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="1">
+            <img src="https://images.pexels.com/photos/12903905/pexels-photo-12903905.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Blue Sky">
+            <span class="coverflow-number">02</span>
+            <div class="coverflow-info"><span>Urban Series</span><strong>Blue Sky</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="2">
+            <img src="https://images.pexels.com/photos/29114530/pexels-photo-29114530.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Orange Lines">
+            <span class="coverflow-number">03</span>
+            <div class="coverflow-info"><span>Color Theory</span><strong>Orange Lines</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="3">
+            <img src="https://images.pexels.com/photos/9458996/pexels-photo-9458996.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="White Panels">
+            <span class="coverflow-number">04</span>
+            <div class="coverflow-info"><span>Minimalism</span><strong>White Panels</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="4">
+            <img src="https://images.pexels.com/photos/26547201/pexels-photo-26547201.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Window Grid">
+            <span class="coverflow-number">05</span>
+            <div class="coverflow-info"><span>Patterns</span><strong>Window Grid</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="5">
+            <img src="https://images.pexels.com/photos/26241922/pexels-photo-26241922.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Glass Tower">
+            <span class="coverflow-number">06</span>
+            <div class="coverflow-info"><span>Perspective</span><strong>Glass Tower</strong></div>
+        </div>
+        <div class="coverflow-card" data-index="6">
+            <img src="https://images.pexels.com/photos/9612453/pexels-photo-9612453.jpeg?auto=compress&cs=tinysrgb&h=800&w=600" alt="Sleek Lines">
+            <span class="coverflow-number">07</span>
+            <div class="coverflow-info"><span>Contemporary</span><strong>Sleek Lines</strong></div>
+        </div>
+    </div>
+    <button class="coverflow-arrow coverflow-prev" aria-label="Previous">←</button>
+    <button class="coverflow-arrow coverflow-next" aria-label="Next">→</button>
+    <div class="coverflow-dots"></div>
+</div>`,
+  css: `.coverflow-component {
+    position: relative;
+    width: 100%;
+    height: 520px;
+    overflow: hidden;
+    font-family: Inter, Arial, sans-serif;
+    perspective: 1400px;
+}
+
+.coverflow-stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.coverflow-card {
+    position: absolute;
+    width: 280px;
+    height: 420px;
+    overflow: hidden;
+    border-radius: 4px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(.22,1,.36,1), opacity 0.6s ease, filter 0.6s ease;
+    user-select: none;
+}
+
+.coverflow-card img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.coverflow-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.8), transparent 55%);
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+
+.coverflow-card.is-active::after {
+    opacity: 1;
+}
+
+.coverflow-number {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,.6);
+    mix-blend-mode: difference;
+}
+
+.coverflow-info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    padding: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+.coverflow-card.is-active .coverflow-info {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.coverflow-info span {
+    display: block;
+    margin-bottom: 6px;
+    font-family: monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: rgba(255,255,255,.5);
+}
+
+.coverflow-info strong {
+    display: block;
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+}
+
+.coverflow-arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 50;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 50%;
+    background: rgba(10,10,10,.5);
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+.coverflow-arrow:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.4);
+    transform: translateY(-50%) scale(1.08);
+}
+
+.coverflow-prev {
+    left: 24px;
+}
+
+.coverflow-next {
+    right: 24px;
+}
+
+.coverflow-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transform: translateX(-50%);
+}
+
+.coverflow-dot {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border: 0;
+    border-radius: 10px;
+    background: rgba(255,255,255,.25);
+    cursor: pointer;
+    transition: width .35s ease, background .35s ease;
+}
+
+.coverflow-dot.is-active {
+    width: 30px;
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .coverflow-component {
+        height: 440px;
+    }
+    .coverflow-card {
+        width: 230px;
+        height: 350px;
+    }
+    .coverflow-prev {
+        left: 10px;
+    }
+    .coverflow-next {
+        right: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .coverflow-component {
+        height: 400px;
+    }
+    .coverflow-card {
+        width: 210px;
+        height: 320px;
+    }
+}
+
+/* Preview overrides */
+.component-card__preview .coverflow-component {
+    height: 220px !important;
+}
+
+.component-card__preview .coverflow-card {
+    width: 120px !important;
+    height: 160px !important;
+}
+
+.component-card__preview .coverflow-arrow {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+}
+
+.component-card__preview .coverflow-prev {
+    left: 8px !important;
+}
+
+.component-card__preview .coverflow-next {
+    right: 8px !important;
+}
+
+.component-card__preview .coverflow-info {
+    display: none !important;
+}
+
+.component-card__preview .coverflow-number {
+    font-size: 8px !important;
+    top: 6px !important;
+    right: 6px !important;
+}
+
+.component-card__preview .coverflow-dots {
+    bottom: 8px !important;
+}
+
+.component-card__preview .coverflow-dot {
+    width: 4px !important;
+    height: 4px !important;
+}
+
+.component-card__preview .coverflow-dot.is-active {
+    width: 16px !important;
+}
+
+.modal__preview .coverflow-component {
+    height: 420px !important;
+}
+
+.modal__preview .coverflow-card {
+    width: 240px !important;
+    height: 360px !important;
+}
+`,
+  js: `(function() {
+  function initCoverflow(root) {
+    const component = root.classList && root.classList.contains('coverflow-component')
+      ? root
+      : root.querySelector('.coverflow-component');
+
+    if (!component) return;
+
+    const cards = Array.from(component.querySelectorAll('.coverflow-card'));
+    const prev = component.querySelector('.coverflow-prev');
+    const next = component.querySelector('.coverflow-next');
+    const dotsContainer = component.querySelector('.coverflow-dots');
+
+    if (!cards.length) return;
+
+    let current = 2;
+
+    // Create dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      cards.forEach(function(_, index) {
+        const dot = document.createElement('button');
+        dot.className = 'coverflow-dot';
+        dot.setAttribute('aria-label', 'Go to slide ' + (index + 1));
+        dot.addEventListener('click', function() {
+          current = index;
+          update();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    const dots = dotsContainer ? Array.from(dotsContainer.querySelectorAll('.coverflow-dot')) : [];
+
+    function update() {
+      cards.forEach(function(card, index) {
+        const offset = index - current;
+        const distance = Math.abs(offset);
+
+        if (distance > 2) {
+          card.style.display = 'none';
+          return;
+        }
+
+        card.style.display = 'block';
+
+        const x = offset * 220;
+        const z = -distance * 200;
+        const rotation = offset * -25;
+        const scale = offset === 0 ? 1 : .78;
+
+        card.style.transform = \`translateX(\${x}px) translateZ(\${z}px) rotateY(\${rotation}deg) scale(\${scale})\`;
+        card.style.zIndex = 30 - distance;
+        card.style.opacity = 1 - distance * .15;
+
+        if (offset === 0) {
+          card.classList.add('is-active');
+          card.style.filter = 'none';
+        } else {
+          card.classList.remove('is-active');
+          card.style.filter = \`brightness(\${.5 - distance * .1})\`;
+        }
+      });
+
+      dots.forEach(function(dot, index) {
+        dot.classList.toggle('is-active', index === current);
+      });
+    }
+
+    if (prev) {
+      prev.addEventListener('click', function() {
+        if (current > 0) {
+          current--;
+          update();
+        }
+      });
+    }
+
+    if (next) {
+      next.addEventListener('click', function() {
+        if (current < cards.length - 1) {
+          current++;
+          update();
+        }
+      });
+    }
+
+    component.addEventListener('keydown', function(event) {
+      if (event.key === 'ArrowLeft' && current > 0) {
+        current--;
+        update();
+      }
+      if (event.key === 'ArrowRight' && current < cards.length - 1) {
+        current++;
+        update();
+      }
+    });
+
+    let startX = 0;
+    component.addEventListener('touchstart', function(e) {
+      startX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    component.addEventListener('touchend', function(e) {
+      const endX = e.changedTouches[0].screenX;
+      const distance = startX - endX;
+      if (Math.abs(distance) < 50) return;
+      if (distance > 0 && current < cards.length - 1) {
+        current++;
+      } else if (distance < 0 && current > 0) {
+        current--;
+      }
+      update();
+    }, { passive: true });
+
+    component.setAttribute('tabindex', '0');
+    update();
+  }
+
+  window.initCoverflow = initCoverflow;
+
+  function autoInit() {
+    document.querySelectorAll('.coverflow-component').forEach(initCoverflow);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+})();
+`
+},
 {
       id: "masonry-gallery",
       name: "Masonry Gallery",
@@ -2316,6 +2765,9 @@
     },
     "cinematic-slider": (el) => {
       window.initCinematicSlider(el);
+    },
+    "coverflow-slider": (el) => {
+      window.initCoverflow(el);
     },
     "tilt-card": (el) => {
       const inner = el.querySelector(".tc-inner");
