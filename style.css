@@ -1013,21 +1013,55 @@ html[data-theme="light"] .component-card:hover {
   color: var(--bg);
 }
 
-/* Code Toggle Button */
-.preview-action--code {
-  font-family: monospace;
-  font-size: 0.8rem;
+/* Code Toggle Handle */
+.code-toggle {
+  display: flex;
+  justify-content: center;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 0;
+  flex-shrink: 0;
 }
 
-.preview-action--code.is-active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
+.code-toggle__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 28px;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 12px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.code-toggle__btn:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.code-toggle__icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
 /* Code Hidden State */
+.modal__body.is-code-hidden .code-toggle__icon {
+  transform: rotate(180deg);
+}
+
 .modal__body.is-code-hidden .code-tabs {
-  display: none;
+  height: 0;
+  min-height: 0;
+  overflow: hidden;
+  border-top: none;
+}
+
+.modal__body .code-tabs {
+  transition: height 0.3s ease;
 }
 
 .modal__body.is-code-hidden .preview-stage {

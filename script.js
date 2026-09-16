@@ -2949,7 +2949,6 @@ ${comp.js || ""}
 
     modal.querySelector("[data-toggle-code]").onclick = () => {
       modalBody.classList.toggle("is-code-hidden");
-      modal.querySelector("[data-toggle-code]").classList.toggle("is-active");
       requestAnimationFrame(updatePreviewScale);
     };
 
