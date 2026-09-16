@@ -1192,6 +1192,527 @@
       css: `.product-slider { overflow: hidden; border-radius: 14px; width: 100%; max-width: 320px; }\n.ps-track { display: flex; gap: 12px; animation: psScroll 6s linear infinite; }\n@keyframes psScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }\n.ps-card {\n  flex: 0 0 140px; background: #15171d; border: 1px solid rgba(255,255,255,0.08);\n  border-radius: 14px; padding: 12px; text-align: center; color: #f5f7ff;\n}\n.ps-img { aspect-ratio: 1; border-radius: 10px; background: linear-gradient(135deg,#6366f1,#8b5cf6); margin-bottom: 10px; overflow: hidden; }\n.ps-img img { width: 100%; height: 100%; object-fit: cover; display: block; }`,
       js: `// CSS animation handles continuous scroll.`
     },
+
+{
+  id: "cinematic-slider",
+  name: "Cinematic Slider",
+  description: "Full-width cinematic image slider with Ken Burns effect and overlay gradients.",
+  category: "sliders",
+  tags: ["free", "interactive", "javascript"],
+  injectScript: true,
+  preview: `<div class="comp cinematic-slider">
+    <div class="cinematic-slides">
+      <div class="cinematic-slide is-active">
+        <img src="${images[0]}" alt="" />
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+      <div class="cinematic-slide">
+        <img src="${images[1]}" alt="" />
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+    </div>
+    <div class="cinematic-content">
+      <div class="content-inner">
+        <p class="slide-subtitle">Mountain Studies — Vol. III</p>
+        <h2 class="slide-title">Eternal Silence</h2>
+        <p class="slide-description">Where the air thins and the noise fades, only scale remains.</p>
+        <p class="slide-meta">2024 · Dolomites, Italy</p>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-control" aria-label="Previous"><span>←</span></button>
+      <button class="slider-control" aria-label="Pause"><span>Ⅱ</span></button>
+      <button class="slider-control" aria-label="Next"><span>→</span></button>
+    </div>
+    <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+    <div class="slider-counter"><span>01</span><span class="counter-separator">/</span><span>04</span></div>
+  </div>`,
+  html: `<section class="cinematic-slider">
+    <div class="cinematic-slides">
+        <div class="cinematic-slide is-active">
+            <img src="https://images.pexels.com/photos/675257/pexels-photo-675257.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Eternal Silence">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+        <div class="cinematic-slide">
+            <img src="https://images.pexels.com/photos/1280840/pexels-photo-1280840.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Veil of Clouds">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+        <div class="cinematic-slide">
+            <img src="https://images.pexels.com/photos/15469407/pexels-photo-15469407.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Last Light">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+        <div class="cinematic-slide">
+            <img src="https://images.pexels.com/photos/34068536/pexels-photo-34068536.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Twilight Bodies">
+            <div class="slide-overlay overlay-bottom"></div>
+            <div class="slide-overlay overlay-left"></div>
+        </div>
+    </div>
+    <div class="cinematic-content">
+        <div class="content-inner">
+            <p class="slide-subtitle">Mountain Studies — Vol. III</p>
+            <h2 class="slide-title">Eternal Silence</h2>
+            <p class="slide-description">Where the air thins and the noise fades, only scale remains.</p>
+            <p class="slide-meta">2024 · Dolomites, Italy</p>
+        </div>
+    </div>
+    <div class="slider-controls">
+        <button class="slider-control" aria-label="Previous slide"><span>←</span></button>
+        <button class="slider-control" aria-label="Pause slideshow"><span>Ⅱ</span></button>
+        <button class="slider-control" aria-label="Next slide"><span>→</span></button>
+    </div>
+    <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+    <div class="slider-counter"><span>01</span><span class="counter-separator">/</span><span>04</span></div>
+</section>`,
+  css: `.cinematic-slider {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.cinematic-slider *,
+.cinematic-slider *::before,
+.cinematic-slider *::after {
+    box-sizing: border-box;
+}
+
+/* SLIDES */
+
+.cinematic-slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cinematic-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    pointer-events: none;
+}
+
+.cinematic-slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.cinematic-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* KEN BURNS */
+
+.cinematic-slide.is-active img {
+    animation: cinematicKenBurns 7s ease-out forwards;
+}
+
+@keyframes cinematicKenBurns {
+    0% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* OVERLAYS */
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.overlay-bottom {
+    background: linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.30) 50%, rgba(0,0,0,.20));
+}
+
+.overlay-left {
+    background: linear-gradient(to right, rgba(0,0,0,.60), transparent);
+}
+
+/* CONTENT */
+
+.cinematic-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+.content-inner {
+    width: 100%;
+    padding: 0 8vw 80px;
+}
+
+.slide-subtitle {
+    margin: 0 0 12px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+    color: rgba(255,255,255,.5);
+}
+
+.slide-title {
+    margin: 0;
+    max-width: 800px;
+    font-size: clamp(52px, 7vw, 112px);
+    line-height: .95;
+    font-weight: 300;
+    letter-spacing: -.05em;
+    animation: fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.slide-description {
+    max-width: 430px;
+    margin: 22px 0 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,.6);
+    animation: fadeUp .8s .08s cubic-bezier(.22,1,.36,1) both;
+}
+
+.slide-meta {
+    margin: 15px 0 0;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,.3);
+    animation: fadeUp .8s .15s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CONTROLS */
+
+.slider-controls {
+    position: absolute;
+    right: 8vw;
+    bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 20;
+}
+
+.slider-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: rgba(255,255,255,.4);
+    cursor: pointer;
+    font-size: 20px;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.slider-control:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.slider-control:focus-visible {
+    outline: 1px solid #fff;
+    outline-offset: 4px;
+}
+
+/* PROGRESS */
+
+.slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,.1);
+    z-index: 20;
+}
+
+.slider-progress-bar {
+    width: 0;
+    height: 100%;
+    background: rgba(255,255,255,.7);
+}
+
+.slider-progress-bar.animate {
+    animation: cinematicProgress 5.5s linear forwards;
+}
+
+@keyframes cinematicProgress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* COUNTER */
+
+.slider-counter {
+    position: absolute;
+    top: 48px;
+    left: 8vw;
+    z-index: 20;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,.4);
+}
+
+.slider-counter #currentSlide {
+    color: rgba(255,255,255,.9);
+}
+
+.counter-separator {
+    margin: 0 5px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .cinematic-slider {
+        height: 600px;
+    }
+    .content-inner {
+        padding: 0 25px 70px;
+    }
+    .slide-title {
+        font-size: clamp(48px, 15vw, 80px);
+    }
+    .slide-description {
+        font-size: 14px;
+    }
+    .slider-counter {
+        top: 25px;
+        left: 25px;
+    }
+    .slider-controls {
+        right: 20px;
+        bottom: 25px;
+    }
+}
+
+/* Preview overrides */
+.component-card__preview .cinematic-slider {
+    height: 220px !important;
+}
+
+.component-card__preview .content-inner {
+    padding: 0 15px 20px !important;
+}
+
+.component-card__preview .slide-subtitle {
+    font-size: 8px !important;
+    margin-bottom: 4px !important;
+}
+
+.component-card__preview .slide-title {
+    font-size: 20px !important;
+}
+
+.component-card__preview .slide-description {
+    font-size: 9px !important;
+    margin-top: 6px !important;
+    display: none;
+}
+
+.component-card__preview .slide-meta {
+    font-size: 7px !important;
+    margin-top: 4px !important;
+}
+
+.component-card__preview .slider-controls {
+    right: 10px !important;
+    bottom: 10px !important;
+    gap: 4px !important;
+}
+
+.component-card__preview .slider-control {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 12px !important;
+}
+
+.component-card__preview .slider-counter {
+    top: 10px !important;
+    left: 15px !important;
+    font-size: 9px !important;
+}
+
+.component-card__preview .slider-progress {
+    display: none !important;
+}
+
+.modal__preview .cinematic-slider {
+    height: 420px !important;
+}
+
+.modal__preview .content-inner {
+    padding: 0 40px 50px !important;
+}
+
+.modal__preview .slide-title {
+    font-size: 48px !important;
+}
+
+.modal__preview .slide-description {
+    display: block;
+    font-size: 14px !important;
+}
+`,
+  js: `(function() {
+  function initCinematicSlider(root) {
+    const slider = root.classList && root.classList.contains('cinematic-slider')
+      ? root
+      : root.querySelector('.cinematic-slider');
+
+    if (!slider) return;
+
+    const slidesData = [
+      { title: "Eternal Silence", sub: "Mountain Studies — Vol. III", desc: "Where the air thins and the noise fades, only scale remains.", meta: "2024 · Dolomites, Italy" },
+      { title: "Veil of Clouds", sub: "Mountain Studies — Vol. V", desc: "A monochrome study of weather rolling over stone.", meta: "2024 · Mount Kazbek, Georgia" },
+      { title: "Last Light", sub: "Mountain Studies — Vol. I", desc: "The golden breath before night swallows the ridge.", meta: "2023 · Kashmir, India" },
+      { title: "Twilight Bodies", sub: "Mountain Studies — Vol. VII", desc: "Shadows lengthen into memory across the Minas Gerais range.", meta: "2024 · Minas Gerais, Brazil" }
+    ];
+
+    const slideElements = slider.querySelectorAll(".cinematic-slide");
+    const title = slider.querySelector(".slide-title");
+    const subtitle = slider.querySelector(".slide-subtitle");
+    const description = slider.querySelector(".slide-description");
+    const meta = slider.querySelector(".slide-meta");
+    const currentSlideEl = slider.querySelector("#currentSlide") || slider.querySelector("[data-counter]");
+    const progressBar = slider.querySelector(".slider-progress-bar");
+    const previousButton = slider.querySelector("[data-prev]") || slider.querySelector(".slider-control:first-child");
+    const nextButton = slider.querySelector("[data-next]") || slider.querySelector(".slider-control:last-child");
+    const playButton = slider.querySelector("[data-play]") || slider.querySelector(".slider-control:nth-child(2)");
+    const playIcon = slider.querySelector("#playIcon") || slider.querySelector("[data-play-icon]");
+
+    let current = 0;
+    let playing = true;
+    let interval;
+    const intervalTime = 5500;
+
+    function updateSlide() {
+      slideElements.forEach(function(slide, index) {
+        slide.classList.toggle("is-active", index === current);
+      });
+
+      if (title) {
+        title.classList.remove("slide-title");
+        void title.offsetWidth;
+        title.classList.add("slide-title");
+      }
+
+      if (subtitle) subtitle.textContent = slidesData[current].sub;
+      if (title) title.textContent = slidesData[current].title;
+      if (description) description.textContent = slidesData[current].desc;
+      if (meta) meta.textContent = slidesData[current].meta;
+      if (currentSlideEl) currentSlideEl.textContent = String(current + 1).padStart(2, "0");
+
+      restartProgress();
+    }
+
+    function next() {
+      current = (current + 1) % slidesData.length;
+      updateSlide();
+    }
+
+    function previous() {
+      current = (current - 1 + slidesData.length) % slidesData.length;
+      updateSlide();
+    }
+
+    function startAutoplay() {
+      clearInterval(interval);
+      if (!playing) return;
+      interval = setInterval(next, intervalTime);
+      restartProgress();
+    }
+
+    function stopAutoplay() {
+      clearInterval(interval);
+    }
+
+    function restartProgress() {
+      if (progressBar) {
+        progressBar.classList.remove("animate");
+        void progressBar.offsetWidth;
+        if (playing) progressBar.classList.add("animate");
+      }
+    }
+
+    function togglePlay() {
+      playing = !playing;
+      if (playing) {
+        if (playIcon) playIcon.textContent = "Ⅱ";
+        if (playButton) playButton.setAttribute("aria-label", "Pause slideshow");
+        startAutoplay();
+      } else {
+        if (playIcon) playIcon.textContent = "▶";
+        if (playButton) playButton.setAttribute("aria-label", "Play slideshow");
+        stopAutoplay();
+        restartProgress();
+      }
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", function() { next(); startAutoplay(); });
+    }
+
+    if (previousButton) {
+      previousButton.addEventListener("click", function() { previous(); startAutoplay(); });
+    }
+
+    if (playButton) {
+      playButton.addEventListener("click", togglePlay);
+    }
+
+    slider.addEventListener("touchstart", function(e) {
+      slider._touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener("touchend", function(e) {
+      const distance = slider._touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(distance) < 50) return;
+      if (distance > 0) { next(); } else { previous(); }
+      startAutoplay();
+    }, { passive: true });
+
+    updateSlide();
+    startAutoplay();
+  }
+
+  window.initCinematicSlider = initCinematicSlider;
+
+  function autoInit() {
+    document.querySelectorAll('.cinematic-slider').forEach(initCinematicSlider);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', autoInit);
+  } else {
+    autoInit();
+  }
+})();
+`
+},
 {
       id: "masonry-gallery",
       name: "Masonry Gallery",
@@ -1792,6 +2313,9 @@
       let i = 0;
       el.querySelector(".bs-next").onclick = () => { i = (i + 1) % slides.length; track.style.transform = `translateX(${-i * 100}%)`; };
       el.querySelector(".bs-prev").onclick = () => { i = (i - 1 + slides.length) % slides.length; track.style.transform = `translateX(${-i * 100}%)`; };
+    },
+    "cinematic-slider": (el) => {
+      window.initCinematicSlider(el);
     },
     "tilt-card": (el) => {
       const inner = el.querySelector(".tc-inner");

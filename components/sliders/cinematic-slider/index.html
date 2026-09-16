@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cinematic Slider</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="cinematic-slider">
+    <div class="cinematic-slides">
+      <div class="cinematic-slide is-active">
+        <img src="https://images.pexels.com/photos/675257/pexels-photo-675257.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Eternal Silence">
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+      <div class="cinematic-slide">
+        <img src="https://images.pexels.com/photos/1280840/pexels-photo-1280840.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Veil of Clouds">
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+      <div class="cinematic-slide">
+        <img src="https://images.pexels.com/photos/15469407/pexels-photo-15469407.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Last Light">
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+      <div class="cinematic-slide">
+        <img src="https://images.pexels.com/photos/34068536/pexels-photo-34068536.jpeg?auto=compress&cs=tinysrgb&h=1200&w=1800" alt="Twilight Bodies">
+        <div class="slide-overlay overlay-bottom"></div>
+        <div class="slide-overlay overlay-left"></div>
+      </div>
+    </div>
+    <div class="cinematic-content">
+      <div class="content-inner">
+        <p class="slide-subtitle">Mountain Studies — Vol. III</p>
+        <h2 class="slide-title">Eternal Silence</h2>
+        <p class="slide-description">Where the air thins and the noise fades, only scale remains.</p>
+        <p class="slide-meta">2024 · Dolomites, Italy</p>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-control" aria-label="Previous slide"><span>←</span></button>
+      <button class="slider-control" aria-label="Pause slideshow"><span>Ⅱ</span></button>
+      <button class="slider-control" aria-label="Next slide"><span>→</span></button>
+    </div>
+    <div class="slider-progress"><div class="slider-progress-bar"></div></div>
+    <div class="slider-counter"><span>01</span><span class="counter-separator">/</span><span>04</span></div>
+  </section>
+  <script src="script.js"></script>
+</body>
+</html>

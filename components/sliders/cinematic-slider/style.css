@@ -1,0 +1,240 @@
+.cinematic-slider {
+    position: relative;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.cinematic-slider *,
+.cinematic-slider *::before,
+.cinematic-slider *::after {
+    box-sizing: border-box;
+}
+
+/* SLIDES */
+
+.cinematic-slides {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.cinematic-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+    pointer-events: none;
+}
+
+.cinematic-slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.cinematic-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* KEN BURNS */
+
+.cinematic-slide.is-active img {
+    animation: cinematicKenBurns 7s ease-out forwards;
+}
+
+@keyframes cinematicKenBurns {
+    0% { transform: scale(1.08); }
+    100% { transform: scale(1); }
+}
+
+/* OVERLAYS */
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.overlay-bottom {
+    background: linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.30) 50%, rgba(0,0,0,.20));
+}
+
+.overlay-left {
+    background: linear-gradient(to right, rgba(0,0,0,.60), transparent);
+}
+
+/* CONTENT */
+
+.cinematic-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    pointer-events: none;
+}
+
+.content-inner {
+    width: 100%;
+    padding: 0 8vw 80px;
+}
+
+.slide-subtitle {
+    margin: 0 0 12px;
+    font-family: "Courier New", monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .3em;
+    color: rgba(255,255,255,.5);
+}
+
+.slide-title {
+    margin: 0;
+    max-width: 800px;
+    font-size: clamp(52px, 7vw, 112px);
+    line-height: .95;
+    font-weight: 300;
+    letter-spacing: -.05em;
+    animation: fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+.slide-description {
+    max-width: 430px;
+    margin: 22px 0 0;
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255,255,255,.6);
+    animation: fadeUp .8s .08s cubic-bezier(.22,1,.36,1) both;
+}
+
+.slide-meta {
+    margin: 15px 0 0;
+    font-family: "Courier New", monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,.3);
+    animation: fadeUp .8s .15s cubic-bezier(.22,1,.36,1) both;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* CONTROLS */
+
+.slider-controls {
+    position: absolute;
+    right: 8vw;
+    bottom: 48px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 20;
+}
+
+.slider-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: rgba(255,255,255,.4);
+    cursor: pointer;
+    font-size: 20px;
+    transition: color .3s ease, transform .3s ease;
+}
+
+.slider-control:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.slider-control:focus-visible {
+    outline: 1px solid #fff;
+    outline-offset: 4px;
+}
+
+/* PROGRESS */
+
+.slider-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,.1);
+    z-index: 20;
+}
+
+.slider-progress-bar {
+    width: 0;
+    height: 100%;
+    background: rgba(255,255,255,.7);
+}
+
+.slider-progress-bar.animate {
+    animation: cinematicProgress 5.5s linear forwards;
+}
+
+@keyframes cinematicProgress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+/* COUNTER */
+
+.slider-counter {
+    position: absolute;
+    top: 48px;
+    left: 8vw;
+    z-index: 20;
+    font-family: "Courier New", monospace;
+    font-size: 13px;
+    color: rgba(255,255,255,.4);
+}
+
+.slider-counter #currentSlide {
+    color: rgba(255,255,255,.9);
+}
+
+.counter-separator {
+    margin: 0 5px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+    .cinematic-slider {
+        height: 600px;
+    }
+    .content-inner {
+        padding: 0 25px 70px;
+    }
+    .slide-title {
+        font-size: clamp(48px, 15vw, 80px);
+    }
+    .slide-description {
+        font-size: 14px;
+    }
+    .slider-counter {
+        top: 25px;
+        left: 25px;
+    }
+    .slider-controls {
+        right: 20px;
+        bottom: 25px;
+    }
+}
